@@ -1,10 +1,9 @@
 package book_rent.main;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,18 +11,20 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import book_rent.conect.BookRentCon;
-import book_rent.dto.Member_info;
-import book_rent.panel.MemTablePanel;
+import book_rent.table.MemTableModel;
 
 public class BookRentMain extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTable table;
+	private MemTableModel model;
 //	private List<Member_info> memList = new ArrayList<>();
 
 	public static void main(String[] args) {
@@ -40,8 +41,7 @@ public class BookRentMain extends JFrame {
 	}
 
 	public BookRentMain() {
-		
-		
+
 		initialize();
 	}
 
@@ -103,8 +103,16 @@ public class BookRentMain extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 
-		MemTablePanel pMember = new MemTablePanel();
+		JPanel pMember = new JPanel();
 		panel_1.add(pMember);
+		pMember.setLayout(new BorderLayout(0, 0));
+
+		JScrollPane scrollPane = new JScrollPane();
+		pMember.add(scrollPane, BorderLayout.CENTER);
+
+		model = new MemTableModel();
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
 
 		JPanel pBook = new JPanel();
 		panel_1.add(pBook);

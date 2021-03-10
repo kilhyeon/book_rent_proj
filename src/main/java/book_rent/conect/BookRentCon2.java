@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import book_rent.dto.Member_info_dto;
 import book_rent.uitl.JdbcUtil;
 
-public class BookRentCon {
+public class BookRentCon2 {
 	public static void main(String[] args) {
 
 		ArrayList<Member_info_dto> list = null;

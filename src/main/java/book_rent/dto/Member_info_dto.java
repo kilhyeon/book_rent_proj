@@ -1,6 +1,6 @@
 package book_rent.dto;
 
-public class Member_info {
+public class Member_info_dto {
 	private String memNo;
 	private String memName;
 	private String memBirth;
@@ -8,11 +8,11 @@ public class Member_info {
 	private String memCp;
 	private String memAddr;
 
-	public Member_info() {
+	public Member_info_dto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member_info(String memNo, String memName, String memBirth, String memTel, String memCp, String memAddr) {
+	public Member_info_dto(String memNo, String memName, String memBirth, String memTel, String memCp, String memAddr) {
 		this.memNo = memNo;
 		this.memName = memName;
 		this.memBirth = memBirth;
