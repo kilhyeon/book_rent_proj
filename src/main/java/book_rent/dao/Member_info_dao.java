@@ -72,11 +72,11 @@ public class Member_info_dao extends Dao<Member_info_dto> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
-	}
+//
+//	@Override
+//	public void finalize() throws Throwable {
+//		// TODO Auto-generated method stub
+//		super.finalize();
+//	}
 
 }

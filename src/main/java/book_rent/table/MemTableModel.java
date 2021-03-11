@@ -5,18 +5,15 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-import book_rent.dao.DaoFactory;
+import book_rent.dao.DaoConnect;
 import book_rent.dto.Member_info_dto;
 
 public class MemTableModel extends AbstractTableModel {
 	private String[] titles = { "회원번호", "회원명", "생년월일", "전화번호", "휴대전화", "주소" };
-	// private Object[][] data ;
 	private Vector<String[]> data;
-	// List<Client> clients;
 
 	public MemTableModel() {
-		// clients = DAOFactory.getClientDAO().all();
-		initData();
+		inData();
 	}
 
 	public void loadData(List<Member_info_dto> members) {
@@ -29,12 +26,12 @@ public class MemTableModel extends AbstractTableModel {
 //		fireTableChanged(null);
 	}
 
-	public void initData() {
-		this.loadData(DaoFactory.getMember_info_dao().all());
+	public void inData() {
+		this.loadData(DaoConnect.getMember_info_dao().all());
 	}
 
 	public void availables() {
-		this.loadData(DaoFactory.getMember_info_dao().available());
+		this.loadData(DaoConnect.getMember_info_dao().available());
 	}
 
 	public int getRowCount() {
