@@ -1,1 +1,0 @@
-select memNo, memName, memBirth, memTel, memCp, memAddr from member_info;

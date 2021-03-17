@@ -2,7 +2,7 @@ package book_rent.dao;
 
 import java.sql.Connection;
 
-import book_rent.uitl.JdbcUtil;
+import book_rent.database.JdbcUtil;
 
 public class DaoConnect {
 	private static final Connection connection = JdbcUtil.getConnection();

@@ -1,4 +1,4 @@
-package book_rent.uitl;
+package book_rent.database;
 
 import java.io.IOException;
 import java.io.InputStream;

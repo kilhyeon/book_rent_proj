@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import book_rent.database.JdbcUtil;
 import book_rent.dto.Member_info_dto;
-import book_rent.uitl.JdbcUtil;
 
 public class BookRentCon {
 	public static void main(String[] args) {
