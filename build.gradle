@@ -30,7 +30,7 @@ dependencies {
 jar {
     version = 1.0
     mainClassName= 'book_rent_proj.BookRentMain'
-    baseName= 'BookRentMain'
+    baseName= 'book_rent'
     appendix = 'bin'
     
     manifest{

@@ -1,24 +1,31 @@
 package book_rent.dto;
 
-public class Member_info_dto {
+public class MemberInfo {
 	private String memNo;
 	private String memName;
 	private String memBirth;
 	private String memTel;
 	private String memCp;
 	private String memAddr;
+	private String memGrade;
 
-	public Member_info_dto() {
+	public MemberInfo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member_info_dto(String memNo, String memName, String memBirth, String memTel, String memCp, String memAddr) {
+	public MemberInfo(String memNo) {
+		this.memNo = memNo;
+	}
+
+	public MemberInfo(String memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
+			String memGrade) {
 		this.memNo = memNo;
 		this.memName = memName;
 		this.memBirth = memBirth;
 		this.memTel = memTel;
 		this.memCp = memCp;
 		this.memAddr = memAddr;
+		this.memGrade = memGrade;
 	}
 
 	public String getMemNo() {
@@ -69,10 +76,44 @@ public class Member_info_dto {
 		this.memAddr = memAddr;
 	}
 
+	public String getMemGrade() {
+		return memGrade;
+	}
+
+	public void setMemGrade(String memGrade) {
+		this.memGrade = memGrade;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((memNo == null) ? 0 : memNo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MemberInfo other = (MemberInfo) obj;
+		if (memNo == null) {
+			if (other.memNo != null)
+				return false;
+		} else if (!memNo.equals(other.memNo))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("Member_info [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s]", memNo,
-				memName, memBirth, memTel, memCp, memAddr);
+		return String.format(
+				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGrade=%s]", memNo,
+				memName, memBirth, memTel, memCp, memAddr, memGrade);
 	}
 
 }
