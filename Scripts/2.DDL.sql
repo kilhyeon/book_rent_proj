@@ -46,8 +46,7 @@ CREATE TABLE book_rent.rent (
 	bookNo     VARCHAR(5) NOT NULL COMMENT '도서번호', -- 도서번호
 	rentDate   DATE       NULL     COMMENT '도서대여일', -- 도서대여일
 	returnDate DATE       NULL     COMMENT '도서반납일', -- 도서반납일
-	lateDate   INT        NULL     COMMENT '연체일자', -- 연체일자
-	rentState  VARCHAR(5) NULL     COMMENT '대출상태' -- 대출상태
+	lateDate   INT        NULL     COMMENT '연체일자' -- 연체일자
 )
 COMMENT '대출내역';
 

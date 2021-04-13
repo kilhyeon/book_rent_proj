@@ -13,9 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
+import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
+import book_rent.service.RentService;
+import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
+import book_rent.ui.list.RentTablePanel;
 
 @SuppressWarnings("serial")
 public class BookRentMain extends JFrame {
@@ -26,9 +31,12 @@ public class BookRentMain extends JFrame {
 	private JTable table;
 
 	private MemberInfoTablePanel pMember;
-	private JPanel pBook;
+	private BookInfoTablePanel pBook;
 	private JPanel pList;
-	private MemberInfoService service;
+	private RentTablePanel pRent;
+	private MemberInfoService memService;
+	private BookInfoService bookService;
+	private RentService rentService;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,7 +52,9 @@ public class BookRentMain extends JFrame {
 	}
 
 	public BookRentMain() {
-
+		memService = new MemberInfoService();
+		bookService = new BookInfoService();
+		rentService = new RentService();
 		initialize();
 	}
 
@@ -106,16 +116,21 @@ public class BookRentMain extends JFrame {
 		contentPane.add(pList);
 		pList.setLayout(new GridLayout(1, 0, 0, 0));
 
-		pMember = new MemberInfoTablePanel();		
+		pMember = new MemberInfoTablePanel();
 		pList.add(pMember);
-		pMember.setService(service);
+		pMember.setService(memService);
 		pMember.loadData();
 
-		pBook = new JPanel();
+		pBook = new BookInfoTablePanel();
 		pList.add(pBook);
+		pBook.setService(bookService);
+		pBook.loadData();
 
-		JPanel panel_3 = new JPanel();
-		contentPane.add(panel_3);
+		pRent = new RentTablePanel();
+		contentPane.add(pRent);
+		pRent.setBorder(new TitledBorder(null, "현재 대여중인 도서목록", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pRent.setService(rentService);
+		pRent.loadData();
 	}
 
 }

@@ -22,3 +22,7 @@ insert into bookinfo values
 	('40008', 'Machine learning', '컴퓨터', '보유중'),
 	('40009', 'Probabilistic robotics', '통계', '보유중'),
 	('40010', 'Pattern recognition and machine learning', '컴퓨터', '보유중');
+	
+insert into rent values
+	('1', '12004', '40003', '2021-04-01', '2021-04-04', 0),
+	('2', '12007', '40010', '2021-04-02', '2021-04-05', 0);

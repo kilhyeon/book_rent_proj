@@ -9,21 +9,16 @@ import book_rent.service.MemberInfoService;
 public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
 	public MemberInfoTablePanel() {
 	}
+
 	private MemberInfoService service;
 
-//	@Override
-//	public MemberInfo getItem() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public void setService(MemberInfoService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void initList() {
 		list = service.showMemberList();
-	}
-	
-	public void setService(MemberInfoService service) {
-		this.service = service;
 	}
 
 	@Override
@@ -36,16 +31,9 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
 	}
 
 	@Override
-	public Object[] toArray(MemberInfo t) {
-		return new Object[] {
-			t.getMemNo()
-			, t.getMemName()
-			, t.getMemBirth()
-			, t.getMemTel()
-			, t.getMemCp()
-			, t.getMemAddr()
-			, t.getMemGrade()
-		};
+	public Object[] toArray(MemberInfo m) {
+		return new Object[] { m.getMemNo(), m.getMemName(), m.getMemBirth(), m.getMemTel(), m.getMemCp(),
+				m.getMemAddr(), m.getMemGrade() };
 	}
 
 	@Override

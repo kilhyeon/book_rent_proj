@@ -42,30 +42,30 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	}
 
 	private MemberInfo GetMemberInfo(ResultSet rs) throws SQLException {
-		String memNo = rs.getString("memno");
-		String memName = rs.getString("memname");
-		String memBirth = rs.getString("membirth");
-		String memTel = rs.getString("memtel");
-		String memCp = rs.getString("memcp");
-		String memAddr = rs.getString("memaddr");
-		String memGrade = rs.getString("memgrade");
+		String memNo = rs.getString("memNo");
+		String memName = rs.getString("memName");
+		String memBirth = rs.getString("memBirth");
+		String memTel = rs.getString("memTel");
+		String memCp = rs.getString("memCp");
+		String memAddr = rs.getString("memAddr");
+		String memGrade = rs.getString("memGrade");
 		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGrade);
 	}
 
 	@Override
-	public int insertEmployee(MemberInfo member) {
+	public int insertMembere(MemberInfo memberinfo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateEmployee(MemberInfo member) {
+	public int updateMember(MemberInfo memberinfo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int deleteEmployee(MemberInfo member) {
+	public int deleteMember(MemberInfo memberinfo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
