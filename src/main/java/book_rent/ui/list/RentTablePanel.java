@@ -43,4 +43,10 @@ public class RentTablePanel extends AbstractCustomTablePanel<Rent> {
 		return new String[] { "대출번호", "회원번호", "도서번호", "도서대여일", "도서반납일", "연체일자" };
 	}
 
+	@Override
+	public Rent getItem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

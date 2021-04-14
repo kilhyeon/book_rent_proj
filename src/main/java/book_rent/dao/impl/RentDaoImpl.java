@@ -45,9 +45,9 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	private Rent GetRent(ResultSet rs) throws SQLException {
-		String rentNo = rs.getString("rentNo");
-		MemberInfo memNo = new MemberInfo(rs.getString("memNo"));
-		BookInfo bookNo = new BookInfo(rs.getString("bookNo"));
+		int rentNo = rs.getInt("rentNo");
+		MemberInfo memNo = new MemberInfo(rs.getInt("memNo"));
+		BookInfo bookNo = new BookInfo(rs.getInt("bookNo"));
 		Date rentDate = rs.getTimestamp("rentDate");
 		Date returnDate = rs.getTimestamp("returnDate");
 		int lateDate = rs.getInt("lateDate");

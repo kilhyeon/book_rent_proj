@@ -1,7 +1,7 @@
 package book_rent.dto;
 
 public class MemberInfo {
-	private String memNo;
+	private int memNo;
 	private String memName;
 	private String memBirth;
 	private String memTel;
@@ -13,11 +13,11 @@ public class MemberInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberInfo(String memNo) {
+	public MemberInfo(int memNo) {
 		this.memNo = memNo;
 	}
 
-	public MemberInfo(String memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
+	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
 			String memGrade) {
 		this.memNo = memNo;
 		this.memName = memName;
@@ -28,11 +28,11 @@ public class MemberInfo {
 		this.memGrade = memGrade;
 	}
 
-	public String getMemNo() {
+	public int getMemNo() {
 		return memNo;
 	}
 
-	public void setMemNo(String memNo) {
+	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
 
@@ -88,7 +88,7 @@ public class MemberInfo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((memNo == null) ? 0 : memNo.hashCode());
+		result = prime * result + memNo;
 		return result;
 	}
 
@@ -101,10 +101,7 @@ public class MemberInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		MemberInfo other = (MemberInfo) obj;
-		if (memNo == null) {
-			if (other.memNo != null)
-				return false;
-		} else if (!memNo.equals(other.memNo))
+		if (memNo != other.memNo)
 			return false;
 		return true;
 	}

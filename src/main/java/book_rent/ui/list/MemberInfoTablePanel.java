@@ -4,9 +4,11 @@ import javax.swing.SwingConstants;
 
 import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
+import book_rent.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
 public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
+
 	public MemberInfoTablePanel() {
 	}
 
@@ -39,6 +41,17 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
 	@Override
 	public String[] getColumnNames() {
 		return new String[] { "회원번호", "회원명", "생년월일", "전화번호", "휴대전화", "주소", "회원등급" };
+	}
+
+	@Override
+	public MemberInfo getItem() {
+		int row = table.getSelectedRow();
+		int memNo = (int) table.getValueAt(row, 0);
+
+		if (row == -1) {
+			throw new NotSelectedException();
+		}
+		return list.get(list.indexOf(new MemberInfo(memNo)));
 	}
 
 }

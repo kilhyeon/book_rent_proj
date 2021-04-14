@@ -7,8 +7,10 @@ import book_rent.dto.MemberInfo;
 public interface MemberInfoDao {
 
 	List<MemberInfo> selectMemberInfoByAll();
+	
+	MemberInfo selectMemberByNo(MemberInfo memberinfo);
 
-	int insertMembere(MemberInfo memberinfo);
+	int insertMember(MemberInfo memberinfo);
 
 	int updateMember(MemberInfo memberinfo);
 

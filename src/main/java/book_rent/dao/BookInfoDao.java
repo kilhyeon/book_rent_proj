@@ -6,6 +6,8 @@ import book_rent.dto.BookInfo;
 
 public interface BookInfoDao {
 	List<BookInfo> selectBookInfoByAll();
+	
+	BookInfo selectBookByNo(BookInfo bookinfo);
 
 	int insertBook(BookInfo bookinfo);
 

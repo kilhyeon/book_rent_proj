@@ -10,7 +10,6 @@ import java.util.List;
 import book_rent.dao.BookInfoDao;
 import book_rent.database.JdbcConn;
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemberInfo;
 
 public class BookInfoDaoImpl implements BookInfoDao {
 
@@ -25,7 +24,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public List<BookInfo> selectBookInfoByAll() {
-		String sql = "select bookNo, bookName, cateNo, rentState from bookinfo";
+		String sql = "select bookNo, bookName, bookCate, rentState from bookinfo";
 		try (Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
@@ -43,28 +42,68 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	}
 
 	private BookInfo GetBookInfo(ResultSet rs) throws SQLException {
-		String bookNo = rs.getString("bookNo");
+		int bookNo = rs.getInt("bookNo");
 		String bookName = rs.getString("bookName");
-		String cateNo = rs.getString("cateNo");
+		String bookCate = rs.getString("bookCate");
 		String rentState = rs.getString("rentState");
-		return new BookInfo(bookNo, bookName, cateNo, rentState);
+		return new BookInfo(bookNo, bookName, bookCate, rentState);
+	}
+
+	@Override
+	public BookInfo selectBookByNo(BookInfo bookinfo) {
+		String sql = "select bookNo, bookName, bookCate, rentState from bookinfo where = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, bookinfo.getBookNo());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return GetBookInfo(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public int insertBook(BookInfo bookinfo) {
-		// TODO Auto-generated method stub
+		String sql = "insert into bookinfo(bookNo, bookName, bookCate, rentState) values (?, ?, ?, ?)";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, bookinfo.getBookNo());
+			pstmt.setString(2, bookinfo.getBookName());
+			pstmt.setString(3, bookinfo.getBookCate());
+			pstmt.setString(4, bookinfo.getRentState());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int updateBook(BookInfo bookinfo) {
-		// TODO Auto-generated method stub
+		String sql = "update bookinfo set bookName = ?, bookCate = ?, rentState =? where bookNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, bookinfo.getBookName());
+			pstmt.setString(2, bookinfo.getBookCate());
+			pstmt.setString(3, bookinfo.getRentState());
+			pstmt.setInt(4, bookinfo.getBookNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int deleteBook(BookInfo bookinfo) {
-		// TODO Auto-generated method stub
+		String sql = "delete from bookinfo where bookNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, bookinfo.getBookNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 

@@ -26,11 +26,6 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 
 	protected AbstractContentPanel<T> pContent;
 	protected AbstractCustomTablePanel<T> pList;
-	protected JMenuItem empListByTitleItem;
-
-	protected static final String TITLE_MENU = "동일 직책 사원 보기";
-	protected static final String DEPT_MENU = "동일 부서 사원 보기";
-	protected static final String EMP_MENU = "사원 세부정보 보기";
 
 	public AbstractManagerUI() {
 		setService(); // service 연결
@@ -76,8 +71,6 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 
 	protected abstract AbstractCustomTablePanel<T> createTablePanel();
 
-	protected abstract void actionPerformedMenuGubun();
-
 	protected abstract void actionPerformedMenuUpdate();
 
 	protected abstract void actionPerformedMenuDelete();
@@ -105,10 +98,6 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		deleteItem.addActionListener(this);
 		popMenu.add(deleteItem);
 
-		empListByTitleItem = new JMenuItem("동일 직책 사원 보기");
-		empListByTitleItem.addActionListener(this);
-		popMenu.add(empListByTitleItem);
-
 		return popMenu;
 	}
 
@@ -123,11 +112,6 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 					actionPerformedMenuUpdate();
 				}
 
-				if (e.getActionCommand().contentEquals(AbstractManagerUI.TITLE_MENU)
-						|| e.getActionCommand().contentEquals(AbstractManagerUI.DEPT_MENU)
-						|| e.getActionCommand().contentEquals(AbstractManagerUI.EMP_MENU)) {
-					actionPerformedMenuGubun();
-				}
 			} else {
 				if (e.getSource() == btnCancel) {
 					actionPerformedBtnCancel(e);
@@ -143,7 +127,6 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 			}
 		} catch (InvalidCheckException | SqlConstraintException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			pContent.clearTf();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

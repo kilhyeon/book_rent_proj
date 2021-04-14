@@ -3,7 +3,7 @@ package book_rent.dto;
 import java.util.Date;
 
 public class Rent {
-	private String rentNo;
+	private int rentNo;
 	private MemberInfo memNo;
 	private BookInfo bookNo;
 	private Date rentDate;
@@ -14,11 +14,11 @@ public class Rent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Rent(String rentNo) {
+	public Rent(int rentNo) {
 		this.rentNo = rentNo;
 	}
 
-	public Rent(String rentNo, MemberInfo memNo, BookInfo bookNo, Date rentDate, Date returnDate, int lateDate) {
+	public Rent(int rentNo, MemberInfo memNo, BookInfo bookNo, Date rentDate, Date returnDate, int lateDate) {
 		this.rentNo = rentNo;
 		this.memNo = memNo;
 		this.bookNo = bookNo;
@@ -27,11 +27,11 @@ public class Rent {
 		this.lateDate = lateDate;
 	}
 
-	public String getRentNo() {
+	public int getRentNo() {
 		return rentNo;
 	}
 
-	public void setRentNo(String rentNo) {
+	public void setRentNo(int rentNo) {
 		this.rentNo = rentNo;
 	}
 
@@ -79,7 +79,7 @@ public class Rent {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((rentNo == null) ? 0 : rentNo.hashCode());
+		result = prime * result + rentNo;
 		return result;
 	}
 
@@ -92,10 +92,7 @@ public class Rent {
 		if (getClass() != obj.getClass())
 			return false;
 		Rent other = (Rent) obj;
-		if (rentNo == null) {
-			if (other.rentNo != null)
-				return false;
-		} else if (!rentNo.equals(other.rentNo))
+		if (rentNo != other.rentNo)
 			return false;
 		return true;
 	}

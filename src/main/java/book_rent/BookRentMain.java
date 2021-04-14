@@ -14,12 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
+import book_rent.ui.BookManagerUI;
+import book_rent.ui.MemberManagerUI;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.list.RentTablePanel;
@@ -39,6 +42,10 @@ public class BookRentMain extends JFrame implements ActionListener {
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
+	private JPanel panel_1;
+	private JButton button;
+	private JButton button_1;
+	private JPanel panel_2;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 
@@ -64,7 +71,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 550);
+		setBounds(100, 100, 1000, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,17 +82,32 @@ public class BookRentMain extends JFrame implements ActionListener {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_7 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel.add(panel_7);
+		panel_7.setLayout(new GridLayout(0, 2, 0, 0));
 
-		btnNewButton = new JButton("대출하기");
+		panel_1 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		panel_7.add(panel_1);
+
+		button = new JButton("대출하기");
+		button.addActionListener(this);
+		panel_1.add(button);
+
+		button_1 = new JButton("반납하기");
+		button_1.addActionListener(this);
+		panel_1.add(button_1);
+
+		panel_2 = new JPanel();
+		panel_7.add(panel_2);
+
+		btnNewButton = new JButton("회원관리");
 		btnNewButton.addActionListener(this);
-		panel_7.add(btnNewButton);
+		panel_2.add(btnNewButton);
 
-		btnNewButton_1 = new JButton("반납하기");
+		btnNewButton_1 = new JButton("도서관리");
 		btnNewButton_1.addActionListener(this);
-		panel_7.add(btnNewButton_1);
+		btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(btnNewButton_1);
 
 		JPanel panel_8 = new JPanel();
 		panel.add(panel_8);
@@ -120,7 +142,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 
 		pList = new JPanel();
 		contentPane.add(pList);
-		pList.setLayout(new GridLayout(1, 0, 0, 0));
+		pList.setLayout(new GridLayout(1, 0, 5, 0));
 
 		pMember = new MemberInfoTablePanel();
 		pList.add(pMember);
@@ -143,17 +165,34 @@ public class BookRentMain extends JFrame implements ActionListener {
 		if (e.getSource() == btnNewButton_1) {
 			actionPerformedBtnNewButton_1(e);
 		}
+		if (e.getSource() == button_1) {
+			actionPerformedButton_1(e);
+		}
+		if (e.getSource() == button) {
+			actionPerformedButton(e);
+		}
 		if (e.getSource() == btnNewButton) {
 			actionPerformedBtnNewButton(e);
 		}
 	}
 
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
+	protected void actionPerformedButton(ActionEvent e) {
 		RentPage frame = new RentPage();
 		frame.setVisible(true);
 	}
-	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
+
+	protected void actionPerformedButton_1(ActionEvent e) {
 		ReturnPage frame = new ReturnPage();
+		frame.setVisible(true);
+	}
+
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		MemberManagerUI frame = new MemberManagerUI();
+		frame.setVisible(true);
+	}
+
+	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
+		BookManagerUI frame = new BookManagerUI();
 		frame.setVisible(true);
 	}
 }

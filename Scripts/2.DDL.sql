@@ -6,7 +6,7 @@ CREATE SCHEMA book_rent;
 
 -- 회원정보
 CREATE TABLE book_rent.memberInfo (
-	memNo    VARCHAR(5)   NOT NULL COMMENT '회원번호', -- 회원번호
+	memNo    INT          NOT NULL COMMENT '회원번호', -- 회원번호
 	memName  VARCHAR(10)  NULL     COMMENT '회원이름', -- 회원이름
 	memBirth VARCHAR(8)   NULL     COMMENT '생년월일', -- 생년월일
 	memTel   VARCHAR(13)  NULL     COMMENT '전화번호', -- 전화번호
@@ -25,9 +25,9 @@ ALTER TABLE book_rent.memberInfo
 
 -- 도서정보
 CREATE TABLE book_rent.bookInfo (
-	bookNo    VARCHAR(5)  NOT NULL COMMENT '도서번호', -- 도서번호
+	bookNo    INT         NOT NULL COMMENT '도서번호', -- 도서번호
 	bookName  VARCHAR(40) NULL     COMMENT '도서제목', -- 도서제목
-	cateNo    VARCHAR(5)  NULL     COMMENT '구분번호', -- 구분번호
+	bookCate  VARCHAR(20) NULL     COMMENT '도서구분', -- 도서구분
 	rentState VARCHAR(5)  NULL     COMMENT '대출상태' -- 대출상태
 )
 COMMENT '도서정보';
@@ -41,12 +41,12 @@ ALTER TABLE book_rent.bookInfo
 
 -- 대출내역
 CREATE TABLE book_rent.rent (
-	rentNo     VARCHAR(5) NOT NULL COMMENT '대출번호', -- 대출번호
-	memNo      VARCHAR(5) NOT NULL COMMENT '회원번호', -- 회원번호
-	bookNo     VARCHAR(5) NOT NULL COMMENT '도서번호', -- 도서번호
-	rentDate   DATE       NULL     COMMENT '도서대여일', -- 도서대여일
-	returnDate DATE       NULL     COMMENT '도서반납일', -- 도서반납일
-	lateDate   INT        NULL     COMMENT '연체일자' -- 연체일자
+	rentNo     INT  NOT NULL COMMENT '대출번호', -- 대출번호
+	memNo      INT  NOT NULL COMMENT '회원번호', -- 회원번호
+	bookNo     INT  NOT NULL COMMENT '도서번호', -- 도서번호
+	rentDate   DATE NULL     COMMENT '도서대여일', -- 도서대여일
+	returnDate DATE NULL     COMMENT '도서반납일', -- 도서반납일
+	lateDate   INT  NULL     COMMENT '연체일자' -- 연체일자
 )
 COMMENT '대출내역';
 

@@ -1,31 +1,31 @@
 package book_rent.dto;
 
 public class BookInfo {
-	private String bookNo;
+	private int bookNo;
 	private String bookName;
-	private String cateNo;
+	private String bookCate;
 	private String rentState;
 
 	public BookInfo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookInfo(String bookNo) {
+	public BookInfo(int bookNo) {
 		this.bookNo = bookNo;
 	}
 
-	public BookInfo(String bookNo, String bookName, String cateNo, String rentState) {
+	public BookInfo(int bookNo, String bookName, String bookCate, String rentState) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
-		this.cateNo = cateNo;
+		this.bookCate = bookCate;
 		this.rentState = rentState;
 	}
 
-	public String getBookNo() {
+	public int getBookNo() {
 		return bookNo;
 	}
 
-	public void setBookNo(String bookNo) {
+	public void setBookNo(int bookNo) {
 		this.bookNo = bookNo;
 	}
 
@@ -37,12 +37,12 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
-	public String getCateNo() {
-		return cateNo;
+	public String getBookCate() {
+		return bookCate;
 	}
 
-	public void setCateNo(String cateNo) {
-		this.cateNo = cateNo;
+	public void setBookCate(String bookCate) {
+		this.bookCate = bookCate;
 	}
 
 	public String getRentState() {
@@ -57,7 +57,7 @@ public class BookInfo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bookNo == null) ? 0 : bookNo.hashCode());
+		result = prime * result + bookNo;
 		return result;
 	}
 
@@ -70,10 +70,7 @@ public class BookInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		BookInfo other = (BookInfo) obj;
-		if (bookNo == null) {
-			if (other.bookNo != null)
-				return false;
-		} else if (!bookNo.equals(other.bookNo))
+		if (bookNo != other.bookNo)
 			return false;
 		return true;
 	}

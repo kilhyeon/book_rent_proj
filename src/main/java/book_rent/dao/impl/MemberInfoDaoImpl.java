@@ -42,7 +42,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	}
 
 	private MemberInfo GetMemberInfo(ResultSet rs) throws SQLException {
-		String memNo = rs.getString("memNo");
+		int memNo = rs.getInt("memNo");
 		String memName = rs.getString("memName");
 		String memBirth = rs.getString("memBirth");
 		String memTel = rs.getString("memTel");
@@ -53,20 +53,69 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	}
 
 	@Override
-	public int insertMembere(MemberInfo memberinfo) {
-		// TODO Auto-generated method stub
+	public MemberInfo selectMemberByNo(MemberInfo memberinfo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGrade from memberinfo where = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setInt(1, memberinfo.getMemNo());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return GetMemberInfo(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public int insertMember(MemberInfo memberinfo) {
+		String sql = "insert into memberinfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGrade) "
+				+ "values (?, ?, ?, ?, ?, ?, ?)";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, memberinfo.getMemNo());
+			pstmt.setString(2, memberinfo.getMemName());
+			pstmt.setString(3, memberinfo.getMemBirth());
+			pstmt.setString(4, memberinfo.getMemTel());
+			pstmt.setString(5, memberinfo.getMemCp());
+			pstmt.setString(6, memberinfo.getMemAddr());
+			pstmt.setString(7, memberinfo.getMemGrade());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int updateMember(MemberInfo memberinfo) {
-		// TODO Auto-generated method stub
+		String sql = "update memberinfo set memName = ?, memBirth = ?, memTel = ?, memCp = ?, memAddr = ?, memGrade = ? "
+				+ "where memNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, memberinfo.getMemName());
+			pstmt.setString(2, memberinfo.getMemBirth());
+			pstmt.setString(3, memberinfo.getMemTel());
+			pstmt.setString(4, memberinfo.getMemCp());
+			pstmt.setString(5, memberinfo.getMemAddr());
+			pstmt.setString(6, memberinfo.getMemGrade());
+			pstmt.setInt(7, memberinfo.getMemNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int deleteMember(MemberInfo memberinfo) {
-		// TODO Auto-generated method stub
+		String sql = "delete from memberinfo where memNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, memberinfo.getMemNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
