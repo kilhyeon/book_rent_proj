@@ -80,8 +80,7 @@ public class BookInfo {
 
 	@Override
 	public String toString() {
-		return String.format("BookInfo [bookNo=%s, bookName=%s, cateNo=%s, rentState=%s]", bookNo, bookName, cateNo,
-				rentState);
+		return String.format("%s", bookNo);
 	}
 
 }

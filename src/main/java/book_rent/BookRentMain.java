@@ -3,6 +3,8 @@ package book_rent;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,7 +25,7 @@ import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.list.RentTablePanel;
 
 @SuppressWarnings("serial")
-public class BookRentMain extends JFrame {
+public class BookRentMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -37,6 +39,8 @@ public class BookRentMain extends JFrame {
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,7 +64,7 @@ public class BookRentMain extends JFrame {
 
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 801, 535);
+		setBounds(100, 100, 800, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,10 +79,12 @@ public class BookRentMain extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel.add(panel_7);
 
-		JButton btnNewButton = new JButton("대출하기");
+		btnNewButton = new JButton("대출하기");
+		btnNewButton.addActionListener(this);
 		panel_7.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("반납하기");
+		btnNewButton_1 = new JButton("반납하기");
+		btnNewButton_1.addActionListener(this);
 		panel_7.add(btnNewButton_1);
 
 		JPanel panel_8 = new JPanel();
@@ -133,4 +139,21 @@ public class BookRentMain extends JFrame {
 		pRent.loadData();
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton_1) {
+			actionPerformedBtnNewButton_1(e);
+		}
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(e);
+		}
+	}
+
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		RentPage frame = new RentPage();
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
+		ReturnPage frame = new ReturnPage();
+		frame.setVisible(true);
+	}
 }
