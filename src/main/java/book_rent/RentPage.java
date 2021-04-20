@@ -1,6 +1,5 @@
 package book_rent;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
@@ -15,20 +14,24 @@ import javax.swing.border.TitledBorder;
 
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
+import book_rent.ui.content.BookContentPanel;
+import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.BookContentPanel;
+import book_rent.ui.search.MemberSearch;
+import book_rent.ui.search.BookSearch;
 
 public class RentPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
 	private MemberInfoService memService;
 	private BookInfoService bookService;
-	private MemberInfoTablePanel panel_2;
-	private BookInfoTablePanel panel_5;
+	private MemberInfoTablePanel pListMem;
+	private BookInfoTablePanel pListBook;
+	private MemberSearch pSearchMem;
+	private BookSearch pSearchBook;
+	private MemberContentPanel pMemInfo;
+	private BookContentPanel pBookInfo;
 
 	public RentPage() {
 		memService = new MemberInfoService();
@@ -44,67 +47,71 @@ public class RentPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1);
+		pSearchMem = new MemberSearch();
+		contentPane.add(pSearchMem);
+		pSearchMem.setService(memService);
 
-		JLabel lblNewLabel = new JLabel("검색방법 : ");
-		panel_1.add(lblNewLabel);
+		pListMem = pSearchMem.getMemberInfoList();
+		contentPane.add(pListMem);
+		pListMem.setService(memService);
+		pListMem.loadData();
 
-		JComboBox comboBox = new JComboBox();
-		panel_1.add(comboBox);
+		pMemInfo = pListMem.getpMemInfo();
+		contentPane.add(pMemInfo);
 
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		pSearchBook = new BookSearch();
+		pSearchBook.setBorder(new EmptyBorder(10, 0, 0, 0));
+		contentPane.add(pSearchBook);
+		pSearchBook.setService(bookService);
 
-		JButton btnNewButton = new JButton("검색");
-		panel_1.add(btnNewButton);
+		pListBook = pSearchBook.getBookInfoList();
+		contentPane.add(pListBook);
+		pListBook.setService(bookService);
+		pListBook.loadData();
 
-		panel_2 = new MemberInfoTablePanel();
-		contentPane.add(panel_2);
-		panel_2.setService(memService);
-		panel_2.loadData();
+		pBookInfo = new BookContentPanel();
+		contentPane.add(pBookInfo);
 
-		MemberContentPanel panel_3 = new MemberContentPanel();
-		panel_3.setBorder(new TitledBorder(null, "대여회원 상세정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(panel_3);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
+		JPanel pBtn = new JPanel();
+		contentPane.add(pBtn);
 
-		JPanel panel_4 = new JPanel();
-		contentPane.add(panel_4);
+		JButton btnRent = new JButton("대여하기");
+		pBtn.add(btnRent);
 
-		JLabel label = new JLabel("검색방법 : ");
-		panel_4.add(label);
+		JButton btnCancel = new JButton("취소");
+		pBtn.add(btnCancel);
+	}
 
-		JComboBox comboBox_1 = new JComboBox();
-		panel_4.add(comboBox_1);
+	public MemberInfoTablePanel getpListMem() {
+		return pListMem;
+	}
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel_4.add(textField_1);
+	public void setpListMem(MemberInfoTablePanel pListMem) {
+		this.pListMem = pListMem;
+	}
 
-		JButton button = new JButton("검색");
-		panel_4.add(button);
+	public BookInfoTablePanel getpListBook() {
+		return pListBook;
+	}
 
-		panel_5 = new BookInfoTablePanel();
-		contentPane.add(panel_5);
-		panel_5.setService(bookService);
-		panel_5.loadData();
+	public void setpListBook(BookInfoTablePanel pListBook) {
+		this.pListBook = pListBook;
+	}
 
-		BookContentPanel panel_6 = new BookContentPanel();
-		panel_6.setBorder(new TitledBorder(null, "대여도서 상세정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(panel_6);
-		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.Y_AXIS));
+	public MemberContentPanel getpMemInfo() {
+		return pMemInfo;
+	}
 
-		JPanel panel_7 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
-		contentPane.add(panel_7);
+	public void setpMemInfo(MemberContentPanel pMemInfo) {
+		this.pMemInfo = pMemInfo;
+	}
 
-		JButton btnNewButton_1 = new JButton("대여하기");
-		panel_7.add(btnNewButton_1);
+	public BookContentPanel getpBookInfo() {
+		return pBookInfo;
+	}
 
-		JButton btnNewButton_2 = new JButton("취소");
-		panel_7.add(btnNewButton_2);
+	public void setpBookInfo(BookContentPanel pBookInfo) {
+		this.pBookInfo = pBookInfo;
 	}
 
 }

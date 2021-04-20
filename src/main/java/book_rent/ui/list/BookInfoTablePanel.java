@@ -1,19 +1,28 @@
 package book_rent.ui.list;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.ui.exception.NotSelectedException;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> {
+	private BookInfoService service;
 
 	public BookInfoTablePanel() {
+		initialize();
+	}
+	private void initialize() {
+		setBorder(new TitledBorder(null, "도서리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 	}
 
-	private BookInfoService service;
+	public void setList(List<BookInfo> list) {
+		this.list = list;
+	}
 
 	public void setService(BookInfoService service) {
 		this.service = service;
@@ -36,12 +45,12 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> {
 
 	@Override
 	public Object[] toArray(BookInfo b) {
-		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCate(), b.getRentState() };
+		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCateNo(), b.getRentState() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "도서번호", "도서제목", "구분번호", "대출상태" };
+		return new String[] { "도서번호", "도서제목", "도서구분", "대여상태" };
 	}
 
 	@Override

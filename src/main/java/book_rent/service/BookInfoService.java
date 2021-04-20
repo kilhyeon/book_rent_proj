@@ -12,20 +12,32 @@ public class BookInfoService {
 	public List<BookInfo> showBookList() {
 		return bookDao.selectBookInfoByAll();
 	}
-	
-	public BookInfo showBookByNo(BookInfo bookinfo) {
-		return bookDao.selectBookByNo(bookinfo);
+
+	public List<BookInfo> showBookListByNo(BookInfo bookinfo) {
+		return bookDao.selectBookInfoByNo(bookinfo);
 	}
-	
-	public void addBook (BookInfo bookinfo) {
+
+	public List<BookInfo> showBookListByName(BookInfo bookinfo) {
+		return bookDao.selectBookInfoByName(bookinfo);
+	}
+
+	public List<BookInfo> showBookListByCate(BookInfo bookinfo) {
+		return bookDao.selectBookInfoByCate(bookinfo);
+	}
+
+	public List<BookInfo> showBookListByRent(BookInfo bookinfo) {
+		return bookDao.selectBookInfoByRent(bookinfo);
+	}
+
+	public void addBook(BookInfo bookinfo) {
 		bookDao.insertBook(bookinfo);
 	}
-	
-	public void modifyBook (BookInfo bookinfo) {
+
+	public void modifyBook(BookInfo bookinfo) {
 		bookDao.updateBook(bookinfo);
 	}
-	
-	public void removeBook (BookInfo bookinfo) {
+
+	public void removeBook(BookInfo bookinfo) {
 		bookDao.deleteBook(bookinfo);
 	}
 }

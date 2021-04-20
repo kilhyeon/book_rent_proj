@@ -24,14 +24,14 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 	@Override
 	public List<MemberInfo> selectMemberInfoByAll() {
-		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGrade from memberinfo";
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo";
 		try (Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			if (rs.next()) {
 				List<MemberInfo> list = new ArrayList();
 				do {
-					list.add(GetMemberInfo(rs));
+					list.add(getMemberInfo(rs));
 				} while (rs.next());
 				return list;
 			}
@@ -41,26 +41,19 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		return null;
 	}
 
-	private MemberInfo GetMemberInfo(ResultSet rs) throws SQLException {
-		int memNo = rs.getInt("memNo");
-		String memName = rs.getString("memName");
-		String memBirth = rs.getString("memBirth");
-		String memTel = rs.getString("memTel");
-		String memCp = rs.getString("memCp");
-		String memAddr = rs.getString("memAddr");
-		String memGrade = rs.getString("memGrade");
-		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGrade);
-	}
-
 	@Override
-	public MemberInfo selectMemberByNo(MemberInfo memberinfo) {
-		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGrade from memberinfo where = ?";
-		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
-
+	public List<MemberInfo> selectMemberInfoByNo(MemberInfo memberinfo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, memberinfo.getMemNo());
+
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					return GetMemberInfo(rs);
+					List<MemberInfo> list = new ArrayList<MemberInfo>();
+					do {
+						list.add(getMemberInfo(rs));
+					} while (rs.next());
+					return list;
 				}
 			}
 		} catch (SQLException e) {
@@ -70,8 +63,99 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	}
 
 	@Override
+	public List<MemberInfo> selectMemberInfoByName(MemberInfo memberinfo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memName= ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, memberinfo.getMemName());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<MemberInfo> list = new ArrayList<MemberInfo>();
+					do {
+						list.add(getMemberInfo(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<MemberInfo> selectMemberInfoByBirth(MemberInfo memberinfo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memBirth = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, memberinfo.getMemBirth());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<MemberInfo> list = new ArrayList<MemberInfo>();
+					do {
+						list.add(getMemberInfo(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<MemberInfo> selectMemberInfoByCp(MemberInfo memberinfo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memCp = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, memberinfo.getMemCp());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<MemberInfo> list = new ArrayList<MemberInfo>();
+					do {
+						list.add(getMemberInfo(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<MemberInfo> selectMemberInfoByGrade(MemberInfo memberinfo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memGradeNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, memberinfo.getMemGradeNo());
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<MemberInfo> list = new ArrayList<MemberInfo>();
+					do {
+						list.add(getMemberInfo(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private MemberInfo getMemberInfo(ResultSet rs) throws SQLException {
+		int memNo = rs.getInt("memNo");
+		String memName = rs.getString("memName");
+		String memBirth = rs.getString("memBirth");
+		String memTel = rs.getString("memTel");
+		String memCp = rs.getString("memCp");
+		String memAddr = rs.getString("memAddr");
+		int memGradeNo = rs.getInt("memGradeNo");
+		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo);
+	}
+
+	@Override
 	public int insertMember(MemberInfo memberinfo) {
-		String sql = "insert into memberinfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGrade) "
+		String sql = "insert into memberinfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo) "
 				+ "values (?, ?, ?, ?, ?, ?, ?)";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, memberinfo.getMemNo());
@@ -80,7 +164,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 			pstmt.setString(4, memberinfo.getMemTel());
 			pstmt.setString(5, memberinfo.getMemCp());
 			pstmt.setString(6, memberinfo.getMemAddr());
-			pstmt.setString(7, memberinfo.getMemGrade());
+			pstmt.setInt(7, memberinfo.getMemGradeNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +174,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 	@Override
 	public int updateMember(MemberInfo memberinfo) {
-		String sql = "update memberinfo set memName = ?, memBirth = ?, memTel = ?, memCp = ?, memAddr = ?, memGrade = ? "
+		String sql = "update memberinfo set memName = ?, memBirth = ?, memTel = ?, memCp = ?, memAddr = ?, memGradeNo = ? "
 				+ "where memNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, memberinfo.getMemName());
@@ -98,7 +182,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 			pstmt.setString(3, memberinfo.getMemTel());
 			pstmt.setString(4, memberinfo.getMemCp());
 			pstmt.setString(5, memberinfo.getMemAddr());
-			pstmt.setString(6, memberinfo.getMemGrade());
+			pstmt.setInt(6, memberinfo.getMemGradeNo());
 			pstmt.setInt(7, memberinfo.getMemNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -117,6 +201,24 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public MemberInfo selectMeberInfoBymemNo(int memNo) {
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, memNo);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+
+					return getMemberInfo(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

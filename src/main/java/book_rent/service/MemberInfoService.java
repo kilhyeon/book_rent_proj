@@ -13,8 +13,28 @@ public class MemberInfoService {
 		return memDao.selectMemberInfoByAll();
 	}
 
-	public MemberInfo showMemberByNo(MemberInfo memberinfo) {
-		return memDao.selectMemberByNo(memberinfo);
+	public List<MemberInfo> showMemberListByNo(MemberInfo memberinfo) {
+		return memDao.selectMemberInfoByNo(memberinfo);
+	}
+
+	public List<MemberInfo> showMemberListByName(MemberInfo memberinfo) {
+		return memDao.selectMemberInfoByName(memberinfo);
+	}
+
+	public List<MemberInfo> showMemberListByBirth(MemberInfo memberinfo) {
+		return memDao.selectMemberInfoByBirth(memberinfo);
+	}
+
+	public List<MemberInfo> showMemberListByCp(MemberInfo memberinfo) {
+		return memDao.selectMemberInfoByCp(memberinfo);
+	}
+
+	public List<MemberInfo> showMemberListByGrade(MemberInfo memberinfo) {
+		return memDao.selectMemberInfoByGrade(memberinfo);
+	}
+
+	public MemberInfo showMemberByMemNo(int memNo) {
+		return memDao.selectMeberInfoBymemNo(memNo);
 	}
 
 	public void addMember(MemberInfo memberinfo) {

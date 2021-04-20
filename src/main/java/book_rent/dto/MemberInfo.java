@@ -7,7 +7,7 @@ public class MemberInfo {
 	private String memTel;
 	private String memCp;
 	private String memAddr;
-	private String memGrade;
+	private int memGradeNo;
 
 	public MemberInfo() {
 		// TODO Auto-generated constructor stub
@@ -17,15 +17,19 @@ public class MemberInfo {
 		this.memNo = memNo;
 	}
 
+	public MemberInfo(String memName) {
+		this.memName = memName;
+	}
+
 	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
-			String memGrade) {
+			int memGradeNo) {
 		this.memNo = memNo;
 		this.memName = memName;
 		this.memBirth = memBirth;
 		this.memTel = memTel;
 		this.memCp = memCp;
 		this.memAddr = memAddr;
-		this.memGrade = memGrade;
+		this.memGradeNo = memGradeNo;
 	}
 
 	public int getMemNo() {
@@ -76,12 +80,12 @@ public class MemberInfo {
 		this.memAddr = memAddr;
 	}
 
-	public String getMemGrade() {
-		return memGrade;
+	public int getMemGradeNo() {
+		return memGradeNo;
 	}
 
-	public void setMemGrade(String memGrade) {
-		this.memGrade = memGrade;
+	public void setMemGradeNo(int memGradeNo) {
+		this.memGradeNo = memGradeNo;
 	}
 
 	@Override
@@ -108,7 +112,14 @@ public class MemberInfo {
 
 	@Override
 	public String toString() {
-		return String.format("%s", memNo);
+		return String.format(
+				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGrade=%s]", memNo,
+				memName, memBirth, memTel, memCp, memAddr, memGradeNo);
 	}
+
+//	@Override
+//	public String toString() {
+//		return String.format("%s", memNo);
+//	}
 
 }

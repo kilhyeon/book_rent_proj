@@ -42,7 +42,7 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemNo.setColumns(10);
 		panel_1.add(tfMemNo);
 
-		JLabel lblMemName = new JLabel("회 원 명 : ");
+		JLabel lblMemName = new JLabel("회  원  명 : ");
 		panel_1.add(lblMemName);
 
 		tfMemName = new JTextField();
@@ -60,13 +60,13 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemBirth = new JTextField();
 		panel_2.add(tfMemBirth);
 		tfMemBirth.setColumns(10);
-		
-				JLabel lblMemTel = new JLabel("전화번호 : ");
-				panel_2.add(lblMemTel);
-				
-						tfMemTel = new JTextField();
-						panel_2.add(tfMemTel);
-						tfMemTel.setColumns(10);
+
+		JLabel lblMemTel = new JLabel("전화번호 : ");
+		panel_2.add(lblMemTel);
+
+		tfMemTel = new JTextField();
+		panel_2.add(tfMemTel);
+		tfMemTel.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
 		FlowLayout fl_panel_3 = (FlowLayout) panel_3.getLayout();
@@ -79,13 +79,13 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemCp = new JTextField();
 		panel_3.add(tfMemCp);
 		tfMemCp.setColumns(10);
-		
-				JLabel lblMemAddr = new JLabel("주      소 : ");
-				panel_3.add(lblMemAddr);
-				
-						tfMemAddr = new JTextField();
-						panel_3.add(tfMemAddr);
-						tfMemAddr.setColumns(10);
+
+		JLabel lblMemAddr = new JLabel("주        소 : ");
+		panel_3.add(lblMemAddr);
+
+		tfMemAddr = new JTextField();
+		panel_3.add(tfMemAddr);
+		tfMemAddr.setColumns(10);
 
 		JPanel panel_4 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
@@ -102,12 +102,12 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 
 	@Override
 	public void setItem(MemberInfo item) {
-		if (item == null) {
-			throw new NotSelectedException();
-		}
+//		if (item == null) {
+//			throw new NotSelectedException();
+//		}
 		tfMemNo.setText(String.valueOf(item.getMemNo()));
 		tfMemName.setText(item.getMemName());
-		tfMemGrade.setText(item.getMemGrade());
+		tfMemGrade.setText(String.valueOf(item.getMemGradeNo()));
 		tfMemBirth.setText(item.getMemBirth());
 		tfMemAddr.setText(item.getMemAddr());
 		tfMemCp.setText(item.getMemCp());
@@ -126,8 +126,8 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		String memTel = tfMemTel.getText().trim();
 		String memCp = tfMemCp.getText().trim();
 		String memAddr = tfMemAddr.getText().trim();
-		String memGrade = tfMemGrade.getText().trim();
-		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGrade);
+		int memGradeNo = Integer.parseInt(tfMemGrade.getText().trim());
+		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo);
 	}
 
 	@Override
@@ -151,6 +151,62 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 			tfMemNo.setEditable(true);
 		}
 
+	}
+
+	public JTextField getTfMemNo() {
+		return tfMemNo;
+	}
+
+	public void setTfMemNo(JTextField tfMemNo) {
+		this.tfMemNo = tfMemNo;
+	}
+
+	public JTextField getTfMemName() {
+		return tfMemName;
+	}
+
+	public void setTfMemName(JTextField tfMemName) {
+		this.tfMemName = tfMemName;
+	}
+
+	public JTextField getTfMemBirth() {
+		return tfMemBirth;
+	}
+
+	public void setTfMemBirth(JTextField tfMemBirth) {
+		this.tfMemBirth = tfMemBirth;
+	}
+
+	public JTextField getTfMemTel() {
+		return tfMemTel;
+	}
+
+	public void setTfMemTel(JTextField tfMemTel) {
+		this.tfMemTel = tfMemTel;
+	}
+
+	public JTextField getTfMemCp() {
+		return tfMemCp;
+	}
+
+	public void setTfMemCp(JTextField tfMemCp) {
+		this.tfMemCp = tfMemCp;
+	}
+
+	public JTextField getTfMemGrade() {
+		return tfMemGrade;
+	}
+
+	public void setTfMemGrade(JTextField tfMemGrade) {
+		this.tfMemGrade = tfMemGrade;
+	}
+
+	public JTextField getTfMemAddr() {
+		return tfMemAddr;
+	}
+
+	public void setTfMemAddr(JTextField tfMemAddr) {
+		this.tfMemAddr = tfMemAddr;
 	}
 
 }

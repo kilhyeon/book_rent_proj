@@ -8,12 +8,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -22,17 +19,17 @@ import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
 import book_rent.ui.BookManagerUI;
-import book_rent.ui.MemberManagerUI;
+import book_rent.ui.MemMangerUI;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.list.RentTablePanel;
+import book_rent.ui.search.BookSearch;
+import book_rent.ui.search.MemberSearch;
 
 @SuppressWarnings("serial")
 public class BookRentMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
 	private JTable table;
 
 	private MemberInfoTablePanel pMember;
@@ -87,6 +84,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 
 		panel_1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		flowLayout.setHgap(10);
 		panel_7.add(panel_1);
 
 		button = new JButton("대출하기");
@@ -98,6 +96,8 @@ public class BookRentMain extends JFrame implements ActionListener {
 		panel_1.add(button_1);
 
 		panel_2 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_2.getLayout();
+		flowLayout_1.setHgap(10);
 		panel_7.add(panel_2);
 
 		btnNewButton = new JButton("회원관리");
@@ -113,44 +113,29 @@ public class BookRentMain extends JFrame implements ActionListener {
 		panel.add(panel_8);
 		panel_8.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JPanel panel_9 = new JPanel();
+		MemberSearch panel_9 = new MemberSearch();
 		panel_8.add(panel_9);
+		panel_9.setService(memService);
 		panel_9.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JLabel lblNewLabel = new JLabel("빠른회원검색");
-		panel_9.add(lblNewLabel);
-
-		JComboBox comboBox = new JComboBox();
-		panel_9.add(comboBox);
-
-		textField = new JTextField();
-		panel_9.add(textField);
-		textField.setColumns(10);
-
-		JPanel panel_10 = new JPanel();
+		BookSearch panel_10 = new BookSearch();
 		panel_8.add(panel_10);
-
-		JLabel label = new JLabel("빠른도서검색");
-		panel_10.add(label);
-
-		JComboBox comboBox_1 = new JComboBox();
-		panel_10.add(comboBox_1);
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel_10.add(textField_1);
+		panel_10.setService(bookService);
+		
 
 		pList = new JPanel();
 		contentPane.add(pList);
 		pList.setLayout(new GridLayout(1, 0, 5, 0));
 
-		pMember = new MemberInfoTablePanel();
+		pMember = panel_9.getMemberInfoList();
 		pList.add(pMember);
+//		pMember.setBorder(new TitledBorder(null, "회원리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pMember.setService(memService);
 		pMember.loadData();
 
-		pBook = new BookInfoTablePanel();
+		pBook = panel_10.getBookInfoList();
 		pList.add(pBook);
+//		pBook.setBorder(new TitledBorder(null, "도서리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pBook.setService(bookService);
 		pBook.loadData();
 
@@ -187,7 +172,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		MemberManagerUI frame = new MemberManagerUI();
+		MemMangerUI frame = new MemMangerUI();
 		frame.setVisible(true);
 	}
 

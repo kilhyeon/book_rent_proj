@@ -3,7 +3,7 @@ package book_rent.dto;
 public class BookInfo {
 	private int bookNo;
 	private String bookName;
-	private String bookCate;
+	private int bookCateNo;
 	private String rentState;
 
 	public BookInfo() {
@@ -14,10 +14,14 @@ public class BookInfo {
 		this.bookNo = bookNo;
 	}
 
-	public BookInfo(int bookNo, String bookName, String bookCate, String rentState) {
+	public BookInfo(String bookName) {
+		this.bookName = bookName;
+	}
+
+	public BookInfo(int bookNo, String bookName, int bookCateNo, String rentState) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
-		this.bookCate = bookCate;
+		this.bookCateNo = bookCateNo;
 		this.rentState = rentState;
 	}
 
@@ -37,12 +41,12 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
-	public String getBookCate() {
-		return bookCate;
+	public int getBookCateNo() {
+		return bookCateNo;
 	}
 
-	public void setBookCate(String bookCate) {
-		this.bookCate = bookCate;
+	public void setBookCateNo(int bookCateNo) {
+		this.bookCateNo = bookCateNo;
 	}
 
 	public String getRentState() {
@@ -77,7 +81,13 @@ public class BookInfo {
 
 	@Override
 	public String toString() {
-		return String.format("%s", bookNo);
+		return String.format("BookInfo [bookNo=%s, bookName=%s, bookCate=%s, rentState=%s]", bookNo, bookName,
+				bookCateNo, rentState);
 	}
+
+//	@Override
+//	public String toString() {
+//		return String.format("%s", bookNo);
+//	}
 
 }

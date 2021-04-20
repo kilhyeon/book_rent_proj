@@ -1,21 +1,43 @@
 package book_rent.ui.list;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
+import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
-public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
+public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener {
+	private MemberInfoService service;
+	private MemberContentPanel pMemInfo;
 
 	public MemberInfoTablePanel() {
+		initialize();
+		table.addMouseListener(this);
+		pMemInfo = new MemberContentPanel();
+	}
+	
+	private void initialize() {
+		setBorder(new TitledBorder(null, "회원리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 	}
 
-	private MemberInfoService service;
+	public MemberContentPanel getpMemInfo() {
+		return pMemInfo;
+	}
 
 	public void setService(MemberInfoService service) {
 		this.service = service;
+	}
+
+	public void setList(List<MemberInfo> list) {
+		this.list = list;
 	}
 
 	@Override
@@ -35,7 +57,7 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
 	@Override
 	public Object[] toArray(MemberInfo m) {
 		return new Object[] { m.getMemNo(), m.getMemName(), m.getMemBirth(), m.getMemTel(), m.getMemCp(),
-				m.getMemAddr(), m.getMemGrade() };
+				m.getMemAddr(), m.getMemGradeNo() };
 	}
 
 	@Override
@@ -52,6 +74,64 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> {
 			throw new NotSelectedException();
 		}
 		return list.get(list.indexOf(new MemberInfo(memNo)));
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+		int row = table.getSelectedRow();
+		int memNo = (int) table.getValueAt(row, 0);
+		if (row == -1) {
+			throw new NotSelectedException();
+		}
+		try {
+			MemberInfo item = service.showMemberByMemNo(memNo);
+			pMemInfo.setItem(item);
+			pMemInfo.getTfMemNo().setEditable(false);
+			pMemInfo.getTfMemName().setEditable(false);
+			pMemInfo.getTfMemGrade().setEditable(false);
+			pMemInfo.getTfMemBirth().setEditable(false);
+			pMemInfo.getTfMemAddr().setEditable(false);
+			pMemInfo.getTfMemCp().setEditable(false);
+			pMemInfo.getTfMemTel().setEditable(false);
+		} catch (NullPointerException e1) {
+			e1.printStackTrace();
+		}
+
+	}
+
+//	private void setItem(MemberInfo item) {
+//		pMemInfo.getTfMemNo().setText(String.valueOf(item.getMemNo()));
+//		pMemInfo.getTfMemName().setText(item.getMemName());
+//		pMemInfo.getTfMemGrade().setText(String.valueOf(item.getMemGradeNo()));
+//		pMemInfo.getTfMemBirth().setText(item.getMemBirth());
+//		pMemInfo.getTfMemAddr().setText(item.getMemAddr());
+//		pMemInfo.getTfMemCp().setText(item.getMemCp());
+//		pMemInfo.getTfMemTel().setText(item.getMemTel());
+//	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -1,6 +1,8 @@
 package book_rent.ui.content;
 
-import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -9,17 +11,6 @@ import javax.swing.border.TitledBorder;
 import book_rent.dto.BookInfo;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.NotSelectedException;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import net.miginfocom.swing.MigLayout;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.Rectangle;
-import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
-import javax.swing.JComboBox;
 
 public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 	private JTextField tfBookNo;
@@ -88,7 +79,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		}
 		tfBookNo.setText(String.valueOf(item.getBookNo()));
 		tfBookName.setText(item.getBookName());
-		tfBookCate.setText(item.getBookCate());
+		tfBookCate.setText(String.valueOf(item.getBookCateNo()));
 		tfRentState.setText(item.getRentState());
 
 		tfBookNo.setEditable(false);
@@ -99,9 +90,9 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		validCheck();
 		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
 		String bookName = tfBookName.getText().trim();
-		String bookCate = tfBookCate.getText().trim();
+		int bookCateNo = Integer.parseInt(tfBookCate.getText().trim());
 		String rentState = tfRentState.getText().trim();
-		return new BookInfo(bookNo, bookName, bookCate, rentState);
+		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
 	}
 
 	@Override

@@ -121,5 +121,9 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 			return false;
 		}
 	}
+	
+	public List<T> getList() {
+		return list;
+	}
 
 }

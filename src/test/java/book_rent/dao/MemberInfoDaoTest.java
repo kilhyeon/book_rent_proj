@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import book_rent.dao.impl.MemberInfoDaoImpl;
+import book_rent.dto.MemGradeNo;
 import book_rent.dto.MemberInfo;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -32,10 +33,30 @@ public class MemberInfoDaoTest {
 	}
 
 	@Test
+	public void test05SelectMemberInfoByNo() {
+		System.out.printf("%s()%n", "testSelectMemberInfoByNo");
+		MemberInfo member = new MemberInfo(12002);
+		List<MemberInfo> searchMemberList = dao.selectMemberInfoByNo(member);
+		Assert.assertNotNull(searchMemberList);
+		System.out.println(searchMemberList);
+		searchMemberList.stream().forEach(System.out::println);
+	}
+	
+	@Test
+	public void test06SelectMemberInfoByGrade() {
+		System.out.printf("%s()%n", "testSelectMemberInfoByGrade");
+		MemGradeNo member = new MemGradeNo("일반회원");
+		List<MemberInfo> searchMemberList = dao.selectMemberInfoByGrade(member);
+		Assert.assertNotNull(searchMemberList);
+		System.out.println(searchMemberList);
+		searchMemberList.stream().forEach(System.out::println);
+	}
+	
+
+//	@Test
 	public void test01InsertEmployee() {
 		System.out.printf("%s()%n", "testInsertEmployee");
-		MemberInfo newMember = new MemberInfo(19998, "홍길동", "20010101", "010-1234-1234", "010-1234-1234", "대구",
-				"일반회원");
+		MemberInfo newMember = new MemberInfo(19998, "홍길동", "20010101", "010-1234-1234", "010-1234-1234", "대구", "일반회원");
 		int res = dao.insertMember(newMember);
 		Assert.assertEquals(1, res);
 
@@ -53,7 +74,7 @@ public class MemberInfoDaoTest {
 //	@Test
 	public void test03DeleteEmployee() {
 		System.out.printf("%s()%n", "testDeleteEmployee()");
-		MemberInfo delMember = new MemberInfo(19998);		
+		MemberInfo delMember = new MemberInfo(19998);
 		int res = dao.deleteMember(delMember);
 		Assert.assertEquals(1, res);
 	}
