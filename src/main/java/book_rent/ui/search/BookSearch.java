@@ -10,17 +10,13 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import book_rent.dto.BookCateNo;
 import book_rent.dto.BookInfo;
 import book_rent.dto.BookRentState;
-import book_rent.dto.MemCp;
-import book_rent.dto.MemGradeNo;
-import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.ui.list.BookInfoTablePanel;
-import book_rent.ui.list.MemberInfoTablePanel;
-import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class BookSearch extends JPanel implements ActionListener {

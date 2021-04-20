@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
@@ -14,22 +13,25 @@ import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
+
 public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener {
 	private MemberInfoService service;
 	private MemberContentPanel pMemInfo;
 
 	public MemberInfoTablePanel() {
+
 		initialize();
 		table.addMouseListener(this);
 		pMemInfo = new MemberContentPanel();
 	}
-	
+
 	private void initialize() {
 		setBorder(new TitledBorder(null, "회원리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 	}
 
 	public MemberContentPanel getpMemInfo() {
 		return pMemInfo;
+
 	}
 
 	public void setService(MemberInfoService service) {

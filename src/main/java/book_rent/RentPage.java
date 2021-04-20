@@ -30,8 +30,6 @@ public class RentPage extends JFrame {
 	private BookInfoTablePanel pListBook;
 	private MemberSearch pSearchMem;
 	private BookSearch pSearchBook;
-	private MemberContentPanel pMemInfo;
-	private BookContentPanel pBookInfo;
 
 	public RentPage() {
 		memService = new MemberInfoService();
@@ -56,9 +54,6 @@ public class RentPage extends JFrame {
 		pListMem.setService(memService);
 		pListMem.loadData();
 
-		pMemInfo = pListMem.getpMemInfo();
-		contentPane.add(pMemInfo);
-
 		pSearchBook = new BookSearch();
 		pSearchBook.setBorder(new EmptyBorder(10, 0, 0, 0));
 		contentPane.add(pSearchBook);
@@ -69,14 +64,15 @@ public class RentPage extends JFrame {
 		pListBook.setService(bookService);
 		pListBook.loadData();
 
-		pBookInfo = new BookContentPanel();
-		contentPane.add(pBookInfo);
-
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn);
 
 		JButton btnRent = new JButton("대여하기");
 		pBtn.add(btnRent);
+
+		pSearchBook = new BookSearch();
+		contentPane.add(pSearchBook);
+		pSearchBook.setService(bookService);
 
 		JButton btnCancel = new JButton("취소");
 		pBtn.add(btnCancel);
@@ -96,22 +92,6 @@ public class RentPage extends JFrame {
 
 	public void setpListBook(BookInfoTablePanel pListBook) {
 		this.pListBook = pListBook;
-	}
-
-	public MemberContentPanel getpMemInfo() {
-		return pMemInfo;
-	}
-
-	public void setpMemInfo(MemberContentPanel pMemInfo) {
-		this.pMemInfo = pMemInfo;
-	}
-
-	public BookContentPanel getpBookInfo() {
-		return pBookInfo;
-	}
-
-	public void setpBookInfo(BookContentPanel pBookInfo) {
-		this.pBookInfo = pBookInfo;
 	}
 
 }

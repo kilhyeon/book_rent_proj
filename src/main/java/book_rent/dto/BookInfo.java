@@ -19,6 +19,7 @@ public class BookInfo {
 	}
 
 	public BookInfo(int bookNo, String bookName, int bookCateNo, String rentState) {
+
 		this.bookNo = bookNo;
 		this.bookName = bookName;
 		this.bookCateNo = bookCateNo;
@@ -81,7 +82,7 @@ public class BookInfo {
 
 	@Override
 	public String toString() {
-		return String.format("BookInfo [bookNo=%s, bookName=%s, bookCate=%s, rentState=%s]", bookNo, bookName,
+		return String.format("BookInfo [bookNo=%s, bookName=%s, bookCateNo=%s, rentState=%s]", bookNo, bookName,
 				bookCateNo, rentState);
 	}
 

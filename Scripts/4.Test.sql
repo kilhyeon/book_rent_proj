@@ -13,4 +13,8 @@ select bookNo, bookName, cateNo, rentState from bookinfo;
 select rentNo, memNo, bookNo, rentDate, returnDate, lateDate from rent;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 select memNo, memName, memBirth, memTel, memCp, memAddr, memGrade from memberinfo where memGrade = '일반회원';

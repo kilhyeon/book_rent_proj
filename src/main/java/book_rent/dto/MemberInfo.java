@@ -113,7 +113,7 @@ public class MemberInfo {
 	@Override
 	public String toString() {
 		return String.format(
-				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGrade=%s]", memNo,
+				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGradeNo=%s]", memNo,
 				memName, memBirth, memTel, memCp, memAddr, memGradeNo);
 	}
 

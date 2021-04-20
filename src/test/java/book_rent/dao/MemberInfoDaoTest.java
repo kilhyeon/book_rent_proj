@@ -9,7 +9,11 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import book_rent.dao.impl.MemberInfoDaoImpl;
+<<<<<<< HEAD
 import book_rent.dto.MemGradeNo;
+=======
+import book_rent.dto.MemGrade;
+>>>>>>> refs/remotes/origin/master
 import book_rent.dto.MemberInfo;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -45,7 +49,11 @@ public class MemberInfoDaoTest {
 	@Test
 	public void test06SelectMemberInfoByGrade() {
 		System.out.printf("%s()%n", "testSelectMemberInfoByGrade");
+<<<<<<< HEAD
 		MemGradeNo member = new MemGradeNo("일반회원");
+=======
+		MemGrade member = new MemGrade("일반회원");
+>>>>>>> refs/remotes/origin/master
 		List<MemberInfo> searchMemberList = dao.selectMemberInfoByGrade(member);
 		Assert.assertNotNull(searchMemberList);
 		System.out.println(searchMemberList);

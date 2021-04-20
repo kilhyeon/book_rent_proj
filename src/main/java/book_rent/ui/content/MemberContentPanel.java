@@ -10,8 +10,6 @@ import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
-import book_rent.ui.exception.NotSelectedException;
-import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
@@ -31,72 +29,72 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		setBorder(new TitledBorder(null, "회원정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 0, 0));
 
-		JPanel panel_1 = new JPanel();
-		add(panel_1);
-		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel pMem1 = new JPanel();
+		add(pMem1);
+		pMem1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		JLabel lblMemNo = new JLabel("회원번호 : ");
-		panel_1.add(lblMemNo);
+		pMem1.add(lblMemNo);
 
 		tfMemNo = new JTextField();
 		tfMemNo.setColumns(10);
-		panel_1.add(tfMemNo);
+		pMem1.add(tfMemNo);
 
 		JLabel lblMemName = new JLabel("회  원  명 : ");
-		panel_1.add(lblMemName);
+		pMem1.add(lblMemName);
 
 		tfMemName = new JTextField();
 		tfMemName.setColumns(10);
-		panel_1.add(tfMemName);
+		pMem1.add(tfMemName);
 
-		JPanel panel_2 = new JPanel();
-		FlowLayout fl_panel_2 = (FlowLayout) panel_2.getLayout();
-		fl_panel_2.setAlignment(FlowLayout.LEFT);
-		add(panel_2);
+		JPanel pMem2 = new JPanel();
+		FlowLayout fl_pMem2 = (FlowLayout) pMem2.getLayout();
+		fl_pMem2.setAlignment(FlowLayout.LEFT);
+		add(pMem2);
 
 		JLabel lblMemBirth = new JLabel("생년월일 : ");
-		panel_2.add(lblMemBirth);
+		pMem2.add(lblMemBirth);
 
 		tfMemBirth = new JTextField();
-		panel_2.add(tfMemBirth);
+		pMem2.add(tfMemBirth);
 		tfMemBirth.setColumns(10);
 
 		JLabel lblMemTel = new JLabel("전화번호 : ");
-		panel_2.add(lblMemTel);
+		pMem2.add(lblMemTel);
 
 		tfMemTel = new JTextField();
-		panel_2.add(tfMemTel);
+		pMem2.add(tfMemTel);
 		tfMemTel.setColumns(10);
 
-		JPanel panel_3 = new JPanel();
-		FlowLayout fl_panel_3 = (FlowLayout) panel_3.getLayout();
-		fl_panel_3.setAlignment(FlowLayout.LEFT);
-		add(panel_3);
+		JPanel pMem3 = new JPanel();
+		FlowLayout fl_pMem3 = (FlowLayout) pMem3.getLayout();
+		fl_pMem3.setAlignment(FlowLayout.LEFT);
+		add(pMem3);
 
 		JLabel lblMemCp = new JLabel("휴대전화 : ");
-		panel_3.add(lblMemCp);
+		pMem3.add(lblMemCp);
 
 		tfMemCp = new JTextField();
-		panel_3.add(tfMemCp);
+		pMem3.add(tfMemCp);
 		tfMemCp.setColumns(10);
 
 		JLabel lblMemAddr = new JLabel("주        소 : ");
-		panel_3.add(lblMemAddr);
+		pMem3.add(lblMemAddr);
 
 		tfMemAddr = new JTextField();
-		panel_3.add(tfMemAddr);
+		pMem3.add(tfMemAddr);
 		tfMemAddr.setColumns(10);
 
-		JPanel panel_4 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		add(panel_4);
+		JPanel pMem4 = new JPanel();
+		FlowLayout fl_pMem4 = (FlowLayout) pMem4.getLayout();
+		fl_pMem4.setAlignment(FlowLayout.LEFT);
+		add(pMem4);
 
 		JLabel lblMemGrade = new JLabel("회원등급 : ");
-		panel_4.add(lblMemGrade);
+		pMem4.add(lblMemGrade);
 
 		tfMemGrade = new JTextField();
-		panel_4.add(tfMemGrade);
+		pMem4.add(tfMemGrade);
 		tfMemGrade.setColumns(10);
 	}
 

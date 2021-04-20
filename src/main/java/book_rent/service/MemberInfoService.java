@@ -31,6 +31,7 @@ public class MemberInfoService {
 
 	public List<MemberInfo> showMemberListByGrade(MemberInfo memberinfo) {
 		return memDao.selectMemberInfoByGrade(memberinfo);
+
 	}
 
 	public MemberInfo showMemberByMemNo(int memNo) {

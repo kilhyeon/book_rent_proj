@@ -42,6 +42,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	}
 
 	@Override
+
 	public List<MemberInfo> selectMemberInfoByNo(MemberInfo memberinfo) {
 		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo from memberinfo where memNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -154,6 +155,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 	}
 
 	@Override
+
 	public int insertMember(MemberInfo memberinfo) {
 		String sql = "insert into memberinfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo) "
 				+ "values (?, ?, ?, ?, ?, ?, ?)";

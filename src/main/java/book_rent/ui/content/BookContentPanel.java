@@ -27,49 +27,49 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 				new TitledBorder(null, "도서정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 0, 0));
 
-		JPanel panel_1 = new JPanel();
-		add(panel_1);
-				panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel pBookNo = new JPanel();
+		add(pBookNo);
+				pBookNo.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 				JLabel lblBookNo = new JLabel("도서번호 : ");
-				panel_1.add(lblBookNo);
+				pBookNo.add(lblBookNo);
 		
 				tfBookNo = new JTextField();
-				panel_1.add(tfBookNo);
+				pBookNo.add(tfBookNo);
 				tfBookNo.setColumns(15);
 
-		JPanel panel_2 = new JPanel();
-		add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel pBookName = new JPanel();
+		add(pBookName);
+		pBookName.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		JLabel lblBookName = new JLabel("도서제목 : ");
-		panel_2.add(lblBookName);
+		pBookName.add(lblBookName);
 
 		tfBookName = new JTextField();
 		tfBookName.setColumns(25);
-		panel_2.add(tfBookName);
+		pBookName.add(tfBookName);
 
-		JPanel panel_3 = new JPanel();
-		add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel pBookCate = new JPanel();
+		add(pBookCate);
+		pBookCate.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		JLabel lblBookCate = new JLabel("도서구분 : ");
-		panel_3.add(lblBookCate);
+		pBookCate.add(lblBookCate);
 
 		tfBookCate = new JTextField();
 		tfBookCate.setColumns(15);
-		panel_3.add(tfBookCate);
+		pBookCate.add(tfBookCate);
 
-		JPanel panel_4 = new JPanel();
-		add(panel_4);
-		panel_4.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel pRentState = new JPanel();
+		add(pRentState);
+		pRentState.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		JLabel lblRentState = new JLabel("대여상태 : ");
-		panel_4.add(lblRentState);
+		pRentState.add(lblRentState);
 
 		tfRentState = new JTextField();
 		tfRentState.setColumns(10);
-		panel_4.add(tfRentState);
+		pRentState.add(tfRentState);
 	}
 
 	@Override

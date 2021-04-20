@@ -44,7 +44,9 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public List<BookInfo> selectBookInfoByNo(BookInfo bookinfo) {
+
 		String sql = "select bookNo, bookName, bookCateNo, rentState from bookinfo where bookNo = ?";
+
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, bookinfo.getBookNo());
 
@@ -132,6 +134,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		int bookCateNo = rs.getInt("bookCateNo");
 		String rentState = rs.getString("rentState");
 		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
+
 	}
 
 	@Override

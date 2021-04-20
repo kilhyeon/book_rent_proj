@@ -76,5 +76,7 @@ public class MemberManagerUI extends AbstractManagerUI<MemberInfo> {
 		pContent.clearTf();
 		JOptionPane.showMessageDialog(null, addMember + " 추가했습니다.");
 	}
-
+	
+	
+	
 }

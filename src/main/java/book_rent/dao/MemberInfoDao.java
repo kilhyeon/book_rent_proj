@@ -17,7 +17,7 @@ public interface MemberInfoDao {
 	List<MemberInfo> selectMemberInfoByCp(MemberInfo memberinfo);
 
 	List<MemberInfo> selectMemberInfoByGrade(MemberInfo memberinfo);
-	
+
 	MemberInfo selectMeberInfoBymemNo(int memNo);
 
 	int insertMember(MemberInfo memberinfo);

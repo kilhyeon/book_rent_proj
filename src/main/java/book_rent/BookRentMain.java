@@ -39,12 +39,12 @@ public class BookRentMain extends JFrame implements ActionListener {
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
-	private JPanel panel_1;
-	private JButton button;
-	private JButton button_1;
-	private JPanel panel_2;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JPanel pBtn1;
+	private JButton btnRent;
+	private JButton btnReturn;
+	private JPanel pBtn2;
+	private JButton btnMember;
+	private JButton btnBook;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -68,72 +68,70 @@ public class BookRentMain extends JFrame implements ActionListener {
 
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 800);
+		setBounds(100, 100, 1200, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		JPanel panel = new JPanel();
-		contentPane.add(panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel pBtnSearch = new JPanel();
+		contentPane.add(pBtnSearch);
+		pBtnSearch.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JPanel panel_7 = new JPanel();
-		panel.add(panel_7);
-		panel_7.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel pBtn3 = new JPanel();
+		pBtnSearch.add(pBtn3);
+		pBtn3.setLayout(new GridLayout(0, 2, 0, 0));
 
-		panel_1 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
-		flowLayout.setHgap(10);
-		panel_7.add(panel_1);
+		pBtn1 = new JPanel();
+		FlowLayout fl_pBtn1 = (FlowLayout) pBtn1.getLayout();
+		pBtn3.add(pBtn1);
 
-		button = new JButton("대출하기");
-		button.addActionListener(this);
-		panel_1.add(button);
+		btnRent = new JButton("대출하기");
+		btnRent.addActionListener(this);
+		pBtn1.add(btnRent);
 
-		button_1 = new JButton("반납하기");
-		button_1.addActionListener(this);
-		panel_1.add(button_1);
+		btnReturn = new JButton("반납하기");
+		btnReturn.addActionListener(this);
+		pBtn1.add(btnReturn);
 
-		panel_2 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_2.getLayout();
-		flowLayout_1.setHgap(10);
-		panel_7.add(panel_2);
+		pBtn2 = new JPanel();
+		pBtn3.add(pBtn2);
 
-		btnNewButton = new JButton("회원관리");
-		btnNewButton.addActionListener(this);
-		panel_2.add(btnNewButton);
+		btnMember = new JButton("회원관리");
+		btnMember.addActionListener(this);
+		pBtn2.add(btnMember);
 
-		btnNewButton_1 = new JButton("도서관리");
-		btnNewButton_1.addActionListener(this);
-		btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(btnNewButton_1);
+		btnBook = new JButton("도서관리");
+		btnBook.addActionListener(this);
+		btnBook.setHorizontalAlignment(SwingConstants.RIGHT);
+		pBtn2.add(btnBook);
 
-		JPanel panel_8 = new JPanel();
-		panel.add(panel_8);
-		panel_8.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel pSearch = new JPanel();
+		pBtnSearch.add(pSearch);
+		pSearch.setLayout(new GridLayout(0, 2, 0, 0));
 
-		MemberSearch panel_9 = new MemberSearch();
-		panel_8.add(panel_9);
-		panel_9.setService(memService);
-		panel_9.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		MemberSearch pSerachMember = new MemberSearch();
+		pSearch.add(pSerachMember);
+		pSerachMember.setService(memService);
+		pSerachMember.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		BookSearch panel_10 = new BookSearch();
-		panel_8.add(panel_10);
-		panel_10.setService(bookService);
-		
+		BookSearch pSerachBook = new BookSearch();
+		pSearch.add(pSerachBook);
+		pSerachBook.setService(bookService);
 
 		pList = new JPanel();
 		contentPane.add(pList);
 		pList.setLayout(new GridLayout(1, 0, 5, 0));
 
-		pMember = panel_9.getMemberInfoList();
+		pMember = pSerachMember.getMemberInfoList();
+
 		pList.add(pMember);
 //		pMember.setBorder(new TitledBorder(null, "회원리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pMember.setService(memService);
 		pMember.loadData();
 
-		pBook = panel_10.getBookInfoList();
+		pBook = pSerachBook.getBookInfoList();
+
 		pList.add(pBook);
 //		pBook.setBorder(new TitledBorder(null, "도서리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pBook.setService(bookService);
@@ -147,16 +145,16 @@ public class BookRentMain extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton_1) {
+		if (e.getSource() == btnBook) {
 			actionPerformedBtnNewButton_1(e);
 		}
-		if (e.getSource() == button_1) {
+		if (e.getSource() == btnReturn) {
 			actionPerformedButton_1(e);
 		}
-		if (e.getSource() == button) {
+		if (e.getSource() == btnRent) {
 			actionPerformedButton(e);
 		}
-		if (e.getSource() == btnNewButton) {
+		if (e.getSource() == btnMember) {
 			actionPerformedBtnNewButton(e);
 		}
 	}

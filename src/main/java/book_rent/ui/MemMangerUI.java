@@ -82,7 +82,7 @@ public class MemMangerUI extends JFrame implements ActionListener {
 		pMemMangement.add(pSearchMem);
 		pSearchMem.setService(memService);
 
-		pListMem = new MemberInfoTablePanel();
+		pListMem = pSearchMem.getMemberInfoList();
 		pMemMangement.add(pListMem);
 		pListMem.setService(memService);
 		pListMem.loadData();

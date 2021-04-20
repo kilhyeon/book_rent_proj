@@ -2,6 +2,8 @@ package book_rent.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -61,6 +63,7 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 
 		JPopupMenu popupMenu = createPopupMenu();
 		pList.setPopupMenu(popupMenu);
+		
 	}
 
 	protected abstract void setService();
