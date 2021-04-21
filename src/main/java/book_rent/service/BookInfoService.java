@@ -29,6 +29,11 @@ public class BookInfoService {
 		return bookDao.selectBookInfoByRent(bookinfo);
 	}
 
+	public BookInfo showBookByBookNo(int bookNo) {
+		return bookDao.selectBookInfoBybookNo(bookNo);
+	}
+	
+	
 	public void addBook(BookInfo bookinfo) {
 		bookDao.insertBook(bookinfo);
 	}

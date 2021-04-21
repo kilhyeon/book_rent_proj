@@ -28,13 +28,27 @@ public class RentPage extends JFrame {
 	private BookInfoService bookService;
 	private MemberInfoTablePanel pListMem;
 	private BookInfoTablePanel pListBook;
+	private MemberContentPanel pMemInfo;
+	private BookContentPanel pBookInfo;
+	private JPanel pMem;
+	private JPanel pBook;
 	private MemberSearch pSearchMem;
 	private BookSearch pSearchBook;
+	private JPanel pBtn;
+	private JButton btnRent;
+	private JButton btnCancel;
 
 	public RentPage() {
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
 		initialize();
+		tableLoadData();
+	}
+
+	private void tableLoadData() {
+		pListMem.setService(memService);
+		pListMem.loadData();
+
 	}
 
 	private void initialize() {
@@ -45,36 +59,45 @@ public class RentPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
+		pMem = new JPanel();
+		contentPane.add(pMem);
+		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
+
 		pSearchMem = new MemberSearch();
-		contentPane.add(pSearchMem);
+		pMem.add(pSearchMem);
 		pSearchMem.setService(memService);
 
 		pListMem = pSearchMem.getMemberInfoList();
-		contentPane.add(pListMem);
+		pMem.add(pListMem);
 		pListMem.setService(memService);
 		pListMem.loadData();
 
+		pMemInfo = pListMem.getpMemInfo();
+		pMem.add(pMemInfo);
+
+		pBook = new JPanel();
+		contentPane.add(pBook);
+		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
+
 		pSearchBook = new BookSearch();
-		pSearchBook.setBorder(new EmptyBorder(10, 0, 0, 0));
-		contentPane.add(pSearchBook);
+		pBook.add(pSearchBook);
 		pSearchBook.setService(bookService);
 
 		pListBook = pSearchBook.getBookInfoList();
-		contentPane.add(pListBook);
+		pBook.add(pListBook);
 		pListBook.setService(bookService);
 		pListBook.loadData();
 
-		JPanel pBtn = new JPanel();
+		pBookInfo = pListBook.getpBookInfo();
+		pBook.add(pBookInfo);
+
+		pBtn = new JPanel();
 		contentPane.add(pBtn);
 
-		JButton btnRent = new JButton("대여하기");
+		btnRent = new JButton("대여하기");
 		pBtn.add(btnRent);
 
-		pSearchBook = new BookSearch();
-		contentPane.add(pSearchBook);
-		pSearchBook.setService(bookService);
-
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
 		pBtn.add(btnCancel);
 	}
 

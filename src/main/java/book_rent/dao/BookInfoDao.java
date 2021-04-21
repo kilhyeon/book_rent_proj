@@ -14,6 +14,8 @@ public interface BookInfoDao {
 	List<BookInfo> selectBookInfoByCate(BookInfo bookinfo);
 
 	List<BookInfo> selectBookInfoByRent(BookInfo bookinfo);
+	
+	BookInfo selectBookInfoBybookNo(int bookNo);
 
 	int insertBook(BookInfo bookinfo);
 

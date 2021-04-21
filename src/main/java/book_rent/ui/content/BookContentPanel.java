@@ -23,20 +23,19 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 	}
 
 	private void initialize() {
-		setBorder(
-				new TitledBorder(null, "도서정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "도서정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 0, 0));
 
 		JPanel pBookNo = new JPanel();
 		add(pBookNo);
-				pBookNo.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
-				JLabel lblBookNo = new JLabel("도서번호 : ");
-				pBookNo.add(lblBookNo);
-		
-				tfBookNo = new JTextField();
-				pBookNo.add(tfBookNo);
-				tfBookNo.setColumns(15);
+		pBookNo.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+
+		JLabel lblBookNo = new JLabel("도서번호 : ");
+		pBookNo.add(lblBookNo);
+
+		tfBookNo = new JTextField();
+		pBookNo.add(tfBookNo);
+		tfBookNo.setColumns(15);
 
 		JPanel pBookName = new JPanel();
 		add(pBookName);
@@ -114,4 +113,37 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 			tfBookNo.setEditable(true);
 		}
 	}
+
+	public JTextField getTfBookNo() {
+		return tfBookNo;
+	}
+
+	public void setTfBookNo(JTextField tfBookNo) {
+		this.tfBookNo = tfBookNo;
+	}
+
+	public JTextField getTfBookName() {
+		return tfBookName;
+	}
+
+	public void setTfBookName(JTextField tfBookName) {
+		this.tfBookName = tfBookName;
+	}
+
+	public JTextField getTfBookCate() {
+		return tfBookCate;
+	}
+
+	public void setTfBookCate(JTextField tfBookCate) {
+		this.tfBookCate = tfBookCate;
+	}
+
+	public JTextField getTfRentState() {
+		return tfRentState;
+	}
+
+	public void setTfRentState(JTextField tfRentState) {
+		this.tfRentState = tfRentState;
+	}
+
 }

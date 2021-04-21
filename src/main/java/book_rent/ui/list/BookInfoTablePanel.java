@@ -1,23 +1,34 @@
 package book_rent.ui.list;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.SwingConstants;
 
 import book_rent.dto.BookInfo;
 import book_rent.service.BookInfoService;
+import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.exception.NotSelectedException;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> {
+public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> implements MouseListener {
 	private BookInfoService service;
+	private BookContentPanel pBookInfo;
 
 	public BookInfoTablePanel() {
 		initialize();
+		table.addMouseListener(this);
+		pBookInfo = new BookContentPanel();
 	}
+
 	private void initialize() {
 		setBorder(new TitledBorder(null, "도서리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	}
+
+	public BookContentPanel getpBookInfo() {
+		return pBookInfo;
 	}
 
 	public void setList(List<BookInfo> list) {
@@ -62,6 +73,50 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> {
 			throw new NotSelectedException();
 		}
 		return list.get(list.indexOf(new BookInfo(bookNo)));
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int row = table.getSelectedRow();
+		int bookNo = (int) table.getValueAt(row, 0);
+
+		if (row == -1) {
+			throw new NotSelectedException();
+		}
+		try {
+			BookInfo item = service.showBookByBookNo(bookNo);
+			pBookInfo.setItem(item);
+			pBookInfo.getTfBookNo().setEditable(false);
+			pBookInfo.getTfBookName().setEditable(false);
+			pBookInfo.getTfBookCate().setEditable(false);
+			pBookInfo.getTfRentState().setEditable(false);			
+		} catch (NullPointerException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -28,6 +28,7 @@ public class MemMangerUI extends JFrame implements ActionListener {
 	private MemberInfoTablePanel pListMem;
 	private MemberContentPanel pMemInfo;
 	private MemberSearch pSearchMem;
+	
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private JPanel pBtn;
@@ -55,24 +56,24 @@ public class MemMangerUI extends JFrame implements ActionListener {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 
-		JPanel pMemList = new JPanel();
-		tabbedPane.addTab("회원정보", null, pMemList, null);
-		pMemList.setLayout(new BoxLayout(pMemList, BoxLayout.Y_AXIS));
+		JPanel pMem = new JPanel();
+		tabbedPane.addTab("회원정보", null, pMem, null);
+		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
 		pSearchMem = new MemberSearch();
-		pMemList.add(pSearchMem);
+		pMem.add(pSearchMem);
 		pSearchMem.setService(memService);
 
 		pListMem = pSearchMem.getMemberInfoList();
-		pMemList.add(pListMem);
+		pMem.add(pListMem);
 		pListMem.setService(memService);
 		pListMem.loadData();
 
 		pMemInfo = pListMem.getpMemInfo();
-		pMemList.add(pMemInfo);
+		pMem.add(pMemInfo);
 
 		JPanel pRentList = new JPanel();
-		pMemList.add(pRentList);
+		pMem.add(pRentList);
 
 		JPanel pMemMangement = new JPanel();
 		tabbedPane.addTab("회원관리", null, pMemMangement, null);

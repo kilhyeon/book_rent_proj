@@ -32,7 +32,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 			if (rs.next()) {
 				List<BookInfo> list = new ArrayList();
 				do {
-					list.add(GetBookInfo(rs));
+					list.add(getBookInfo(rs));
 				} while (rs.next());
 				return list;
 			}
@@ -54,7 +54,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<BookInfo>();
 					do {
-						list.add(GetBookInfo(rs));
+						list.add(getBookInfo(rs));
 					} while (rs.next());
 					return list;
 				}
@@ -75,7 +75,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<BookInfo>();
 					do {
-						list.add(GetBookInfo(rs));
+						list.add(getBookInfo(rs));
 					} while (rs.next());
 					return list;
 				}
@@ -96,7 +96,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<BookInfo>();
 					do {
-						list.add(GetBookInfo(rs));
+						list.add(getBookInfo(rs));
 					} while (rs.next());
 					return list;
 				}
@@ -117,7 +117,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 				if (rs.next()) {
 					List<BookInfo> list = new ArrayList<BookInfo>();
 					do {
-						list.add(GetBookInfo(rs));
+						list.add(getBookInfo(rs));
 					} while (rs.next());
 					return list;
 				}
@@ -128,7 +128,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		return null;
 	}
 
-	private BookInfo GetBookInfo(ResultSet rs) throws SQLException {
+	private BookInfo getBookInfo(ResultSet rs) throws SQLException {
 		int bookNo = rs.getInt("bookNo");
 		String bookName = rs.getString("bookName");
 		int bookCateNo = rs.getInt("bookCateNo");
@@ -177,6 +177,24 @@ public class BookInfoDaoImpl implements BookInfoDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public BookInfo selectBookInfoBybookNo(int bookNo) {
+		String sql = "select bookNo, bookName, bookCateNo, rentState from bookinfo where bookNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, bookNo);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					
+					return getBookInfo(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
