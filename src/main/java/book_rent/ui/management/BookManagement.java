@@ -1,8 +1,12 @@
-package book_rent.ui.content;
+package book_rent.ui.management;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -10,17 +14,27 @@ import javax.swing.border.TitledBorder;
 
 import book_rent.dto.BookCate;
 import book_rent.dto.BookInfo;
+import book_rent.service.BookCateService;
+import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
-import book_rent.ui.exception.NotSelectedException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class BookContentPanel extends AbstractContentPanel<BookInfo> {
+public class BookManagement extends AbstractContentPanel<BookInfo> implements ActionListener {
 	private JTextField tfBookNo;
 	private JTextField tfBookName;
 	private JTextField tfBookCate;
 	private JTextField tfRentState;
+	private JComboBox cmbCate;
+	private JComboBox cmbRentState;
+	private BookCateService service;
 
-	public BookContentPanel() {
+	public BookManagement() {
+		service = new BookCateService();
 		initialize();
+		selectCmb();
+		tfBookCate.setEditable(false);
+//		tfRentState.setEditable(false);
 	}
 
 	private void initialize() {
@@ -57,8 +71,13 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		pBookCate.add(lblBookCate);
 
 		tfBookCate = new JTextField();
-		tfBookCate.setColumns(15);
+		tfBookCate.setColumns(10);
 		pBookCate.add(tfBookCate);
+
+		cmbCate = new JComboBox();
+		cmbCate.addActionListener(this);
+
+		pBookCate.add(cmbCate);
 
 		JPanel pRentState = new JPanel();
 		add(pRentState);
@@ -70,16 +89,25 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfRentState = new JTextField();
 		tfRentState.setColumns(10);
 		pRentState.add(tfRentState);
+
+		cmbRentState = new JComboBox();
+		pRentState.add(cmbRentState);
+	}
+
+	public void selectCmb() {
+		List<BookCate> cate = service.showBookCateByAll();
+		DefaultComboBoxModel<BookCate> dcbm = new DefaultComboBoxModel<BookCate>(new Vector<>(cate));
+		cmbCate.setModel(dcbm);
+		cmbCate.setSelectedIndex(-1);
+		tfBookCate.setText("");
 	}
 
 	@Override
 	public void setItem(BookInfo item) {
-		if (item == null) {
-			throw new NotSelectedException();
-		}
+
 		tfBookNo.setText(String.valueOf(item.getBookNo()));
 		tfBookName.setText(item.getBookName());
-		tfBookCate.setText(String.valueOf(item.getBookCateNo()));
+		tfBookCate.setText((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
 		tfRentState.setText(item.getRentState());
 		tfBookNo.setEditable(false);
 	}
@@ -90,7 +118,6 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
 		String bookName = tfBookName.getText().trim();
 		BookCate bookCateNo = new BookCate(Integer.parseInt(tfBookCate.getText().trim()));
-		System.out.println(bookCateNo);
 		String rentState = tfRentState.getText().trim();
 		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
 	}
@@ -109,6 +136,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfBookName.setText("");
 		tfBookCate.setText("");
 		tfRentState.setText("");
+		cmbCate.setSelectedIndex(-1);
 
 		if (!tfBookNo.isEditable()) {
 			tfBookNo.setEditable(true);
@@ -147,4 +175,13 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		this.tfRentState = tfRentState;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cmbCate) {
+			actionPerformedCmbCate(e);
+		}
+	}
+
+	protected void actionPerformedCmbCate(ActionEvent e) {
+		tfBookCate.setText((cmbCate.getSelectedItem() + "").replaceAll("[^0-9]", ""));
+	}
 }

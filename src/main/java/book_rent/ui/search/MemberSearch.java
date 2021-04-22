@@ -10,13 +10,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
-import book_rent.dto.MemCp;
-import book_rent.dto.MemGradeNo;
 import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
 import book_rent.ui.list.MemberInfoTablePanel;
-import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MemberSearch extends JPanel implements ActionListener {
@@ -87,10 +85,10 @@ public class MemberSearch extends JPanel implements ActionListener {
 				list = service.showMemberListByName(new MemberInfo(tf.getText()));
 			}
 			if (model.equals("휴대전화")) {
-				list = service.showMemberListByCp(new MemCp(tf.getText()));
+				list = service.showMemberListByCp(new MemberInfo(tf.getText()));
 			}
 			if (model.equals("회원등급")) {
-				list = service.showMemberListByGrade(new MemGradeNo(Integer.parseInt(tf.getText())));
+				list = service.showMemberListByGrade(new MemberInfo(Integer.parseInt(tf.getText())));
 			}
 
 		} catch (Exception e) {

@@ -14,12 +14,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.BookInfoTablePanel;
+import book_rent.ui.management.BookManagement;
 import book_rent.ui.search.BookSearch;
 
 public class BookManagerUI extends JFrame implements ActionListener {
@@ -27,7 +27,7 @@ public class BookManagerUI extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private BookInfoService bookService;
 	private BookInfoTablePanel pListBook;
-	private BookContentPanel pBookInfo;
+	private BookManagement pBookInfo;
 	private BookSearch pSearchBook;
 
 	private JButton btnAdd;
@@ -70,8 +70,8 @@ public class BookManagerUI extends JFrame implements ActionListener {
 		pListBook.setService(bookService);
 		pListBook.loadData();
 
-		pBookInfo = pListBook.getpBookInfo();
-		pBook.add(pBookInfo);
+//		pBookInfo = pListBook.getpBookInfo();
+//		pBook.add(pBookInfo);
 
 		JPanel pRentList = new JPanel();
 		pBook.add(pRentList);
@@ -89,7 +89,7 @@ public class BookManagerUI extends JFrame implements ActionListener {
 		pListBook.setService(bookService);
 		pListBook.loadData();
 
-		pBookInfo = new BookContentPanel();
+		pBookInfo = new BookManagement();
 		pBookMangement.add(pBookInfo);
 
 		pBtn = new JPanel();
@@ -115,11 +115,11 @@ public class BookManagerUI extends JFrame implements ActionListener {
 		this.pListBook = pListBook;
 	}
 
-	public BookContentPanel getpBookInfo() {
+	public BookManagement getpBookInfo() {
 		return pBookInfo;
 	}
 
-	public void setpBookInfo(BookContentPanel pBookInfo) {
+	public void setpBookInfo(BookManagement pBookInfo) {
 		this.pBookInfo = pBookInfo;
 	}
 

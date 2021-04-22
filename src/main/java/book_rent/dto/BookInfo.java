@@ -3,7 +3,7 @@ package book_rent.dto;
 public class BookInfo {
 	private int bookNo;
 	private String bookName;
-	private int bookCateNo;
+	private BookCate bookCateNo;
 	private String rentState;
 
 	public BookInfo() {
@@ -18,7 +18,22 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
-	public BookInfo(int bookNo, String bookName, int bookCateNo, String rentState) {
+	public BookInfo(BookCate bookCateNo) {
+		this.bookCateNo = bookCateNo;
+	}
+
+	public BookInfo(int bookNo, String bookName) {
+		this.bookNo = bookNo;
+		this.bookName = bookName;
+	}
+
+	public BookInfo(int bookNo, String bookName, BookCate bookCateNo) {
+		this.bookNo = bookNo;
+		this.bookName = bookName;
+		this.bookCateNo = bookCateNo;
+	}
+
+	public BookInfo(int bookNo, String bookName, BookCate bookCateNo, String rentState) {
 
 		this.bookNo = bookNo;
 		this.bookName = bookName;
@@ -42,11 +57,11 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
-	public int getBookCateNo() {
+	public BookCate getBookCateNo() {
 		return bookCateNo;
 	}
 
-	public void setBookCateNo(int bookCateNo) {
+	public void setBookCateNo(BookCate bookCateNo) {
 		this.bookCateNo = bookCateNo;
 	}
 

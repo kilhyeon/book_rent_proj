@@ -5,12 +5,12 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import book_rent.dto.BookInfo;
 import book_rent.service.BookInfoService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.exception.NotSelectedException;
-import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> implements MouseListener {

@@ -58,20 +58,6 @@ ALTER TABLE book_rent.rent
 		);
 
 -- 도서구분
-CREATE TABLE book_rent.bookCategory (
-	cateNo   VARCHAR(5)   NOT NULL COMMENT '구분번호', -- 구분번호
-	cateName VARCHAR(256) NULL     COMMENT '구분이름' -- 구분이름
-)
-COMMENT '도서구분';
-
--- 도서구분
-ALTER TABLE book_rent.bookCategory
-	ADD CONSTRAINT PK_bookCategory -- 도서구분 기본키
-		PRIMARY KEY (
-			cateNo -- 구분번호
-		);
-
--- 도서구분
 CREATE TABLE book_rent.category (
 	bookCateNo   INT         NOT NULL COMMENT '도서구분', -- 도서구분
 	bookCateName VARCHAR(10) NULL     COMMENT '도서구분이름' -- 도서구분이름

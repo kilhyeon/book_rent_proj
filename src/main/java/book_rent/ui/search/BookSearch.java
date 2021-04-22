@@ -12,9 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import book_rent.dto.BookCateNo;
 import book_rent.dto.BookInfo;
-import book_rent.dto.BookRentState;
 import book_rent.service.BookInfoService;
 import book_rent.ui.list.BookInfoTablePanel;
 
@@ -87,10 +85,10 @@ public class BookSearch extends JPanel implements ActionListener {
 				list = service.showBookListByName(new BookInfo(tf.getText()));
 			}
 			if (model.equals("도서구분")) {
-				list = service.showBookListByCate(new BookCateNo(Integer.parseInt(tf.getText())));
+				list = service.showBookListByCate(new BookInfo(Integer.parseInt(tf.getText())));
 			}
 			if (model.equals("대출상태")) {
-				list = service.showBookListByRent(new BookRentState(tf.getText()));
+				list = service.showBookListByRent(new BookInfo(tf.getText()));
 			}
 
 		} catch (Exception e) {
