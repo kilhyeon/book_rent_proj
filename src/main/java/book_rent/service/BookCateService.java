@@ -11,6 +11,17 @@ public class BookCateService {
 
 	public List<BookCate> showBookCateByAll() {
 		return cateDao.selectBookCateByAll();
+	}
 
+	public void addCate(BookCate cate) {
+		cateDao.insertBookCate(cate);
+	}
+
+	public void modifyCate(BookCate cate) {
+		cateDao.updateBookCate(cate);
+	}
+
+	public void removeCate(BookCate cate) {
+		cateDao.deleteBookCate(cate);
 	}
 }

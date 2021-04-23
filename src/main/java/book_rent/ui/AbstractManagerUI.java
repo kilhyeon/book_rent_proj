@@ -2,8 +2,6 @@ package book_rent.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -26,8 +24,8 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	protected JButton btnAdd;
 	private JButton btnCancel;
 
-	protected AbstractContentPanel<T> pContent;
-	protected AbstractCustomTablePanel<T> pList;
+	protected AbstractContentPanel<T> pList;
+	protected AbstractCustomTablePanel<T> pContent;
 
 	public AbstractManagerUI() {
 		setService(); // service 연결
@@ -43,10 +41,24 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		pContent = createContentPanel();
+		pContent = createTablePanel();
 		contentPane.add(pContent);
 //		pContent.setLayout(new GridLayout(1, 0, 0, 0));
 
+//		JPanel pBtn = new JPanel();
+//		contentPane.add(pBtn);
+//
+//		btnAdd = new JButton("추가");
+//		btnAdd.addActionListener(this);
+//		pBtn.add(btnAdd);
+//
+//		btnCancel = new JButton("취소");
+//		btnCancel.addActionListener(this);
+//		pBtn.add(btnCancel);
+//
+//		pList = createTablePanel();
+//		contentPane.add(pList);
+		
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn);
 
@@ -58,11 +70,11 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 
-		pList = createTablePanel();
+		pList = createContentPanel();
 		contentPane.add(pList);
 
 		JPopupMenu popupMenu = createPopupMenu();
-		pList.setPopupMenu(popupMenu);
+		pContent.setPopupMenu(popupMenu);
 		
 	}
 
@@ -83,7 +95,7 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	protected abstract void actionPerformedBtnAdd(ActionEvent e);
 
 	private void actionPerformedBtnCancel(ActionEvent e) {
-		pContent.clearTf();
+		pList.clearTf();
 
 		if (btnAdd.getText().contentEquals("수정")) {
 			btnAdd.setText("추가");

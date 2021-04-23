@@ -82,7 +82,6 @@ public class BookCateDaoImpl implements BookCateDao {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -90,19 +89,39 @@ public class BookCateDaoImpl implements BookCateDao {
 
 	@Override
 	public int insertBookCate(BookCate cate) {
-		// TODO Auto-generated method stub
+		String sql = "insert into category values(?, ?)";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, cate.getBookCateNo());
+			pstmt.setString(2, cate.getBookCateName());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int updateBookCate(BookCate cate) {
-		// TODO Auto-generated method stub
+		String sql = "update category set bookCateName = ? where bookCateNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, cate.getBookCateName());
+			pstmt.setInt(2, cate.getBookCateNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int deleteBookCate(BookCate cate) {
-		// TODO Auto-generated method stub
+		String sql = "delete from category where bookCateNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, cate.getBookCateNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 

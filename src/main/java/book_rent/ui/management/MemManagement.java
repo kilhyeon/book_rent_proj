@@ -1,8 +1,14 @@
-package book_rent.ui.content;
+package book_rent.ui.management;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -10,10 +16,12 @@ import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
 import book_rent.dto.MemberInfo;
+import book_rent.service.MemGradeService;
+import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
+public class MemManagement extends AbstractContentPanel<MemberInfo> implements ActionListener {
 	private JTextField tfMemNo;
 	private JTextField tfMemName;
 	private JTextField tfMemBirth;
@@ -21,9 +29,23 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 	private JTextField tfMemCp;
 	private JTextField tfMemGrade;
 	private JTextField tfMemAddr;
+	private JComboBox cmbGrade;
+	private MemGradeService service;
 
-	public MemberContentPanel() {
+	public MemManagement() {
+		service = new MemGradeService();
 		initialize();
+		selectCmb();
+		tfMemGrade.setEditable(false);
+	}
+
+	private void selectCmb() {
+		List<MemGrade> grade = service.showMemGradeByAll();
+		DefaultComboBoxModel<MemGrade> dcbm = new DefaultComboBoxModel<MemGrade>(new Vector<>(grade));
+		cmbGrade.setModel(dcbm);
+		cmbGrade.setSelectedIndex(-1);
+		tfMemGrade.setText("");
+
 	}
 
 	private void initialize() {
@@ -97,8 +119,14 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemGrade = new JTextField();
 		pMem4.add(tfMemGrade);
 		tfMemGrade.setColumns(10);
+
+		cmbGrade = new JComboBox();
+		cmbGrade.addActionListener(this);
+
+		pMem4.add(cmbGrade);
 	}
 
+	
 	@Override
 	public void setItem(MemberInfo item) {
 //		if (item == null) {
@@ -106,7 +134,7 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 //		}
 		tfMemNo.setText(String.valueOf(item.getMemNo()));
 		tfMemName.setText(item.getMemName());
-		tfMemGrade.setText(String.valueOf(item.getMemGradeNo()));
+		tfMemGrade.setText((String.valueOf(item.getMemGradeNo())).replaceAll("[^0-9]", ""));
 		tfMemBirth.setText(item.getMemBirth());
 		tfMemAddr.setText(item.getMemAddr());
 		tfMemCp.setText(item.getMemCp());
@@ -145,6 +173,7 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemAddr.setText("");
 		tfMemCp.setText("");
 		tfMemTel.setText("");
+		cmbGrade.setSelectedIndex(-1);
 
 		if (!tfMemNo.isEditable()) {
 			tfMemNo.setEditable(true);
@@ -208,4 +237,15 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		this.tfMemAddr = tfMemAddr;
 	}
 
+	public JComboBox getCmbGrade() {
+		return cmbGrade;
+	}
+
+	public void setCmbGrade(JComboBox cmbGrade) {
+		this.cmbGrade = cmbGrade;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		tfMemGrade.setText((cmbGrade.getSelectedItem() + "").replaceAll("[^0-9]", ""));
+	}
 }

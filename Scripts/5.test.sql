@@ -19,3 +19,13 @@ select memNo, memName, memBirth, memTel, memCp, memAddr, memGrade from memberinf
 
 select bookCateNo, bookCateName from category;
 select bookCateNo, bookCateName from category;
+
+select memGradeNo, memGradeName from grade;
+
+select memGradeNo, memGradeName from grade where memGradeNo = 1;
+select memGradeNo, memGradeName from grade where memGradeName = '일반회원';
+
+insert into category values(5, '소설');
+update category set bookCateName = '시' where bookCateNo = 5;
+delete from category where bookCateNo = 5;
+

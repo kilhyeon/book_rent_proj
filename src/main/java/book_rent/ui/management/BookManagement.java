@@ -2,6 +2,8 @@ package book_rent.ui.management;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,8 +19,6 @@ import book_rent.dto.BookInfo;
 import book_rent.service.BookCateService;
 import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class BookManagement extends AbstractContentPanel<BookInfo> implements ActionListener {
 	private JTextField tfBookNo;
@@ -35,6 +35,14 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		selectCmb();
 		tfBookCate.setEditable(false);
 //		tfRentState.setEditable(false);
+	}
+
+	public void selectCmb() {
+		List<BookCate> cate = service.showBookCateByAll();
+		DefaultComboBoxModel<BookCate> dcbm = new DefaultComboBoxModel<BookCate>(new Vector<>(cate));
+		cmbCate.setModel(dcbm);
+		cmbCate.setSelectedIndex(-1);
+		tfBookCate.setText("");
 	}
 
 	private void initialize() {
@@ -92,14 +100,6 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 
 		cmbRentState = new JComboBox();
 		pRentState.add(cmbRentState);
-	}
-
-	public void selectCmb() {
-		List<BookCate> cate = service.showBookCateByAll();
-		DefaultComboBoxModel<BookCate> dcbm = new DefaultComboBoxModel<BookCate>(new Vector<>(cate));
-		cmbCate.setModel(dcbm);
-		cmbCate.setSelectedIndex(-1);
-		tfBookCate.setText("");
 	}
 
 	@Override
@@ -181,7 +181,23 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		}
 	}
 
-	protected void actionPerformedCmbCate(ActionEvent e) {
+	public JComboBox getCmbCate() {
+		return cmbCate;
+	}
+
+	public void setCmbCate(JComboBox cmbCate) {
+		this.cmbCate = cmbCate;
+	}
+
+	public JComboBox getCmbRentState() {
+		return cmbRentState;
+	}
+
+	public void setCmbRentState(JComboBox cmbRentState) {
+		this.cmbRentState = cmbRentState;
+	}
+
+	public void actionPerformedCmbCate(ActionEvent e) {
 		tfBookCate.setText((cmbCate.getSelectedItem() + "").replaceAll("[^0-9]", ""));
 	}
 }

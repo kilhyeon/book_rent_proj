@@ -11,15 +11,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
+import book_rent.ui.BookCateManagerUI;
 import book_rent.ui.BookManagerUI;
-import book_rent.ui.MemMangerUI;
+import book_rent.ui.MemManagerUI;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.list.RentTablePanel;
@@ -39,12 +39,16 @@ public class BookRentMain extends JFrame implements ActionListener {
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
-	private JPanel pBtn1;
+	private JPanel pBtnRentReturn;
 	private JButton btnRent;
 	private JButton btnReturn;
-	private JPanel pBtn2;
+	private JPanel pBtnManagement;
+	private JPanel pBtnMember;
+	private JPanel pBtnBook;
 	private JButton btnMember;
 	private JButton btnBook;
+	private JButton btnGrade;
+	private JButton btnCate;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -68,7 +72,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 800);
+		setBounds(100, 100, 1400, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,33 +82,46 @@ public class BookRentMain extends JFrame implements ActionListener {
 		contentPane.add(pBtnSearch);
 		pBtnSearch.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JPanel pBtn3 = new JPanel();
-		pBtnSearch.add(pBtn3);
-		pBtn3.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel pBtn = new JPanel();
+		pBtnSearch.add(pBtn);
+		pBtn.setLayout(new GridLayout(0, 2, 0, 0));
 
-		pBtn1 = new JPanel();
-		FlowLayout fl_pBtn1 = (FlowLayout) pBtn1.getLayout();
-		pBtn3.add(pBtn1);
+		pBtnRentReturn = new JPanel();
+		pBtn.add(pBtnRentReturn);
 
 		btnRent = new JButton("대출하기");
 		btnRent.addActionListener(this);
-		pBtn1.add(btnRent);
+		pBtnRentReturn.add(btnRent);
 
 		btnReturn = new JButton("반납하기");
 		btnReturn.addActionListener(this);
-		pBtn1.add(btnReturn);
+		pBtnRentReturn.add(btnReturn);
 
-		pBtn2 = new JPanel();
-		pBtn3.add(pBtn2);
+		pBtnManagement = new JPanel();
+		pBtn.add(pBtnManagement);
+		pBtnManagement.setLayout(new GridLayout(0, 2, 0, 0));
+
+		pBtnMember = new JPanel();
+		pBtnManagement.add(pBtnMember);
 
 		btnMember = new JButton("회원관리");
 		btnMember.addActionListener(this);
-		pBtn2.add(btnMember);
+		pBtnMember.add(btnMember);
+
+		btnGrade = new JButton("회원등급관리");
+		btnGrade.addActionListener(this);
+		pBtnMember.add(btnGrade);
+
+		pBtnBook = new JPanel();
+		pBtnManagement.add(pBtnBook);
 
 		btnBook = new JButton("도서관리");
 		btnBook.addActionListener(this);
-		btnBook.setHorizontalAlignment(SwingConstants.RIGHT);
-		pBtn2.add(btnBook);
+		pBtnBook.add(btnBook);
+
+		btnCate = new JButton("도서구분관리");
+		btnCate.addActionListener(this);
+		pBtnBook.add(btnCate);
 
 		JPanel pSearch = new JPanel();
 		pBtnSearch.add(pSearch);
@@ -144,38 +161,56 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pRent.loadData();
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnBook) {
-			actionPerformedBtnNewButton_1(e);
+		if (e.getSource() == btnRent) {
+			actionPerformedButton1(e);
 		}
 		if (e.getSource() == btnReturn) {
-			actionPerformedButton_1(e);
-		}
-		if (e.getSource() == btnRent) {
-			actionPerformedButton(e);
+			actionPerformedButton2(e);
 		}
 		if (e.getSource() == btnMember) {
-			actionPerformedBtnNewButton(e);
+			actionPerformedButton3(e);
+		}
+		if (e.getSource() == btnGrade) {
+			actionPerformedButton4(e);
+		}
+		if (e.getSource() == btnBook) {
+			actionPerformedButton5(e);
+		}
+		if (e.getSource() == btnCate) {
+			actionPerformedButton6(e);
 		}
 	}
 
-	protected void actionPerformedButton(ActionEvent e) {
+	protected void actionPerformedButton1(ActionEvent e) {
 		RentPage frame = new RentPage();
 		frame.setVisible(true);
 	}
 
-	protected void actionPerformedButton_1(ActionEvent e) {
+	protected void actionPerformedButton2(ActionEvent e) {
 		ReturnPage frame = new ReturnPage();
 		frame.setVisible(true);
 	}
 
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		MemMangerUI frame = new MemMangerUI();
+	protected void actionPerformedButton3(ActionEvent e) {
+		MemManagerUI frame = new MemManagerUI();
 		frame.setVisible(true);
 	}
 
-	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
+	protected void actionPerformedButton4(ActionEvent e) {
+//		BookManagerUI frame = new BookManagerUI();
+//		frame.setVisible(true);
+	}
+
+	protected void actionPerformedButton5(ActionEvent e) {
 		BookManagerUI frame = new BookManagerUI();
 		frame.setVisible(true);
 	}
+
+	protected void actionPerformedButton6(ActionEvent e) {
+		BookCateManagerUI frame = new BookCateManagerUI();
+		frame.setVisible(true);
+	}
+
 }

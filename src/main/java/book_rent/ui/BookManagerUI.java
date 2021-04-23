@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookInfo;
 import book_rent.service.BookInfoService;
-import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.BookInfoTablePanel;

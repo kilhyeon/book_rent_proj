@@ -50,7 +50,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(200, 800, 200, 400);
+		setTableCellWidth(200, 1000, 200, 200);
 
 	}
 

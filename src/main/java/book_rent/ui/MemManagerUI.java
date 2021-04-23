@@ -19,21 +19,24 @@ import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.MemberInfoTablePanel;
+import book_rent.ui.management.MemManagement;
 import book_rent.ui.search.MemberSearch;
 
-public class MemMangerUI extends JFrame implements ActionListener {
+public class MemManagerUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private MemberInfoService memService;
 	private MemberInfoTablePanel pListMem;
 	private MemberContentPanel pMemInfo;
+	private MemManagement pMemInfo2;
 	private MemberSearch pSearchMem;
-	
+
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private JPanel pBtn;
+	private JPanel pGrade;
 
-	public MemMangerUI() {
+	public MemManagerUI() {
 		memService = new MemberInfoService();
 		initialize();
 		tableLoadData();
@@ -88,8 +91,8 @@ public class MemMangerUI extends JFrame implements ActionListener {
 		pListMem.setService(memService);
 		pListMem.loadData();
 
-		pMemInfo = new MemberContentPanel();
-		pMemMangement.add(pMemInfo);
+		pMemInfo2 = new MemManagement();
+		pMemMangement.add(pMemInfo2);
 
 		pBtn = new JPanel();
 		pMemMangement.add(pBtn);
@@ -101,6 +104,9 @@ public class MemMangerUI extends JFrame implements ActionListener {
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
+		
+		pGrade = new JPanel();
+		tabbedPane.addTab("등급관리", null, pGrade, null);
 
 		JPopupMenu popupMenu = createPopupMenu();
 		pListMem.setPopupMenu(popupMenu);
@@ -120,6 +126,14 @@ public class MemMangerUI extends JFrame implements ActionListener {
 
 	public void setpMemInfo(MemberContentPanel pMemInfo) {
 		this.pMemInfo = pMemInfo;
+	}
+
+	public MemManagement getpMemInfo2() {
+		return pMemInfo2;
+	}
+
+	public void setpMemInfo2(MemManagement pMemInfo2) {
+		this.pMemInfo2 = pMemInfo2;
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -168,10 +182,10 @@ public class MemMangerUI extends JFrame implements ActionListener {
 	}
 
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		MemberInfo updateMember = pMemInfo.getItem();
+		MemberInfo updateMember = pMemInfo2.getItem();
 		memService.modifyMember(updateMember);
 		pListMem.loadData();
-		pMemInfo.clearTf();
+		pMemInfo2.clearTf();
 		btnAdd.setText("추가");
 		JOptionPane.showMessageDialog(null, updateMember.getMemName() + "정보가 수정되었습니다.");
 
@@ -179,7 +193,7 @@ public class MemMangerUI extends JFrame implements ActionListener {
 
 	private void actionPerformedMenuUpdate() {
 		MemberInfo updateMember = pListMem.getItem();
-		pMemInfo.setItem(updateMember);
+		pMemInfo2.setItem(updateMember);
 		btnAdd.setText("수정");
 
 	}
@@ -193,15 +207,15 @@ public class MemMangerUI extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		MemberInfo addMember = pMemInfo.getItem();
+		MemberInfo addMember = pMemInfo2.getItem();
 		memService.addMember(addMember);
 		pListMem.loadData();
-		pMemInfo.clearTf();
+		pMemInfo2.clearTf();
 		JOptionPane.showMessageDialog(null, addMember + " 추가했습니다.");
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pMemInfo.clearTf();
+		pMemInfo2.clearTf();
 
 		if (btnAdd.getText().contentEquals("수정")) {
 			btnAdd.setText("추가");

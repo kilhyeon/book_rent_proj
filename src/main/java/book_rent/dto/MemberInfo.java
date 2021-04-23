@@ -7,7 +7,7 @@ public class MemberInfo {
 	private String memTel;
 	private String memCp;
 	private String memAddr;
-	private int memGradeNo;
+	private MemGrade memGradeNo;
 
 	public MemberInfo() {
 		// TODO Auto-generated constructor stub
@@ -22,7 +22,7 @@ public class MemberInfo {
 	}
 
 	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
-			int memGradeNo) {
+			MemGrade memGradeNo) {
 		this.memNo = memNo;
 		this.memName = memName;
 		this.memBirth = memBirth;
@@ -80,11 +80,11 @@ public class MemberInfo {
 		this.memAddr = memAddr;
 	}
 
-	public int getMemGradeNo() {
+	public MemGrade getMemGradeNo() {
 		return memGradeNo;
 	}
 
-	public void setMemGradeNo(int memGradeNo) {
+	public void setMemGradeNo(MemGrade memGradeNo) {
 		this.memGradeNo = memGradeNo;
 	}
 

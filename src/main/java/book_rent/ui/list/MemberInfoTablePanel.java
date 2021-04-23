@@ -53,7 +53,7 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(200, 200, 200, 400, 400, 200, 200);
+		setTableCellWidth(200, 200, 300, 400, 400, 200, 300);
 	}
 
 	@Override
