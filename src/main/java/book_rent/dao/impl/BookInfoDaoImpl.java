@@ -30,7 +30,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			if (rs.next()) {
-				List<BookInfo> list = new ArrayList();
+				List<BookInfo> list = new ArrayList<BookInfo>();
 				do {
 					list.add(getBookInfo(rs));
 				} while (rs.next());
@@ -132,20 +132,18 @@ public class BookInfoDaoImpl implements BookInfoDao {
 		int bookNo = rs.getInt("bookNo");
 		String bookName = rs.getString("bookName");
 		BookCate bookCateNo = new BookCate(rs.getInt("bookCateNo"), rs.getString("bookCateName"));
-//		BookCate bookCateName = new BookCate(rs.getString("bookCateName"));
-		String rentState = rs.getString("rentState");
+		int rentState = rs.getInt("rentState");
 		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
 
 	}
 
 	@Override
 	public int insertBook(BookInfo bookinfo) {
-		String sql = "insert into bookinfo(bookNo, bookName, bookCateNo, rentState) values (?, ?, ?, ?)";
+		String sql = "insert into bookinfo(bookNo, bookName, bookCateNo) values (?, ?, ?)";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, bookinfo.getBookNo());
 			pstmt.setString(2, bookinfo.getBookName());
 			pstmt.setInt(3, bookinfo.getBookCateNo().getBookCateNo());
-			pstmt.setString(4, bookinfo.getRentState());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -155,12 +153,11 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public int updateBook(BookInfo bookinfo) {
-		String sql = "update bookinfo set bookName = ?, bookCateNo = ?, rentState =? where bookNo = ?";
+		String sql = "update bookinfo set bookName = ?, bookCateNo = ? where bookNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, bookinfo.getBookName());
-			pstmt.setInt(3, bookinfo.getBookCateNo().getBookCateNo());
-			pstmt.setString(3, bookinfo.getRentState());
-			pstmt.setInt(4, bookinfo.getBookNo());
+			pstmt.setInt(2, bookinfo.getBookCateNo().getBookCateNo());
+			pstmt.setInt(3, bookinfo.getBookNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

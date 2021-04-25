@@ -1,31 +1,32 @@
 package book_rent;
 
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 
+import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
+import book_rent.service.RentService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.search.MemberSearch;
 import book_rent.ui.search.BookSearch;
+import book_rent.ui.search.MemberSearch;
 
-public class RentPage extends JFrame {
+public class RentPage extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private MemberInfoService memService;
 	private BookInfoService bookService;
+	private RentService rentService;
 	private MemberInfoTablePanel pListMem;
 	private BookInfoTablePanel pListBook;
 	private MemberContentPanel pMemInfo;
@@ -41,6 +42,7 @@ public class RentPage extends JFrame {
 	public RentPage() {
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
+		rentService = new RentService();
 		initialize();
 		tableLoadData();
 	}
@@ -95,9 +97,11 @@ public class RentPage extends JFrame {
 		contentPane.add(pBtn);
 
 		btnRent = new JButton("대여하기");
+		btnRent.addActionListener(this);
 		pBtn.add(btnRent);
 
 		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 	}
 
@@ -117,4 +121,30 @@ public class RentPage extends JFrame {
 		this.pListBook = pListBook;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancel(e);
+		}
+		if (e.getSource() == btnRent) {
+			actionPerformedBtnRent(e);
+		}
+	}
+	protected void actionPerformedBtnRent(ActionEvent e) {
+		MemberInfo insertMem = pMemInfo.getItemMemNo();
+		BookInfo insertBook = pBookInfo.getItemBookNo();		
+		rentService.addRent(insertMem, insertBook);
+//		System.out.println("대여성공");
+		pListBook.loadData();
+//		BookRentMain main = new BookRentMain();
+//		main.mainLoadData();
+//		main.revalidate();
+//		main.repaint();
+		pMemInfo.clearTf();
+		pBookInfo.clearTf();
+
+	}
+	protected void actionPerformedBtnCancel(ActionEvent e) {
+		pMemInfo.clearTf();
+		pBookInfo.clearTf();
+	}
 }

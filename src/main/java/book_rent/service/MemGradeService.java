@@ -8,8 +8,20 @@ import book_rent.dto.MemGrade;
 
 public class MemGradeService {
 	private MemGradeDao gradeDao = MemGradeDaoImpl.getInstance();
-	
-	public List<MemGrade> showMemGradeByAll(){
+
+	public List<MemGrade> showMemGradeByAll() {
 		return gradeDao.selectMemGradeByAll();
+	}
+
+	public void addGrade(MemGrade grade) {
+		gradeDao.insertMemGrade(grade);
+	}
+
+	public void modifyGrade(MemGrade grade) {
+		gradeDao.updateMemGrade(grade);
+	}
+
+	public void removeGrade(MemGrade grade) {
+		gradeDao.deleteMemGrade(grade);
 	}
 }

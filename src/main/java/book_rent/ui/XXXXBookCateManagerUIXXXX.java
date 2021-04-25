@@ -1,18 +1,13 @@
 package book_rent.ui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.SwingConstants;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookCate;
 import book_rent.service.BookCateService;
@@ -20,17 +15,18 @@ import book_rent.ui.content.BookCateContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.BookCateTablePanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class BookCateManagerUI extends JPanel implements ActionListener {
-	private BookCateTablePanel pList;
+public class XXXXBookCateManagerUIXXXX extends JFrame implements ActionListener {
+	private BookCateService service;
+	private JPanel contentPane;
 	private BookCateContentPanel pContent;
+	private BookCateTablePanel pList;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private BookCateService service;
-	private JLabel lblMent;
-	private BookManagerUI bmUI;
 
-	public BookCateManagerUI() {
+	public XXXXBookCateManagerUIXXXX() {
 		service = new BookCateService();
 		initialize();
 		tableLoadData();
@@ -43,16 +39,21 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 	}
 
 	private void initialize() {
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 600, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
 		pList = new BookCateTablePanel();
-		add(pList);
+		contentPane.add(pList);
 
 		pContent = new BookCateContentPanel();
-		add(pContent);
+		contentPane.add(pContent);
 
 		JPanel pBtn = new JPanel();
-		add(pBtn);
+		contentPane.add(pBtn);
 
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
@@ -61,13 +62,9 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
-
+		
 		JPopupMenu popupMenu = createPopupMenu();
 		pList.setPopupMenu(popupMenu);
-		
-		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
-		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
-		pList.add(lblMent, BorderLayout.NORTH);
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -84,20 +81,20 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 		return popMenu;
 	}
 
-	public BookCateTablePanel getpList() {
-		return pList;
-	}
-
-	public void setpList(BookCateTablePanel pList) {
-		this.pList = pList;
-	}
-
 	public BookCateContentPanel getpContent() {
 		return pContent;
 	}
 
 	public void setpContent(BookCateContentPanel pContent) {
 		this.pContent = pContent;
+	}
+
+	public BookCateTablePanel getpList() {
+		return pList;
+	}
+
+	public void setpList(BookCateTablePanel pList) {
+		this.pList = pList;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -171,5 +168,4 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 			btnAdd.setText("추가");
 		}
 	}
-
 }

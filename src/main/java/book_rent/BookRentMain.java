@@ -17,7 +17,7 @@ import javax.swing.border.TitledBorder;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
-import book_rent.ui.BookCateManagerUI;
+import book_rent.ui.XXXXBookCateManagerUIXXXX;
 import book_rent.ui.BookManagerUI;
 import book_rent.ui.MemManagerUI;
 import book_rent.ui.list.BookInfoTablePanel;
@@ -43,12 +43,8 @@ public class BookRentMain extends JFrame implements ActionListener {
 	private JButton btnRent;
 	private JButton btnReturn;
 	private JPanel pBtnManagement;
-	private JPanel pBtnMember;
-	private JPanel pBtnBook;
 	private JButton btnMember;
 	private JButton btnBook;
-	private JButton btnGrade;
-	private JButton btnCate;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -68,11 +64,25 @@ public class BookRentMain extends JFrame implements ActionListener {
 		bookService = new BookInfoService();
 		rentService = new RentService();
 		initialize();
+		mainLoadData();
+	}
+	
+	public void mainLoadData() {
+		pMember.setService(memService);
+		pBook.setService(bookService);
+		pRent.setService(rentService);
+		pMember.revalidate();
+		pBook.revalidate();
+		pRent.revalidate();
+		pMember.repaint();
+		pBook.repaint();
+		pRent.repaint();
+		System.out.println("메인로드데이터");
 	}
 
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1400, 800);
+		setBounds(100, 100, 1100, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,29 +109,15 @@ public class BookRentMain extends JFrame implements ActionListener {
 
 		pBtnManagement = new JPanel();
 		pBtn.add(pBtnManagement);
-		pBtnManagement.setLayout(new GridLayout(0, 2, 0, 0));
-
-		pBtnMember = new JPanel();
-		pBtnManagement.add(pBtnMember);
-
-		btnMember = new JButton("회원관리");
-		btnMember.addActionListener(this);
-		pBtnMember.add(btnMember);
-
-		btnGrade = new JButton("회원등급관리");
-		btnGrade.addActionListener(this);
-		pBtnMember.add(btnGrade);
-
-		pBtnBook = new JPanel();
-		pBtnManagement.add(pBtnBook);
-
-		btnBook = new JButton("도서관리");
-		btnBook.addActionListener(this);
-		pBtnBook.add(btnBook);
-
-		btnCate = new JButton("도서구분관리");
-		btnCate.addActionListener(this);
-		pBtnBook.add(btnCate);
+		pBtnManagement.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+				btnMember = new JButton("회원관리");
+				pBtnManagement.add(btnMember);
+				btnMember.addActionListener(this);
+		
+				btnBook = new JButton("도서관리");
+				pBtnManagement.add(btnBook);
+				btnBook.addActionListener(this);
 
 		JPanel pSearch = new JPanel();
 		pBtnSearch.add(pSearch);
@@ -172,14 +168,8 @@ public class BookRentMain extends JFrame implements ActionListener {
 		if (e.getSource() == btnMember) {
 			actionPerformedButton3(e);
 		}
-		if (e.getSource() == btnGrade) {
-			actionPerformedButton4(e);
-		}
 		if (e.getSource() == btnBook) {
 			actionPerformedButton5(e);
-		}
-		if (e.getSource() == btnCate) {
-			actionPerformedButton6(e);
 		}
 	}
 
@@ -198,18 +188,8 @@ public class BookRentMain extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected void actionPerformedButton4(ActionEvent e) {
-//		BookManagerUI frame = new BookManagerUI();
-//		frame.setVisible(true);
-	}
-
 	protected void actionPerformedButton5(ActionEvent e) {
 		BookManagerUI frame = new BookManagerUI();
-		frame.setVisible(true);
-	}
-
-	protected void actionPerformedButton6(ActionEvent e) {
-		BookCateManagerUI frame = new BookCateManagerUI();
 		frame.setVisible(true);
 	}
 

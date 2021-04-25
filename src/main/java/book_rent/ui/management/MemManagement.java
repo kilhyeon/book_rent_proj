@@ -19,6 +19,8 @@ import book_rent.dto.MemberInfo;
 import book_rent.service.MemGradeService;
 import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class MemManagement extends AbstractContentPanel<MemberInfo> implements ActionListener {
@@ -36,16 +38,16 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		service = new MemGradeService();
 		initialize();
 		selectCmb();
-		tfMemGrade.setEditable(false);
 	}
 
-	private void selectCmb() {
+	public void selectCmb() {
 		List<MemGrade> grade = service.showMemGradeByAll();
 		DefaultComboBoxModel<MemGrade> dcbm = new DefaultComboBoxModel<MemGrade>(new Vector<>(grade));
 		cmbGrade.setModel(dcbm);
 		cmbGrade.setSelectedIndex(-1);
-		tfMemGrade.setText("");
 
+		tfMemGrade.setText("");
+//		System.out.println("셀렉트콤보박스");
 	}
 
 	private void initialize() {
@@ -117,15 +119,17 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem4.add(lblMemGrade);
 
 		tfMemGrade = new JTextField();
+		tfMemGrade.setEditable(false);
 		pMem4.add(tfMemGrade);
 		tfMemGrade.setColumns(10);
+		tfMemGrade.setVisible(false);
 
 		cmbGrade = new JComboBox();
 		cmbGrade.addActionListener(this);
-
 		pMem4.add(cmbGrade);
 	}
 
+	
 	
 	@Override
 	public void setItem(MemberInfo item) {
@@ -134,11 +138,13 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 //		}
 		tfMemNo.setText(String.valueOf(item.getMemNo()));
 		tfMemName.setText(item.getMemName());
-		tfMemGrade.setText((String.valueOf(item.getMemGradeNo())).replaceAll("[^0-9]", ""));
 		tfMemBirth.setText(item.getMemBirth());
 		tfMemAddr.setText(item.getMemAddr());
 		tfMemCp.setText(item.getMemCp());
 		tfMemTel.setText(item.getMemTel());
+		
+		int memGrade = Integer.parseInt((String.valueOf(item.getMemGradeNo())).replaceAll("[^0-9]", ""));
+		cmbGrade.setSelectedIndex(memGrade-1);		
 
 		tfMemNo.setEditable(false);
 

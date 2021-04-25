@@ -80,7 +80,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfBookNo.setText(String.valueOf(item.getBookNo()));
 		tfBookName.setText(item.getBookName());
 		tfBookCate.setText(String.valueOf(item.getBookCateNo()));
-		tfRentState.setText(item.getRentState());
+		tfRentState.setText(String.valueOf(item.getRentState()));
 		tfBookNo.setEditable(false);
 	}
 
@@ -90,9 +90,14 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
 		String bookName = tfBookName.getText().trim();
 		BookCate bookCateNo = new BookCate(Integer.parseInt(tfBookCate.getText().trim()));
-		System.out.println(bookCateNo);
-		String rentState = tfRentState.getText().trim();
+		int rentState = Integer.parseInt(tfRentState.getText().trim());
 		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
+	}
+	
+	public BookInfo getItemBookNo() {
+		validCheck();
+		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
+		return new BookInfo(bookNo);
 	}
 
 	@Override
@@ -110,9 +115,9 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfBookCate.setText("");
 		tfRentState.setText("");
 
-		if (!tfBookNo.isEditable()) {
-			tfBookNo.setEditable(true);
-		}
+//		if (!tfBookNo.isEditable()) {
+//			tfBookNo.setEditable(true);
+//		}
 	}
 
 	public JTextField getTfBookNo() {

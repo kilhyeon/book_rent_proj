@@ -4,6 +4,8 @@ import java.util.List;
 
 import book_rent.dao.RentDao;
 import book_rent.dao.impl.RentDaoImpl;
+import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
 
 public class RentService {
@@ -11,6 +13,10 @@ public class RentService {
 
 	public List<Rent> showRentList() {
 		return rentDao.selectRentByAll();
+	}
+
+	public int addRent(MemberInfo itemMemNo, BookInfo itemBookNo) {
+		return rentDao.insertRent(itemMemNo, itemBookNo);
 	}
 
 }

@@ -1,38 +1,56 @@
 package book_rent;
 
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 
+import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
+import book_rent.service.RentService;
+import book_rent.ui.content.BookContentPanel;
+import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.BookContentPanel;
+import book_rent.ui.search.BookSearch;
+import book_rent.ui.search.MemberSearch;
 
-public class ReturnPage extends JFrame {
+public class ReturnPage extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
 	private MemberInfoService memService;
 	private BookInfoService bookService;
-	private MemberInfoTablePanel panel_2;
-	private BookInfoTablePanel panel_5;
+	private RentService rentService;
+	private MemberInfoTablePanel pListMem;
+	private BookInfoTablePanel pListBook;
+	private MemberContentPanel pMemInfo;
+	private BookContentPanel pBookInfo;
+	private JPanel pMem;
+	private JPanel pBook;
+	private MemberSearch pSearchMem;
+	private BookSearch pSearchBook;
+	private JPanel pBtn;
+	private JButton btnRent;
+	private JButton btnCancel;
 
 	public ReturnPage() {
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
+		rentService = new RentService();
 		initialize();
+		tableLoadData();
+	}
+
+	private void tableLoadData() {
+		pListMem.setService(memService);
+		pListMem.loadData();
+
 	}
 
 	private void initialize() {
@@ -43,67 +61,90 @@ public class ReturnPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1);
+		pMem = new JPanel();
+		contentPane.add(pMem);
+		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
-		JLabel lblNewLabel = new JLabel("검색방법 : ");
-		panel_1.add(lblNewLabel);
+		pSearchMem = new MemberSearch();
+		pMem.add(pSearchMem);
+		pSearchMem.setService(memService);
 
-		JComboBox comboBox = new JComboBox();
-		panel_1.add(comboBox);
+		pListMem = pSearchMem.getMemberInfoList();
+		pMem.add(pListMem);
+		pListMem.setService(memService);
+		pListMem.loadData();
 
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		pMemInfo = pListMem.getpMemInfo();
+		pMem.add(pMemInfo);
 
-		JButton btnNewButton = new JButton("검색");
-		panel_1.add(btnNewButton);
+		pBook = new JPanel();
+		contentPane.add(pBook);
+		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
-		panel_2 = new MemberInfoTablePanel();
-		contentPane.add(panel_2);
-		panel_2.setService(memService);
-		panel_2.loadData();
+		pSearchBook = new BookSearch();
+		pBook.add(pSearchBook);
+		pSearchBook.setService(bookService);
 
-		MemberContentPanel panel_3 = new MemberContentPanel();
-		panel_3.setBorder(new TitledBorder(null, "대여회원 상세정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(panel_3);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
+		pListBook = pSearchBook.getBookInfoList();
+		pBook.add(pListBook);
+		pListBook.setService(bookService);
+		pListBook.loadData();
 
-		JPanel panel_4 = new JPanel();
-		contentPane.add(panel_4);
+		pBookInfo = pListBook.getpBookInfo();
+		pBook.add(pBookInfo);
 
-		JLabel label = new JLabel("검색방법 : ");
-		panel_4.add(label);
+		pBtn = new JPanel();
+		contentPane.add(pBtn);
 
-		JComboBox comboBox_1 = new JComboBox();
-		panel_4.add(comboBox_1);
+		btnRent = new JButton("대여하기");
+		btnRent.addActionListener(this);
+		pBtn.add(btnRent);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel_4.add(textField_1);
-
-		JButton button = new JButton("검색");
-		panel_4.add(button);
-
-		panel_5 = new BookInfoTablePanel();
-		contentPane.add(panel_5);
-		panel_5.setService(bookService);
-		panel_5.loadData();
-
-		BookContentPanel panel_6 = new BookContentPanel();
-		panel_6.setBorder(new TitledBorder(null, "대여도서 상세정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(panel_6);
-		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.Y_AXIS));
-
-		JPanel panel_7 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
-		contentPane.add(panel_7);
-
-		JButton btnNewButton_1 = new JButton("반납하기");
-		panel_7.add(btnNewButton_1);
-
-		JButton btnNewButton_2 = new JButton("취소");
-		panel_7.add(btnNewButton_2);
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
+		pBtn.add(btnCancel);
 	}
 
+	public MemberInfoTablePanel getpListMem() {
+		return pListMem;
+	}
+
+	public void setpListMem(MemberInfoTablePanel pListMem) {
+		this.pListMem = pListMem;
+	}
+
+	public BookInfoTablePanel getpListBook() {
+		return pListBook;
+	}
+
+	public void setpListBook(BookInfoTablePanel pListBook) {
+		this.pListBook = pListBook;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancel(e);
+		}
+		if (e.getSource() == btnRent) {
+			actionPerformedBtnRent(e);
+		}
+	}
+	protected void actionPerformedBtnRent(ActionEvent e) {
+		MemberInfo insertMem = pMemInfo.getItemMemNo();
+		BookInfo insertBook = pBookInfo.getItemBookNo();		
+		rentService.addRent(insertMem, insertBook);
+//		System.out.println("대여성공");
+		pListBook.loadData();
+//		BookRentMain main = new BookRentMain();
+//		main.mainLoadData();
+//		main.revalidate();
+//		main.repaint();
+		pMemInfo.clearTf();
+		pBookInfo.clearTf();
+
+	}
+	protected void actionPerformedBtnCancel(ActionEvent e) {
+		pMemInfo.clearTf();
+		pBookInfo.clearTf();
+	}
 }

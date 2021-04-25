@@ -1,5 +1,6 @@
 package book_rent.ui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,20 +22,28 @@ import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.management.MemManagement;
 import book_rent.ui.search.MemberSearch;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
-public class MemManagerUI extends JFrame implements ActionListener {
+public class MemManagerUI extends JFrame implements ActionListener, MouseListener {
 
 	private JPanel contentPane;
 	private MemberInfoService memService;
 	private MemberInfoTablePanel pListMem;
+	private MemberInfoTablePanel pListMem2;
 	private MemberContentPanel pMemInfo;
-	private MemManagement pMemInfo2;
+	private MemManagement pMemManage;
 	private MemberSearch pSearchMem;
 
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private JPanel pBtn;
 	private JPanel pGrade;
+	private MemGradeManagerUI pGradeManage;
+	private JTabbedPane tabbedPane;
+	private JLabel lblMent;
 
 	public MemManagerUI() {
 		memService = new MemberInfoService();
@@ -45,8 +54,15 @@ public class MemManagerUI extends JFrame implements ActionListener {
 	private void tableLoadData() {
 		pListMem.setService(memService);
 		pListMem.loadData();
+		pListMem2.loadData();
 
 	}
+	
+//	public void LoadData() {
+//		pListMem.loadData();
+//		pListMem2.loadData();
+//		
+//	}
 
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -56,7 +72,8 @@ public class MemManagerUI extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addMouseListener(this);
 		contentPane.add(tabbedPane);
 
 		JPanel pMem = new JPanel();
@@ -80,20 +97,26 @@ public class MemManagerUI extends JFrame implements ActionListener {
 
 		JPanel pMemMangement = new JPanel();
 		tabbedPane.addTab("회원관리", null, pMemMangement, null);
+		
 		pMemMangement.setLayout(new BoxLayout(pMemMangement, BoxLayout.Y_AXIS));
 
 		pSearchMem = new MemberSearch();
 		pMemMangement.add(pSearchMem);
 		pSearchMem.setService(memService);
 
-		pListMem = pSearchMem.getMemberInfoList();
-		pMemMangement.add(pListMem);
-		pListMem.setService(memService);
-		pListMem.loadData();
+		pListMem2 = pSearchMem.getMemberInfoList();
+		pMemMangement.add(pListMem2);
+		pListMem2.setService(memService);
+		pListMem2.loadData();
 
-		pMemInfo2 = new MemManagement();
-		pMemMangement.add(pMemInfo2);
+		pMemManage = new MemManagement();
+		pMemMangement.add(pMemManage);
 
+		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
+		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
+		pListMem2.add(lblMent, BorderLayout.NORTH);
+		
+		
 		pBtn = new JPanel();
 		pMemMangement.add(pBtn);
 
@@ -107,9 +130,13 @@ public class MemManagerUI extends JFrame implements ActionListener {
 		
 		pGrade = new JPanel();
 		tabbedPane.addTab("등급관리", null, pGrade, null);
+		pGrade.setLayout(new BoxLayout(pGrade, BoxLayout.X_AXIS));
+		
+		pGradeManage = new MemGradeManagerUI();
+		pGrade.add(pGradeManage);
 
 		JPopupMenu popupMenu = createPopupMenu();
-		pListMem.setPopupMenu(popupMenu);
+		pListMem2.setPopupMenu(popupMenu);
 	}
 
 	public MemberInfoTablePanel getpListMem() {
@@ -118,6 +145,14 @@ public class MemManagerUI extends JFrame implements ActionListener {
 
 	public void setpListMem(MemberInfoTablePanel pListMem) {
 		this.pListMem = pListMem;
+	}
+
+	public MemberInfoTablePanel getpListMem2() {
+		return pListMem2;
+	}
+
+	public void setpListMem2(MemberInfoTablePanel pListMem2) {
+		this.pListMem2 = pListMem2;
 	}
 
 	public MemberContentPanel getpMemInfo() {
@@ -129,11 +164,11 @@ public class MemManagerUI extends JFrame implements ActionListener {
 	}
 
 	public MemManagement getpMemInfo2() {
-		return pMemInfo2;
+		return pMemManage;
 	}
 
 	public void setpMemInfo2(MemManagement pMemInfo2) {
-		this.pMemInfo2 = pMemInfo2;
+		this.pMemManage = pMemInfo2;
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -182,43 +217,64 @@ public class MemManagerUI extends JFrame implements ActionListener {
 	}
 
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		MemberInfo updateMember = pMemInfo2.getItem();
+		MemberInfo updateMember = pMemManage.getItem();
 		memService.modifyMember(updateMember);
 		pListMem.loadData();
-		pMemInfo2.clearTf();
+		pListMem2.loadData();
+		pMemManage.clearTf();
 		btnAdd.setText("추가");
 		JOptionPane.showMessageDialog(null, updateMember.getMemName() + "정보가 수정되었습니다.");
 
 	}
 
 	private void actionPerformedMenuUpdate() {
-		MemberInfo updateMember = pListMem.getItem();
-		pMemInfo2.setItem(updateMember);
+		MemberInfo updateMember = pListMem2.getItem();
+		pMemManage.setItem(updateMember);
 		btnAdd.setText("수정");
 
 	}
 
 	private void actionPerformedMenuDelete() {
-		MemberInfo delMember = pListMem.getItem();
+		MemberInfo delMember = pListMem2.getItem();
 		memService.removeMember(delMember);
 		pListMem.loadData();
+		pListMem2.loadData();
 		JOptionPane.showMessageDialog(null, delMember + "삭제 되었습니다.");
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		MemberInfo addMember = pMemInfo2.getItem();
+		MemberInfo addMember = pMemManage.getItem();
 		memService.addMember(addMember);
 		pListMem.loadData();
-		pMemInfo2.clearTf();
+		pListMem2.loadData();
+		pMemManage.clearTf();
+		tableLoadData();
 		JOptionPane.showMessageDialog(null, addMember + " 추가했습니다.");
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pMemInfo2.clearTf();
+		pMemManage.clearTf();
 
 		if (btnAdd.getText().contentEquals("수정")) {
 			btnAdd.setText("추가");
 		}
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tabbedPane) {
+			mouseClickedTabbedPane(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTabbedPane(MouseEvent e) {
+		pMemManage.selectCmb();
+		tableLoadData();
 	}
 }

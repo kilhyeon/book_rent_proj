@@ -28,7 +28,7 @@ CREATE TABLE book_rent.bookInfo (
 	bookNo     INT         NOT NULL COMMENT '도서번호', -- 도서번호
 	bookName   VARCHAR(40) NULL     COMMENT '도서제목', -- 도서제목
 	bookCateNo INT         NULL     COMMENT '도서구분', -- 도서구분
-	rentState  BOOL        NULL     COMMENT '대출여부' -- 대출여부
+	rentState  INT         NULL     DEFAULT 0 COMMENT '대출여부' -- 대출여부
 )
 COMMENT '도서정보';
 
@@ -56,6 +56,9 @@ ALTER TABLE book_rent.rent
 		PRIMARY KEY (
 			rentNo -- 대여번호
 		);
+
+ALTER TABLE book_rent.rent
+	MODIFY COLUMN rentNo INT NOT NULL AUTO_INCREMENT COMMENT '대여번호';
 
 -- 도서구분
 CREATE TABLE book_rent.category (

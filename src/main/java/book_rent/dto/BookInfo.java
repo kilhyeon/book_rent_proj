@@ -4,7 +4,7 @@ public class BookInfo {
 	private int bookNo;
 	private String bookName;
 	private BookCate bookCateNo;
-	private String rentState;
+	private int rentState;
 
 	public BookInfo() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +33,7 @@ public class BookInfo {
 		this.bookCateNo = bookCateNo;
 	}
 
-	public BookInfo(int bookNo, String bookName, BookCate bookCateNo, String rentState) {
+	public BookInfo(int bookNo, String bookName, BookCate bookCateNo, int rentState) {
 
 		this.bookNo = bookNo;
 		this.bookName = bookName;
@@ -66,10 +66,15 @@ public class BookInfo {
 	}
 
 	public String getRentState() {
-		return rentState;
+		if (rentState == 0) {
+			return "보유중";
+
+		} else {
+			return "대여중";
+		}
 	}
 
-	public void setRentState(String rentState) {
+	public void setRentState(int rentState) {
 		this.rentState = rentState;
 	}
 
@@ -97,8 +102,7 @@ public class BookInfo {
 
 	@Override
 	public String toString() {
-		return String.format("BookInfo [bookNo=%s, bookName=%s, bookCateNo=%s, rentState=%s]", bookNo, bookName,
-				bookCateNo, rentState);
+		return String.format("%s(%s)", bookName, bookNo);
 	}
 
 //	@Override

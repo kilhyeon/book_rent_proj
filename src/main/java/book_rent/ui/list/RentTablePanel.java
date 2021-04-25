@@ -28,7 +28,7 @@ public class RentTablePanel extends AbstractCustomTablePanel<Rent> {
 		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(200, 200, 200, 400, 400, 200);
+		setTableCellWidth(100, 200, 400, 200, 200, 100);
 
 	}
 

@@ -31,12 +31,12 @@ public class BookCateTablePanel extends AbstractCustomTablePanel<BookCate> {
 		return pBookCate;
 	}
 
-	public void setService(BookCateService service) {
-		this.service = service;
-	}
-
 	public void setList(List<BookCate> list) {
 		this.list = list;
+	}
+
+	public void setService(BookCateService service) {
+		this.service = service;
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class BookCateTablePanel extends AbstractCustomTablePanel<BookCate> {
 		if (row == -1) {
 			throw new NotSelectedException();
 		}
+
 		return list.get(list.indexOf(new BookCate(bookCateNo)));
 	}
 

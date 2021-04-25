@@ -29,16 +29,16 @@ insert into memberinfo values
 	(12011, '김동수', '19830108', '043-529-8457', '010-9566-4228', '제천', 2);
 
 insert into bookinfo values
-	(40001, 'The elements of statistical learning', 1, 1),
-	(40002, 'Computer vision : a modern approach', 2, 1),
-	(40003, 'MATLAM for engineers', 3, 1),
-	(40004, 'CUDA by example', 1, 1),
-	(40005, 'An introduction to 3D computer vision', 2, 1),
-	(40006, 'Numerical methods', 1, 1),
-	(40007, 'Image-based modeling', 2, 1),
-	(40008, 'Machine learning', 2, 1),
-	(40009, 'Probabilistic robotics', 4, 1),
-	(40010, 'Pattern recognition and machine learning', 2, 1);
+	(40001, 'The elements of statistical learning', 1, 0),
+	(40002, 'Computer vision : a modern approach', 2, 0),
+	(40003, 'MATLAM for engineers', 3, 0),
+	(40004, 'CUDA by example', 1, 0),
+	(40005, 'An introduction to 3D computer vision', 2, 0),
+	(40006, 'Numerical methods', 1, 0),
+	(40007, 'Image-based modeling', 2, 0),
+	(40008, 'Machine learning', 2, 0),
+	(40009, 'Probabilistic robotics', 4, 0),
+	(40010, 'Pattern recognition and machine learning', 2, 0);
 	
 insert into rent values
 	(1, 12004, 40003, '2021-04-01', '2021-04-04', 0),

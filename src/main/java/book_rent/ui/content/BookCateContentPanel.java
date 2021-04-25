@@ -1,19 +1,23 @@
 package book_rent.ui.content;
 
-import book_rent.dto.BookCate;
-import book_rent.ui.exception.InvalidCheckException;
-import book_rent.ui.exception.NotSelectedException;
 import java.awt.GridLayout;
-import javax.swing.JPanel;
+
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import book_rent.dto.BookCate;
+import book_rent.service.BookCateService;
+import book_rent.ui.exception.InvalidCheckException;
 
 public class BookCateContentPanel extends AbstractContentPanel<BookCate> {
 	private JTextField tfCateNo;
 	private JTextField tfCateName;
+	private BookCateService service;
 
 	public BookCateContentPanel() {
+		service = new BookCateService();
 		initialize();
 	}
 
@@ -46,9 +50,6 @@ public class BookCateContentPanel extends AbstractContentPanel<BookCate> {
 
 	@Override
 	public void setItem(BookCate item) {
-		if (item == null) {
-			throw new NotSelectedException();
-		}
 		tfCateNo.setText(String.valueOf(item.getBookCateNo()));
 		tfCateName.setText(item.getBookCateName());
 		tfCateNo.setEditable(false);
@@ -78,7 +79,6 @@ public class BookCateContentPanel extends AbstractContentPanel<BookCate> {
 		if (!tfCateNo.isEditable()) {
 			tfCateNo.setEditable(true);
 		}
-
 	}
 
 	public JTextField getTfCateNo() {

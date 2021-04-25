@@ -1,37 +1,38 @@
 package book_rent.ui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.SwingConstants;
-
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
-import book_rent.dto.BookCate;
-import book_rent.service.BookCateService;
-import book_rent.ui.content.BookCateContentPanel;
+import book_rent.dto.MemGrade;
+import book_rent.service.MemGradeService;
+import book_rent.ui.content.MemGradeContnetPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
-import book_rent.ui.list.BookCateTablePanel;
+import book_rent.ui.list.MemGradeTablePanel;
+import book_rent.ui.management.MemManagement;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
 
-public class BookCateManagerUI extends JPanel implements ActionListener {
-	private BookCateTablePanel pList;
-	private BookCateContentPanel pContent;
+public class MemGradeManagerUI extends JPanel implements ActionListener {
+	private MemGradeTablePanel pList;
+	private MemGradeContnetPanel pContent;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private BookCateService service;
+	private MemGradeService service;
+//	private MemManagement memManagement;
 	private JLabel lblMent;
-	private BookManagerUI bmUI;
 
-	public BookCateManagerUI() {
-		service = new BookCateService();
+	public MemGradeManagerUI() {
+		service = new MemGradeService();
+//		memManagement = new MemManagement();
 		initialize();
 		tableLoadData();
 	}
@@ -45,10 +46,10 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 	private void initialize() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		pList = new BookCateTablePanel();
+		pList = new MemGradeTablePanel();
 		add(pList);
 
-		pContent = new BookCateContentPanel();
+		pContent = new MemGradeContnetPanel();
 		add(pContent);
 
 		JPanel pBtn = new JPanel();
@@ -64,10 +65,11 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 
 		JPopupMenu popupMenu = createPopupMenu();
 		pList.setPopupMenu(popupMenu);
-		
+
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
 		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
 		pList.add(lblMent, BorderLayout.NORTH);
+
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -84,19 +86,19 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 		return popMenu;
 	}
 
-	public BookCateTablePanel getpList() {
+	public MemGradeTablePanel getpList() {
 		return pList;
 	}
 
-	public void setpList(BookCateTablePanel pList) {
+	public void setpList(MemGradeTablePanel pList) {
 		this.pList = pList;
 	}
 
-	public BookCateContentPanel getpContent() {
+	public MemGradeContnetPanel getpContent() {
 		return pContent;
 	}
 
-	public void setpContent(BookCateContentPanel pContent) {
+	public void setpContent(MemGradeContnetPanel pContent) {
 		this.pContent = pContent;
 	}
 
@@ -132,36 +134,36 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 	}
 
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		BookCate updateCate = pContent.getItem();
-		service.modifyCate(updateCate);
+		MemGrade updateGrade = pContent.getItem();
+		service.modifyGrade(updateGrade);
 		pList.loadData();
 		pContent.clearTf();
 		btnAdd.setText("추가");
-		JOptionPane.showMessageDialog(null, updateCate.getBookCateName() + "정보가 수정되었습니다.");
+		JOptionPane.showMessageDialog(null, updateGrade.getMemGradeName() + "정보가 수정되었습니다.");
 
 	}
 
 	protected void actionPerformedMenuUpdate() {
-		BookCate updateCate = pList.getItem();
-		pContent.setItem(updateCate);
+		MemGrade updateGrade = pList.getItem();
+		pContent.setItem(updateGrade);
 		btnAdd.setText("수정");
 
 	}
 
 	protected void actionPerformedMenuDelete() {
-		BookCate delCate = pList.getItem();
-		service.removeCate(delCate);
+		MemGrade delGrade = pList.getItem();
+		service.removeGrade(delGrade);
 		pList.loadData();
-		JOptionPane.showMessageDialog(null, delCate + "삭제 되었습니다.");
+		JOptionPane.showMessageDialog(null, delGrade + "삭제 되었습니다.");
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		BookCate addCate = pContent.getItem();
-		service.addCate(addCate);
+		MemGrade addGrade = pContent.getItem();
+		service.addGrade(addGrade);
 		pList.loadData();
 		pContent.clearTf();
-		JOptionPane.showMessageDialog(null, addCate + " 추가했습니다.");
+		JOptionPane.showMessageDialog(null, addGrade + " 추가했습니다.");
 
 	}
 

@@ -21,6 +21,11 @@ public class MemberInfo {
 		this.memName = memName;
 	}
 
+	public MemberInfo(int memNo, String memName) {
+		this.memNo = memNo;
+		this.memName = memName;
+	}
+
 	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
 			MemGrade memGradeNo) {
 		this.memNo = memNo;
@@ -112,9 +117,7 @@ public class MemberInfo {
 
 	@Override
 	public String toString() {
-		return String.format(
-				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGradeNo=%s]", memNo,
-				memName, memBirth, memTel, memCp, memAddr, memGradeNo);
+		return String.format("%s(%s)", memName, memNo);
 	}
 
 //	@Override

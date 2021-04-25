@@ -89,19 +89,39 @@ public class MemGradeDaoImpl implements MemGradeDao {
 
 	@Override
 	public int insertMemGrade(MemGrade grade) {
-		// TODO Auto-generated method stub
+		String sql = "insert into grade  values(?, ?)";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, grade.getMemGradeNo());
+			pstmt.setString(2, grade.getMemGradeName());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int updateMemGrade(MemGrade grade) {
-		// TODO Auto-generated method stub
+		String sql = "update grade set memGradeName = ? where memGradeNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, grade.getMemGradeName());
+			pstmt.setInt(2, grade.getMemGradeNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int deleteMemGrade(MemGrade grade) {
-		// TODO Auto-generated method stub
+		String sql = "delete from grade where memGradeNo = ?";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, grade.getMemGradeNo());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 

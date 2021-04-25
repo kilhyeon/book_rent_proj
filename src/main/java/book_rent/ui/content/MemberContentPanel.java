@@ -129,6 +129,13 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo);
 	}
 
+	public MemberInfo getItemMemNo() {
+		int memNo = 0;
+		memNo = Integer.parseInt(tfMemNo.getText().trim());
+
+		return new MemberInfo(memNo);
+	}
+
 	@Override
 	public void validCheck() {
 		if (tfMemNo.getText().equals("")) {
@@ -146,9 +153,9 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemCp.setText("");
 		tfMemTel.setText("");
 
-		if (!tfMemNo.isEditable()) {
-			tfMemNo.setEditable(true);
-		}
+//		if (!tfMemNo.isEditable()) {
+//			tfMemNo.setEditable(true);
+//		}
 
 	}
 
@@ -208,4 +215,5 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		this.tfMemAddr = tfMemAddr;
 	}
 
+	
 }

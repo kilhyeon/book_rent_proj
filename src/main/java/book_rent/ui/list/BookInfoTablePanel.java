@@ -72,6 +72,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 		if (row == -1) {
 			throw new NotSelectedException();
 		}
+
 		return list.get(list.indexOf(new BookInfo(bookNo)));
 	}
 
@@ -89,7 +90,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 			pBookInfo.getTfBookNo().setEditable(false);
 			pBookInfo.getTfBookName().setEditable(false);
 			pBookInfo.getTfBookCate().setEditable(false);
-			pBookInfo.getTfRentState().setEditable(false);			
+			pBookInfo.getTfRentState().setEditable(false);
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}

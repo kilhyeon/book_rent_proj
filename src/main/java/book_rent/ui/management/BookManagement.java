@@ -81,6 +81,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		tfBookCate = new JTextField();
 		tfBookCate.setColumns(10);
 		pBookCate.add(tfBookCate);
+		tfBookCate.setVisible(false);
 
 		cmbCate = new JComboBox();
 		cmbCate.addActionListener(this);
@@ -90,6 +91,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		JPanel pRentState = new JPanel();
 		add(pRentState);
 		pRentState.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		pRentState.setVisible(false);
 
 		JLabel lblRentState = new JLabel("대여상태 : ");
 		pRentState.add(lblRentState);
@@ -107,8 +109,12 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 
 		tfBookNo.setText(String.valueOf(item.getBookNo()));
 		tfBookName.setText(item.getBookName());
-		tfBookCate.setText((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
-		tfRentState.setText(item.getRentState());
+//		tfBookCate.setText((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
+		tfRentState.setText(String.valueOf(item.getRentState()));
+		
+		int bookCate = Integer.parseInt((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
+		cmbCate.setSelectedIndex(bookCate-1);		
+		
 		tfBookNo.setEditable(false);
 	}
 
@@ -118,9 +124,15 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
 		String bookName = tfBookName.getText().trim();
 		BookCate bookCateNo = new BookCate(Integer.parseInt(tfBookCate.getText().trim()));
-		String rentState = tfRentState.getText().trim();
-		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
+//		int rentState = Integer.parseInt(tfRentState.getText().trim());
+		return new BookInfo(bookNo, bookName, bookCateNo);
 	}
+	
+//	public BookInfo getItemBookNo() {
+//		validCheck();
+//		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
+//		return new BookInfo(bookNo);
+//	}
 
 	@Override
 	public void validCheck() {
