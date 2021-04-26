@@ -3,6 +3,7 @@ package book_rent.dto;
 public class BookInfo {
 	private int bookNo;
 	private String bookName;
+	private int bookCount;
 	private BookCate bookCateNo;
 	private int rentState;
 
@@ -27,16 +28,28 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
+	public BookInfo(int bookNo, int bookCount) {
+		this.bookNo = bookNo;
+		this.bookCount = bookCount;
+	}
+
 	public BookInfo(int bookNo, String bookName, BookCate bookCateNo) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
 		this.bookCateNo = bookCateNo;
 	}
 
-	public BookInfo(int bookNo, String bookName, BookCate bookCateNo, int rentState) {
-
+	public BookInfo(int bookNo, String bookName, int bookCount, BookCate bookCateNo) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
+		this.bookCount = bookCount;
+		this.bookCateNo = bookCateNo;
+	}
+
+	public BookInfo(int bookNo, String bookName, int bookCount, BookCate bookCateNo, int rentState) {
+		this.bookNo = bookNo;
+		this.bookName = bookName;
+		this.bookCount = bookCount;
 		this.bookCateNo = bookCateNo;
 		this.rentState = rentState;
 	}
@@ -72,6 +85,18 @@ public class BookInfo {
 		} else {
 			return "대여불가";
 		}
+	}
+
+	public int getBookCount() {
+		return bookCount;
+	}
+
+	public void setBookCount(int bookCount) {
+		this.bookCount = bookCount;
+	}
+
+	public int getRentStateToInt() {
+		return rentState;
 	}
 
 	public void setRentState(int rentState) {

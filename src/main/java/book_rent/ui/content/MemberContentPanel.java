@@ -130,10 +130,14 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 	}
 
 	public MemberInfo getItemMemNo() {
-		int memNo = 0;
-		memNo = Integer.parseInt(tfMemNo.getText().trim());
-
+		int memNo = Integer.parseInt(tfMemNo.getText().trim());
 		return new MemberInfo(memNo);
+	}
+	
+	public MemberInfo getItemMemName() {
+		int memNo = Integer.parseInt(tfMemNo.getText().trim());
+		String memName = tfMemName.getText().trim();
+		return new MemberInfo(memNo, memName);
 	}
 
 	@Override

@@ -47,22 +47,21 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> {
 	@Override
 	protected void setAlignAndWidth() {
 		// 컬럼내용 정렬
-		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5);
+		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(100, 150, 550, 150, 150, 100);
+		setTableCellWidth(100, 200, 500, 200, 100);
 
 	}
 
 	@Override
 	public Object[] toArray(Rent r) {
-		return new Object[] { r.getRentNo(), r.getMemNo(), r.getBookNo(), r.getRentDate(), r.getReturnDate(),
-				r.getLateDate() };
+		return new Object[] { r.getRentNo(), r.getMemNo(), r.getBookNo(), r.getRentDate(), r.getLateDate() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "대출번호", "회원정보", "도서정보", "도서대여일", "도서반납일", "연체일자" };
+		return new String[] { "대출번호", "회원정보", "도서정보", "도서대여일", "연체일자" };
 	}
 
 	@Override

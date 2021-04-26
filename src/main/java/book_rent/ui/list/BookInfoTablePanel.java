@@ -47,21 +47,21 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 	@Override
 	protected void setAlignAndWidth() {
 		// 컬럼내용 정렬
-		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3);
+		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(200, 1000, 200, 200);
+		setTableCellWidth(200, 850, 150, 200, 200);
 
 	}
 
 	@Override
 	public Object[] toArray(BookInfo b) {
-		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCateNo(), b.getRentState() };
+		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCount(), b.getBookCateNo(), b.getRentState() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "도서번호", "도서제목", "도서구분", "대여상태" };
+		return new String[] { "도서번호", "도서제목", "보유권수", "도서구분", "대여상태" };
 	}
 
 	@Override
@@ -89,6 +89,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 			pBookInfo.setItem(item);
 			pBookInfo.getTfBookNo().setEditable(false);
 			pBookInfo.getTfBookName().setEditable(false);
+			pBookInfo.getTfBookCount().setEditable(false);
 			pBookInfo.getTfBookCate().setEditable(false);
 			pBookInfo.getTfRentState().setEditable(false);
 		} catch (NullPointerException e1) {

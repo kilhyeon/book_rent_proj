@@ -103,15 +103,19 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public int insertRent(MemberInfo memNo, BookInfo bookNo) {
 		String rentSql = "insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (?, ?, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0)";
-		String bookSql = "update bookinfo set rentState = 1 where bookNo = ?";
+		String bookSql1 = "update bookinfo set bookCount = bookCount-1 where bookNo = ?";
+		String bookSql2 = "update bookinfo set rentState = if (bookCount > 0, 0, 1) where bookNo = ?";
 		Connection con = JdbcConn.getConnection();
 
 		try (PreparedStatement pstmt = con.prepareStatement(rentSql);
-				PreparedStatement pstmt2 = con.prepareStatement(bookSql);) {
+				PreparedStatement pstmt1 = con.prepareStatement(bookSql1);
+				PreparedStatement pstmt2 = con.prepareStatement(bookSql2);) {
 
 			pstmt.setInt(1, memNo.getMemNo());
 			pstmt.setInt(2, bookNo.getBookNo());
 			pstmt.executeUpdate();
+			pstmt1.setInt(1, bookNo.getBookNo());
+			pstmt1.executeUpdate();
 			pstmt2.setInt(1, bookNo.getBookNo());
 			pstmt2.executeUpdate();
 		} catch (SQLException e) {

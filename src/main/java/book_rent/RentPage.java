@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -38,7 +39,6 @@ public class RentPage extends JFrame implements ActionListener {
 	private JPanel pBtn;
 	private JButton btnRent;
 	private JButton btnCancel;
-	private BookRentMain main;
 
 	public RentPage() {
 		memService = new MemberInfoService();
@@ -46,13 +46,8 @@ public class RentPage extends JFrame implements ActionListener {
 		rentService = new RentService();
 		initialize();
 		tableLoadData();
-		main = new BookRentMain();
 	}
 	
-	private void mainLoad() {
-		main.mainLoadData();
-	}
-
 	private void tableLoadData() {
 		pListMem.setService(memService);
 		pListMem.loadData();
@@ -104,6 +99,8 @@ public class RentPage extends JFrame implements ActionListener {
 		contentPane.add(pBtn);
 
 		btnRent = new JButton("대여하기");
+//		btnRent.setEnabled(false);
+		
 		btnRent.addActionListener(this);
 		pBtn.add(btnRent);
 
@@ -140,13 +137,10 @@ public class RentPage extends JFrame implements ActionListener {
 		MemberInfo insertMem = pMemInfo.getItemMemNo();
 		BookInfo insertBook = pBookInfo.getItemBookNo();		
 		rentService.addRent(insertMem, insertBook);
+		JOptionPane.showMessageDialog(null, pMemInfo.getItemMemName() + " 회원의 " + pBookInfo.getItemBookName() + " 도서 대여를 완료하였습니다.");
 //		System.out.println("대여성공");
+		pListMem.loadData();
 		pListBook.loadData();
-//		BookRentMain main = new BookRentMain();
-//		main.mainLoadData();
-//		main.revalidate();
-//		main.repaint();
-		mainLoad();
 		pMemInfo.clearTf();
 		pBookInfo.clearTf();
 

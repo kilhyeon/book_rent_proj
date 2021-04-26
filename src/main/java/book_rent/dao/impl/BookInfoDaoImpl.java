@@ -25,7 +25,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public List<BookInfo> selectBookInfoByAll() {
-		String sql = "select bookNo, bookName, bookCateNo, bookCateName, rentState from vw_bookinfo_cate order by bookNo";
+		String sql = "select bookNo, bookName, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate order by bookNo";
 		try (Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
@@ -45,7 +45,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	@Override
 	public List<BookInfo> selectBookInfoByNo(BookInfo bookinfo) {
 
-		String sql = "select bookNo, bookName, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookNo = ? order by bookNo";
+		String sql = "select bookNo, bookName, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookNo = ? order by bookNo";
 
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, bookinfo.getBookNo());
@@ -67,7 +67,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public List<BookInfo> selectBookInfoByName(BookInfo bookinfo) {
-		String sql = "select bookNo, bookName, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookName = ? order by bookNo";
+		String sql = "select bookNo, bookName, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookName = ? order by bookNo";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setString(1, bookinfo.getBookName());
 
@@ -88,7 +88,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public List<BookInfo> selectBookInfoByCate(BookInfo bookinfo) {
-		String sql = "select bookNo, bookName, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookCateNo = ? order by bookNo";
+		String sql = "select bookNo, bookName, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookCateNo = ? order by bookNo";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, bookinfo.getBookCateNo().getBookCateNo());
 
@@ -109,9 +109,9 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public List<BookInfo> selectBookInfoByRent(BookInfo bookinfo) {
-		String sql = "select bookNo, bookName, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where rentState = ? order by bookNo";
+		String sql = "select bookNo, bookName, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where rentState = ? order by bookNo";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setString(1, bookinfo.getRentState());
+			pstmt.setInt(1, bookinfo.getRentStateToInt());
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
@@ -131,19 +131,21 @@ public class BookInfoDaoImpl implements BookInfoDao {
 	private BookInfo getBookInfo(ResultSet rs) throws SQLException {
 		int bookNo = rs.getInt("bookNo");
 		String bookName = rs.getString("bookName");
+		int bookCount = rs.getInt("bookCount");
 		BookCate bookCateNo = new BookCate(rs.getInt("bookCateNo"), rs.getString("bookCateName"));
 		int rentState = rs.getInt("rentState");
-		return new BookInfo(bookNo, bookName, bookCateNo, rentState);
+		return new BookInfo(bookNo, bookName, bookCount, bookCateNo, rentState);
 
 	}
 
 	@Override
 	public int insertBook(BookInfo bookinfo) {
-		String sql = "insert into bookinfo(bookNo, bookName, bookCateNo) values (?, ?, ?)";
+		String sql = "insert into bookinfo(bookNo, bookName, bookCount, bookCateNo) values (?, ?, ?, ?)";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, bookinfo.getBookNo());
 			pstmt.setString(2, bookinfo.getBookName());
-			pstmt.setInt(3, bookinfo.getBookCateNo().getBookCateNo());
+			pstmt.setInt(3, bookinfo.getBookCount());
+			pstmt.setInt(4, bookinfo.getBookCateNo().getBookCateNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,11 +155,12 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public int updateBook(BookInfo bookinfo) {
-		String sql = "update bookinfo set bookName = ?, bookCateNo = ? where bookNo = ?";
+		String sql = "update bookinfo set bookName = ?, bookCount = ?, bookCateNo = ? where bookNo = ? ";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, bookinfo.getBookName());
-			pstmt.setInt(2, bookinfo.getBookCateNo().getBookCateNo());
-			pstmt.setInt(3, bookinfo.getBookNo());
+			pstmt.setInt(2, bookinfo.getBookCount());
+			pstmt.setInt(3, bookinfo.getBookCateNo().getBookCateNo());
+			pstmt.setInt(4, bookinfo.getBookNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -179,7 +182,7 @@ public class BookInfoDaoImpl implements BookInfoDao {
 
 	@Override
 	public BookInfo selectBookInfoBybookNo(int bookNo) {
-		String sql = "select bookNo, bookName, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookNo = ?";
+		String sql = "select bookNo, bookName, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate where bookNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, bookNo);
 

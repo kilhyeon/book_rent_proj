@@ -71,7 +71,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		contentPane.add(tabbedPane);
 
 		JPanel pBook = new JPanel();
-		tabbedPane.addTab("도서정보", null, pBook, null);
+//		tabbedPane.addTab("도서정보", null, pBook, null);
 		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
 		pSearchBook = new BookSearch();
@@ -211,7 +211,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		pListBook2.loadData();
 		pBookMange.clearTf();
 		btnAdd.setText("추가");
-		JOptionPane.showMessageDialog(null, updateBook.getBookName() + "정보가 수정되었습니다.");
+		JOptionPane.showMessageDialog(null, updateBook.getBookName() + " 도서의 정보를 수정하였습니다.");
 
 	}
 
@@ -227,7 +227,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		bookService.removeBook(delBook);
 		pListBook.loadData();
 		pListBook2.loadData();
-		JOptionPane.showMessageDialog(null, delBook + "삭제 되었습니다.");
+		JOptionPane.showMessageDialog(null, delBook + " 도서의 정보를 삭제하였습니다.");
 
 	}
 
@@ -238,7 +238,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		pListBook.loadData();
 		pListBook2.loadData();
 		pBookMange.clearTf();
-		JOptionPane.showMessageDialog(null, addBook + " 추가했습니다.");
+		JOptionPane.showMessageDialog(null, addBook + " 도서를 추가하였습니다.");
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {

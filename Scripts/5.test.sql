@@ -62,8 +62,9 @@ select * from rent;
 insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12011, 40010, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0);
 
 update bookinfo set rentState = 1 where bookNo = 40010;
-
-
+update bookinfo set bookCount = bookCount-1, rentState = 1 where bookNo = 40008;
+update bookinfo set rentState = if (bookCount > 0, rentState = 0, rentState =1) where bookNo = 40008;
+update bookinfo set rentState = rentState-1 where bookNo = 40008;
 insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12009, 40009, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0);
 
 

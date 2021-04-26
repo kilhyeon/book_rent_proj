@@ -85,8 +85,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		contentPane.add(tabbedPane);
 
 		JPanel pMem = new JPanel();
-		pMem.setVisible(false);
-		tabbedPane.addTab("회원정보", null, pMem, null);
+//		tabbedPane.addTab("회원정보", null, pMem, null);
 		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
 		pSearchMem = new MemberSearch();
@@ -242,7 +241,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		pListMem2.loadData();
 		pMemManage.clearTf();
 		btnAdd.setText("추가");
-		JOptionPane.showMessageDialog(null, updateMember.getMemName() + "정보가 수정되었습니다.");
+		JOptionPane.showMessageDialog(null, updateMember.getMemName() + " 회원의 정보를 수정하였습니다.");
 
 	}
 
@@ -258,7 +257,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		memService.removeMember(delMember);
 		pListMem.loadData();
 		pListMem2.loadData();
-		JOptionPane.showMessageDialog(null, delMember + "삭제 되었습니다.");
+		JOptionPane.showMessageDialog(null, delMember + " 회원의 정보를 삭제하였습니다.");
 
 	}
 
@@ -269,7 +268,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		pListMem2.loadData();
 		pMemManage.clearTf();
 		tableLoadData();
-		JOptionPane.showMessageDialog(null, addMember + " 추가했습니다.");
+		JOptionPane.showMessageDialog(null, addMember + " 회원을 추가하였습니다.");
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
