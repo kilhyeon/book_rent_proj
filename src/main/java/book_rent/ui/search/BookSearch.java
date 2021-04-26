@@ -2,6 +2,7 @@ package book_rent.ui.search;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -27,6 +28,7 @@ public class BookSearch extends JPanel implements ActionListener {
 
 	public BookSearch() {
 		pBook = new BookInfoTablePanel();
+		list = new ArrayList<BookInfo>();
 		initialize();
 		cmb.setSelectedIndex(-1);
 	}
@@ -58,16 +60,14 @@ public class BookSearch extends JPanel implements ActionListener {
 
 	protected void actionPerformedBtn(ActionEvent e) {
 		try {
-			String selectItem = (String) cmb.getSelectedItem();
-
-			list = selectModel(selectItem);
-
+			String selectItem = cmb.getSelectedItem().toString();
+			list = item(selectItem);
 			if (list != null) {
-				pBook.setService(service);
 				pBook.setList(list);
 				pBook.setList();
 			} else {
-				System.out.println("다시입력");
+				pBook.setList(list);
+				pBook.loadData();
 			}
 
 		} catch (Exception e1) {
@@ -75,7 +75,7 @@ public class BookSearch extends JPanel implements ActionListener {
 		}
 	}
 
-	public List<BookInfo> selectModel(String model) {
+	public List<BookInfo> item(String model) {
 		try {
 
 			if (model.equals("도서번호")) {

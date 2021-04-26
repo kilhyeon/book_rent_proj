@@ -17,12 +17,11 @@ import javax.swing.border.TitledBorder;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
-import book_rent.ui.XXXXBookCateManagerUIXXXX;
 import book_rent.ui.BookManagerUI;
 import book_rent.ui.MemManagerUI;
 import book_rent.ui.list.BookInfoTablePanel;
+import book_rent.ui.list.MemRentTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.list.RentTablePanel;
 import book_rent.ui.search.BookSearch;
 import book_rent.ui.search.MemberSearch;
 
@@ -35,7 +34,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 	private MemberInfoTablePanel pMember;
 	private BookInfoTablePanel pBook;
 	private JPanel pList;
-	private RentTablePanel pRent;
+	private MemRentTablePanel pRent;
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
@@ -153,9 +152,9 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pBook.setService(bookService);
 		pBook.loadData();
 
-		pRent = new RentTablePanel();
+		pRent = pMember.getMemRentList();
 		contentPane.add(pRent);
-		pRent.setBorder(new TitledBorder(null, "현재 대여중인 도서목록", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+//		pRent.setBorder(new TitledBorder(null, "현재 대여중인 도서목록", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pRent.setService(rentService);
 		pRent.loadData();
 	}

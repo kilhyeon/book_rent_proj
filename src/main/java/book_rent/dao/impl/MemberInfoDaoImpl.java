@@ -44,7 +44,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 	@Override
 	public List<MemberInfo> selectMemberInfoByNo(MemberInfo memberinfo) {
-		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeNamem, memGradeCount from vw_meminfo_grade where memNo = ? order by memNo";
+		String sql = "select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeName, memGradeCount from vw_meminfo_grade where memNo = ? order by memNo";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, memberinfo.getMemNo());
 

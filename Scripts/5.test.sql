@@ -2,6 +2,7 @@ select * from memberinfo;
 select * from bookinfo;
 select * from grade;
 select * from category;
+select * from rent;
 
 -- 회원조회
 select memNo, memName, memBirth, memTel, memCp, memAddr, memGrade from memberinfo;
@@ -44,7 +45,8 @@ values('홍길동', '20000101', '010-1234-1234', '010-1234-1234', '대구', 2);
 
 insert into bookinfo(bookNo, bookName, bookCateNo) values (555, 555, 1);
 
-
+-- 회원검색
+select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeName, memGradeCount from vw_meminfo_grade where memNo = 12001 order by memNo;
 
 -- 대여정보 뷰 정렬
 select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, 

@@ -82,8 +82,8 @@ public class RentDaoImpl implements RentDao {
 //		BookInfo bookName = new BookInfo(rs.getString("bookName"));
 //		BookCate bookCateNo = new BookCate(rs.getInt("bookCateNo"));
 //		BookCate bookCateName = new BookCate(rs.getString("bookCateName"));
-		Date rentDate = rs.getTimestamp("rentDate");
-		Date returnDate = rs.getTimestamp("returnDate");
+		Date rentDate = rs.getDate("rentDate");
+		Date returnDate = rs.getDate("returnDate");
 		int lateDate = rs.getInt("lateDate");
 
 		return new Rent(rentNo, memNo, bookNo, rentDate, returnDate, lateDate);

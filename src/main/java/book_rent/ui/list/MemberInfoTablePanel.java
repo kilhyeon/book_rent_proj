@@ -17,12 +17,14 @@ import book_rent.ui.exception.NotSelectedException;
 public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener {
 	private MemberInfoService service;
 	private MemberContentPanel pMemInfo;
+	private MemRentTablePanel memRentList;
 
 	public MemberInfoTablePanel() {
 
 		initialize();
 		table.addMouseListener(this);
 		pMemInfo = new MemberContentPanel();
+		memRentList = new MemRentTablePanel();
 	}
 
 	private void initialize() {
@@ -40,6 +42,14 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 
 	public void setList(List<MemberInfo> list) {
 		this.list = list;
+	}
+
+	public MemRentTablePanel getMemRentList() {
+		return memRentList;
+	}
+
+	public void setMemRentList(MemRentTablePanel memRentList) {
+		this.memRentList = memRentList;
 	}
 
 	@Override
@@ -86,7 +96,7 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 		if (row == -1) {
 			throw new NotSelectedException();
 		}
-		try {
+		try {			
 			MemberInfo item = service.showMemberByMemNo(memNo);
 			pMemInfo.setItem(item);
 			pMemInfo.getTfMemNo().setEditable(false);
@@ -96,8 +106,14 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 			pMemInfo.getTfMemAddr().setEditable(false);
 			pMemInfo.getTfMemCp().setEditable(false);
 			pMemInfo.getTfMemTel().setEditable(false);
+			
+//			System.out.println(memNo);
+			memRentList.showRentListByMemNo(new MemberInfo(memNo));
+			memRentList.setList();
 		} catch (NullPointerException e1) {
-			e1.printStackTrace();
+//			e1.printStackTrace();
+			memRentList.loadData();
+//			System.out.println("널포인트");
 		}
 
 	}
