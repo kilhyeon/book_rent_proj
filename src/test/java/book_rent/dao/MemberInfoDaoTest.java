@@ -55,22 +55,22 @@ public class MemberInfoDaoTest {
 	
 
 //	@Test
-	public void test01InsertEmployee() {
-		System.out.printf("%s()%n", "testInsertEmployee");
-		MemberInfo newMember = new MemberInfo(19998, "홍길동", "20010101", "010-1234-1234", "010-1234-1234", "대구", 1);
-		int res = dao.insertMember(newMember);
-		Assert.assertEquals(1, res);
-
-	}
-
-	@Test
-	public void test02UpdateEmployee() {
-		System.out.printf("%s()%n", "testInsertEmployee");
-		MemberInfo newMember = new MemberInfo(19998, "홍길동2", "20010101", "010-1234-1234", "010-1234-1234", "대구",
-				1);
-		int res = dao.updateMember(newMember);
-		Assert.assertEquals(1, res);
-	}
+//	public void test01InsertEmployee() {
+//		System.out.printf("%s()%n", "testInsertEmployee");
+//		MemberInfo newMember = new MemberInfo(19998, "홍길동", "20010101", "010-1234-1234", "010-1234-1234", "대구", 1);
+//		int res = dao.insertMember(newMember);
+//		Assert.assertEquals(1, res);
+//
+//	}
+//
+//	@Test
+//	public void test02UpdateEmployee() {
+//		System.out.printf("%s()%n", "testInsertEmployee");
+//		MemberInfo newMember = new MemberInfo(19998, "홍길동2", "20010101", "010-1234-1234", "010-1234-1234", "대구",
+//				1);
+//		int res = dao.updateMember(newMember);
+//		Assert.assertEquals(1, res);
+//	}
 
 //	@Test
 	public void test03DeleteEmployee() {

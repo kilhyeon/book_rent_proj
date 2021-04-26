@@ -35,7 +35,7 @@ public class RentDaoImpl implements RentDao {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			if (rs.next()) {
-				List<Rent> list = new ArrayList();
+				List<Rent> list = new ArrayList<Rent>();
 				do {
 					list.add(GetRent(rs));
 				} while (rs.next());
@@ -47,6 +47,31 @@ public class RentDaoImpl implements RentDao {
 		return null;
 	}
 
+	@Override
+	public List<Rent> selectRentByMemNo(MemberInfo memInfo) {
+		String sql = "select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, "
+				+ "rentDate, returnDate, lateDate from vw_rent_mb where memNo = ? order by rentNo";
+		
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, memInfo.getMemNo());
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					List<Rent> list = new ArrayList<Rent>();
+					do {
+						list.add(GetRent(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 	private Rent GetRent(ResultSet rs) throws SQLException {
 		int rentNo = rs.getInt("rentNo");
 		MemberInfo memNo = new MemberInfo(rs.getInt("memNo"), rs.getString("memName"));
@@ -79,7 +104,6 @@ public class RentDaoImpl implements RentDao {
 	public int insertRent(MemberInfo memNo, BookInfo bookNo) {
 		String rentSql = "insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (?, ?, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0)";
 		String bookSql = "update bookinfo set rentState = 1 where bookNo = ?";
-		System.out.println("인설트 작동여부확인");
 		Connection con = JdbcConn.getConnection();
 
 		try (PreparedStatement pstmt = con.prepareStatement(rentSql);
@@ -96,5 +120,7 @@ public class RentDaoImpl implements RentDao {
 
 		return 0;
 	}
+
+	
 
 }

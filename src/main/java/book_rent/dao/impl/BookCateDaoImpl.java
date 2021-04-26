@@ -23,7 +23,7 @@ public class BookCateDaoImpl implements BookCateDao {
 
 	@Override
 	public List<BookCate> selectBookCateByAll() {
-		String sql = "select bookCateNo, bookCateName from category";
+		String sql = "select bookCateNo, bookCateName from category order by bookCateNo";
 		try (Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {

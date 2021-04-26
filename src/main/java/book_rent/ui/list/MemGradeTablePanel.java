@@ -50,21 +50,21 @@ public class MemGradeTablePanel extends AbstractCustomTablePanel<MemGrade> {
 	@Override
 	protected void setAlignAndWidth() {
 		// 컬럼내용 정렬
-		setTableCellAlign(SwingConstants.CENTER, 0, 1);
+		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(200, 200);
+		setTableCellWidth(200, 200, 200);
 
 	}
 
 	@Override
 	public Object[] toArray(MemGrade g) {
-		return new Object[] { g.getMemGradeNo(), g.getMemGradeName() };
+		return new Object[] { g.getMemGradeNo(), g.getMemGradeName(), g.getMemGradeCount() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "등급번호", "등급이름" };
+		return new String[] { "등급번호", "등급이름", "대여가능권수" };
 	}
 
 }

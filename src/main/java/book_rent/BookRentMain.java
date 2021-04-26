@@ -77,7 +77,10 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pMember.repaint();
 		pBook.repaint();
 		pRent.repaint();
-		System.out.println("메인로드데이터");
+		pMember.loadData();
+		pBook.loadData();
+		pRent.loadData();
+//		System.out.println("메인로드데이터");
 	}
 
 	private void initialize() {

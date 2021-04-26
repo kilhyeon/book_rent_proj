@@ -67,10 +67,10 @@ public class BookInfo {
 
 	public String getRentState() {
 		if (rentState == 0) {
-			return "보유중";
+			return "대여가능";
 
 		} else {
-			return "대여중";
+			return "대여불가";
 		}
 	}
 

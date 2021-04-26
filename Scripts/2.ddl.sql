@@ -28,6 +28,7 @@ CREATE TABLE book_rent.bookInfo (
 	bookNo     INT         NOT NULL COMMENT '도서번호', -- 도서번호
 	bookName   VARCHAR(40) NULL     COMMENT '도서제목', -- 도서제목
 	bookCateNo INT         NULL     COMMENT '도서구분', -- 도서구분
+	bookCount  INT         NULL     COMMENT '도서보유권수', -- 도서보유권수
 	rentState  INT         NULL     DEFAULT 0 COMMENT '대출여부' -- 대출여부
 )
 COMMENT '도서정보';
@@ -76,8 +77,9 @@ ALTER TABLE book_rent.category
 
 -- 회원등급
 CREATE TABLE book_rent.grade (
-	memGradeNo   INT         NOT NULL COMMENT '회원등급', -- 회원등급
-	memGradeName VARCHAR(10) NULL     COMMENT '회원등급이름' -- 회원등급이름
+	memGradeNo    INT         NOT NULL COMMENT '회원등급', -- 회원등급
+	memGradeName  VARCHAR(10) NULL     COMMENT '회원등급이름', -- 회원등급이름
+	memGradeCount INT         NULL     COMMENT '등급대여권수' -- 등급대여권수
 )
 COMMENT '회원등급';
 

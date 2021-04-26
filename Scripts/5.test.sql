@@ -38,8 +38,18 @@ update bookinfo set rentState = 2 where bookNo = 123123;
 
 
 
+insert into memberinfo(memName, memBirth, memTel, memCp, memAddr, memGradeNo) 
+values('홍길동', '20000101', '010-1234-1234', '010-1234-1234', '대구', 2);
+
+
 insert into bookinfo(bookNo, bookName, bookCateNo) values (555, 555, 1);
 
+
+
+-- 대여정보 뷰 정렬
+select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, 
+rentDate, returnDate, lateDate 
+from vw_rent_mb order by rentNo;
 
 
 -- 도서 대여 정보 입력
@@ -53,3 +63,8 @@ update bookinfo set rentState = 1 where bookNo = 40010;
 
 
 insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12009, 40009, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0);
+
+
+-- 회원 대여내역 조회
+select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, rentDate, returnDate, lateDate
+from vw_rent_mb where memNo = 12004 order by rentNo;

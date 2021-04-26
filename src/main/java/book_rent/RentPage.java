@@ -38,6 +38,7 @@ public class RentPage extends JFrame implements ActionListener {
 	private JPanel pBtn;
 	private JButton btnRent;
 	private JButton btnCancel;
+	private BookRentMain main;
 
 	public RentPage() {
 		memService = new MemberInfoService();
@@ -45,11 +46,17 @@ public class RentPage extends JFrame implements ActionListener {
 		rentService = new RentService();
 		initialize();
 		tableLoadData();
+		main = new BookRentMain();
+	}
+	
+	private void mainLoad() {
+		main.mainLoadData();
 	}
 
 	private void tableLoadData() {
 		pListMem.setService(memService);
 		pListMem.loadData();
+		
 
 	}
 
@@ -139,6 +146,7 @@ public class RentPage extends JFrame implements ActionListener {
 //		main.mainLoadData();
 //		main.revalidate();
 //		main.repaint();
+		mainLoad();
 		pMemInfo.clearTf();
 		pBookInfo.clearTf();
 

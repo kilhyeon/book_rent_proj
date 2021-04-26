@@ -3,6 +3,7 @@ package book_rent.dto;
 public class MemGrade {
 	private int memGradeNo;
 	private String memGradeName;
+	private int memGradeCount;
 
 	public MemGrade() {
 		super();
@@ -25,6 +26,12 @@ public class MemGrade {
 		this.memGradeName = memGradeName;
 	}
 
+	public MemGrade(int memGradeNo, String memGradeName, int memGradeCount) {
+		this.memGradeNo = memGradeNo;
+		this.memGradeName = memGradeName;
+		this.memGradeCount = memGradeCount;
+	}
+
 	public int getMemGradeNo() {
 		return memGradeNo;
 	}
@@ -39,6 +46,14 @@ public class MemGrade {
 
 	public void setMemGradeName(String memGradeName) {
 		this.memGradeName = memGradeName;
+	}
+
+	public int getMemGradeCount() {
+		return memGradeCount;
+	}
+
+	public void setMemGradeCount(int memGradeCount) {
+		this.memGradeCount = memGradeCount;
 	}
 
 	@Override

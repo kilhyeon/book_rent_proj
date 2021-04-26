@@ -9,7 +9,6 @@ import java.util.List;
 
 import book_rent.dao.MemGradeDao;
 import book_rent.database.JdbcConn;
-import book_rent.dto.BookCate;
 import book_rent.dto.MemGrade;
 
 public class MemGradeDaoImpl implements MemGradeDao {
@@ -24,7 +23,7 @@ public class MemGradeDaoImpl implements MemGradeDao {
 
 	@Override
 	public List<MemGrade> selectMemGradeByAll() {
-		String sql = "select memGradeNo, memGradeName from grade";
+		String sql = "select memGradeNo, memGradeName, memGradeCount from grade order by memGradeNo";
 		try (Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
@@ -44,12 +43,13 @@ public class MemGradeDaoImpl implements MemGradeDao {
 	private MemGrade getMemGrade(ResultSet rs) throws SQLException {
 		int memGradeNo = rs.getInt("MemGradeNo");
 		String memGradeName = rs.getString("MemGradeName");
-		return new MemGrade(memGradeNo, memGradeName);
+		int memGradeCount = rs.getInt("memGradeCount");
+		return new MemGrade(memGradeNo, memGradeName, memGradeCount);
 	}
 
 	@Override
 	public List<MemGrade> selectMemGradeByNo(MemGrade grade) {
-		String sql = "select memGradeNo, memGradeName from grade where memGradeNo = ?";
+		String sql = "select memGradeNo, memGradeName memGradeCount from grade where memGradeNo = ? order by memGradeNo";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, grade.getMemGradeNo());
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -69,7 +69,7 @@ public class MemGradeDaoImpl implements MemGradeDao {
 
 	@Override
 	public List<MemGrade> selectMemGradeByName(MemGrade grade) {
-		String sql = "select memGradeNo, memGradeName from grade where memGradeName = ?";
+		String sql = "select memGradeNo, memGradeName, memGradeCount from grade where memGradeName = ? order by memGradeNo";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, grade.getMemGradeName());
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -89,10 +89,11 @@ public class MemGradeDaoImpl implements MemGradeDao {
 
 	@Override
 	public int insertMemGrade(MemGrade grade) {
-		String sql = "insert into grade  values(?, ?)";
+		String sql = "insert into grade  values(?, ?, ?)";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, grade.getMemGradeNo());
 			pstmt.setString(2, grade.getMemGradeName());
+			pstmt.setInt(3, grade.getMemGradeCount());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,10 +103,11 @@ public class MemGradeDaoImpl implements MemGradeDao {
 
 	@Override
 	public int updateMemGrade(MemGrade grade) {
-		String sql = "update grade set memGradeName = ? where memGradeNo = ?";
+		String sql = "update grade set memGradeName = ?, memGradeCount = ? where memGradeNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, grade.getMemGradeName());
-			pstmt.setInt(2, grade.getMemGradeNo());
+			pstmt.setInt(2, grade.getMemGradeCount());
+			pstmt.setInt(3, grade.getMemGradeNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

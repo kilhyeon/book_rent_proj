@@ -15,6 +15,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 	private JTextField tfGradeNo;
 	private JTextField tfGradeName;
 	private MemGradeService service;
+	private JTextField tfGradeCount;
 
 	public MemGradeContnetPanel() {
 		service = new MemGradeService();
@@ -28,7 +29,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 		JPanel pGradeNo = new JPanel();
 		add(pGradeNo);
 
-		JLabel lblGradeNo = new JLabel("회원등급번호 : ");
+		JLabel lblGradeNo = new JLabel("등급번호 : ");
 		pGradeNo.add(lblGradeNo);
 
 		tfGradeNo = new JTextField();
@@ -38,18 +39,29 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 		JPanel pGradeName = new JPanel();
 		add(pGradeName);
 
-		JLabel lblGradeName = new JLabel("회원등급이름 : ");
+		JLabel lblGradeName = new JLabel("등급이름 : ");
 		pGradeName.add(lblGradeName);
 
 		tfGradeName = new JTextField();
 		pGradeName.add(tfGradeName);
 		tfGradeName.setColumns(10);
+
+		JPanel pGradeCount = new JPanel();
+		add(pGradeCount);
+
+		JLabel lblGradeCount = new JLabel("대여가능권수 : ");
+		pGradeCount.add(lblGradeCount);
+
+		tfGradeCount = new JTextField();
+		pGradeCount.add(tfGradeCount);
+		tfGradeCount.setColumns(10);
 	}
 
 	@Override
 	public void setItem(MemGrade item) {
 		tfGradeNo.setText(String.valueOf(item.getMemGradeNo()));
 		tfGradeName.setText(item.getMemGradeName());
+		tfGradeCount.setText(String.valueOf(item.getMemGradeCount()));
 		tfGradeNo.setEditable(false);
 	}
 
@@ -58,7 +70,8 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 		validCheck();
 		int memGradeNo = Integer.parseInt(tfGradeNo.getText().trim());
 		String memGradeName = tfGradeName.getText().trim();
-		return new MemGrade(memGradeNo, memGradeName);
+		int memGradeCount = Integer.parseInt(tfGradeCount.getText().trim());
+		return new MemGrade(memGradeNo, memGradeName, memGradeCount);
 	}
 
 	@Override
@@ -73,6 +86,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 	public void clearTf() {
 		tfGradeNo.setText("");
 		tfGradeName.setText("");
+		tfGradeCount.setText("");
 
 		if (!tfGradeNo.isEditable()) {
 			tfGradeNo.setEditable(true);
@@ -93,6 +107,14 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 
 	public void setTfGradeName(JTextField tfGradeName) {
 		this.tfGradeName = tfGradeName;
+	}
+
+	public JTextField getTfGradeCount() {
+		return tfGradeCount;
+	}
+
+	public void setTfGradeCount(JTextField tfGradeCount) {
+		this.tfGradeCount = tfGradeCount;
 	}
 
 }
