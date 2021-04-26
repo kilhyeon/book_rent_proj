@@ -41,6 +41,7 @@ public class RentPage extends JFrame implements ActionListener {
 	private JButton btnCancel;
 
 	public RentPage() {
+		setTitle("도서대여");
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
 		rentService = new RentService();

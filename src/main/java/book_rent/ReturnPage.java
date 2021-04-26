@@ -40,6 +40,7 @@ public class ReturnPage extends JFrame implements ActionListener {
 	private JButton btnCancel;
 
 	public ReturnPage() {
+		setTitle("도서반납");
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
 		rentService = new RentService();

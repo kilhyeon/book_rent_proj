@@ -46,6 +46,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	private JLabel lblMent;
 
 	public BookManagerUI() {
+		setTitle("도서관리");
 		bookService = new BookInfoService();
 		initialize();
 		tableLoadData();

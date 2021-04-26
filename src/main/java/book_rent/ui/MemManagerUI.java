@@ -51,6 +51,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 	private MemRentTablePanel pRentList;
 
 	public MemManagerUI() {
+		setTitle("회원관리");
 		memService = new MemberInfoService();
 		rentService = new RentService();
 		initialize();

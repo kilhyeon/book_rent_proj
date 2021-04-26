@@ -59,13 +59,14 @@ public class BookRentMain extends JFrame implements ActionListener {
 	}
 
 	public BookRentMain() {
+		setTitle("도서관리 프로그램");
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
 		rentService = new RentService();
 		initialize();
 		mainLoadData();
 	}
-	
+
 	public void mainLoadData() {
 		pMember.setService(memService);
 		pBook.setService(bookService);
@@ -101,7 +102,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pBtnRentReturn = new JPanel();
 		pBtn.add(pBtnRentReturn);
 
-		btnRent = new JButton("대출하기");
+		btnRent = new JButton("대여하기");
 		btnRent.addActionListener(this);
 		pBtnRentReturn.add(btnRent);
 
@@ -112,14 +113,14 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pBtnManagement = new JPanel();
 		pBtn.add(pBtnManagement);
 		pBtnManagement.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-				btnMember = new JButton("회원관리");
-				pBtnManagement.add(btnMember);
-				btnMember.addActionListener(this);
-		
-				btnBook = new JButton("도서관리");
-				pBtnManagement.add(btnBook);
-				btnBook.addActionListener(this);
+
+		btnMember = new JButton("회원관리");
+		pBtnManagement.add(btnMember);
+		btnMember.addActionListener(this);
+
+		btnBook = new JButton("도서관리");
+		pBtnManagement.add(btnBook);
+		btnBook.addActionListener(this);
 
 		JPanel pSearch = new JPanel();
 		pBtnSearch.add(pSearch);
