@@ -1,4 +1,4 @@
-package book_rent.ui.management;
+package book_rent.ui.content;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -17,11 +17,10 @@ import javax.swing.border.TitledBorder;
 import book_rent.dto.BookCate;
 import book_rent.dto.BookInfo;
 import book_rent.service.BookCateService;
-import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import javax.swing.SwingConstants;
 
-public class BookManagement extends AbstractContentPanel<BookInfo> implements ActionListener {
+public class BookContentManagement extends AbstractContentPanel<BookInfo> implements ActionListener {
 	private JTextField tfBookNo;
 	private JTextField tfBookName;
 	private JTextField tfBookCate;
@@ -31,7 +30,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 	private BookCateService bookCateService;
 	private JTextField tfBookCount;
 
-	public BookManagement() {
+	public BookContentManagement() {
 		bookCateService = new BookCateService();
 		initialize();
 		selectCmb();

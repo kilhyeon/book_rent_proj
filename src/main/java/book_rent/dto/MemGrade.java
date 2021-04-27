@@ -72,7 +72,7 @@ public class MemGrade {
 
 	@Override
 	public String toString() {
-		return String.format("%s", memGradeName);
+		return String.format("%s(%s)", memGradeName, memGradeNo);
 	}
 
 }

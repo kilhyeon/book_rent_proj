@@ -12,7 +12,6 @@ import com.mysql.fabric.xmlrpc.base.Data;
 
 import book_rent.dto.BookCate;
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.NotSelectedException;

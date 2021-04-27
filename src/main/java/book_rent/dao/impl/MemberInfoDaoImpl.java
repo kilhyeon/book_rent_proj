@@ -10,7 +10,7 @@ import java.util.List;
 import book_rent.dao.MemberInfoDao;
 import book_rent.database.JdbcConn;
 import book_rent.dto.MemGrade;
-import book_rent.dto.MemberInfo;
+import book_rent.ui.content.MemberInfo;
 
 public class MemberInfoDaoImpl implements MemberInfoDao {
 

@@ -1,4 +1,6 @@
-package book_rent.dto;
+package book_rent.ui.content;
+
+import book_rent.dto.MemGrade;
 
 public class MemberInfo {
 	private int memNo;

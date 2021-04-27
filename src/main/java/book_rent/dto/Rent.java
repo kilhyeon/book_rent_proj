@@ -2,6 +2,8 @@ package book_rent.dto;
 
 import java.util.Date;
 
+import book_rent.ui.content.MemberInfo;
+
 public class Rent {
 //	select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, 
 //	rentDate, returnDate, lateDate from vw_rent_mb

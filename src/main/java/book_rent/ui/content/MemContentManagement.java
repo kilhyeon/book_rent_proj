@@ -1,4 +1,4 @@
-package book_rent.ui.management;
+package book_rent.ui.content;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -16,13 +16,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
-import book_rent.dto.MemberInfo;
 import book_rent.service.MemGradeService;
-import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class MemManagement extends AbstractContentPanel<MemberInfo> implements ActionListener {
+public class MemContentManagement extends AbstractContentPanel<MemberInfo> implements ActionListener {
 	private JTextField tfMemNo;
 	private JTextField tfMemName;
 	private JTextField tfMemBirth;
@@ -33,7 +31,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 	private JComboBox cmbGrade;
 	private MemGradeService memGradeService;
 
-	public MemManagement() {
+	public MemContentManagement() {
 		memGradeService = new MemGradeService();
 		initialize();
 		selectCmb();

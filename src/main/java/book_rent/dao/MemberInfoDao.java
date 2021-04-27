@@ -2,7 +2,7 @@ package book_rent.dao;
 
 import java.util.List;
 
-import book_rent.dto.MemberInfo;
+import book_rent.ui.content.MemberInfo;
 
 public interface MemberInfoDao {
 

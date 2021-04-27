@@ -19,10 +19,10 @@ import javax.swing.border.EmptyBorder;
 import book_rent.dto.BookInfo;
 import book_rent.service.BookInfoService;
 import book_rent.ui.content.BookContentPanel;
+import book_rent.ui.content.BookContentManagement;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.BookInfoTablePanel;
-import book_rent.ui.management.BookManagement;
 import book_rent.ui.search.BookSearch;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -34,7 +34,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	private BookInfoTablePanel pBookInfoTableList;
 	private BookInfoTablePanel pBookInfoTableList2;
 	private BookContentPanel pBookInfoContent;
-	private BookManagement pBookManageContent;
+	private BookContentManagement pBookManageContent;
 	private BookSearch pBookSearch;
 
 	private JButton btnAdd;
@@ -103,7 +103,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		pBookInfoTableList2.setService(bookService);
 		pBookInfoTableList2.loadData();
 
-		pBookManageContent = new BookManagement();
+		pBookManageContent = new BookContentManagement();
 		pBookMangement.add(pBookManageContent);
 
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
@@ -152,11 +152,11 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		this.pBookInfoContent = pBookInfo;
 	}
 
-	public BookManagement getpBookInfo() {
+	public BookContentManagement getpBookInfo() {
 		return pBookManageContent;
 	}
 
-	public void setpBookInfo(BookManagement pBookInfo) {
+	public void setpBookInfo(BookContentManagement pBookInfo) {
 		this.pBookManageContent = pBookInfo;
 	}
 

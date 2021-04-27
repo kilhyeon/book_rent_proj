@@ -11,8 +11,8 @@ import java.util.List;
 import book_rent.dao.RentDao;
 import book_rent.database.JdbcConn;
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
+import book_rent.ui.content.MemberInfo;
 
 public class RentDaoImpl implements RentDao {
 

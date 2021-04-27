@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
+import book_rent.ui.content.MemberInfo;
 import book_rent.ui.list.MemberInfoTablePanel;
 
 @SuppressWarnings("serial")

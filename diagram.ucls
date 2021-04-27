@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="book_rent.dto.MemberInfo" project="book_rent_proj" 
-    file="/book_rent_proj/src/main/java/book_rent/dto/MemberInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="book_rent.ui.content.MemberInfo" project="book_rent_proj" 
+    file="/book_rent_proj/src/main/java/book_rent/ui/content/MemberInfo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1756" y="710"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

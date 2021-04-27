@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
-import book_rent.dto.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
 import javax.swing.SwingConstants;
 

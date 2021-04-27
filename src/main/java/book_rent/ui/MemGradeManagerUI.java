@@ -13,10 +13,11 @@ import javax.swing.JPopupMenu;
 import book_rent.dto.MemGrade;
 import book_rent.service.MemGradeService;
 import book_rent.ui.content.MemGradeContnetPanel;
+import book_rent.ui.content.MemContentManagement;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.MemGradeTablePanel;
-import book_rent.ui.management.MemManagement;
+
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;

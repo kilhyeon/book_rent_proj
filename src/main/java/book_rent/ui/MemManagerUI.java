@@ -18,16 +18,16 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
+import book_rent.ui.content.MemContentManagement;
 import book_rent.ui.content.MemberContentPanel;
+import book_rent.ui.content.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.MemRentTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.list.RentTablePanel;
-import book_rent.ui.management.MemManagement;
 import book_rent.ui.search.MemberSearch;
 
 public class MemManagerUI extends JFrame implements ActionListener, MouseListener {
@@ -38,7 +38,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 	private MemberInfoTablePanel pMemInfoTableList;
 	private MemberInfoTablePanel pMemInfoTableList2;
 	private MemberContentPanel pMemInfoContent;
-	private MemManagement pMemManageContent;
+	private MemContentManagement pMemManageContent;
 	private MemberSearch pMemSearch;
 
 	private JButton btnAdd;
@@ -115,7 +115,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		pMemInfoTableList2.setService(memService);
 		pMemInfoTableList2.loadData();
 
-		pMemManageContent = new MemManagement();
+		pMemManageContent = new MemContentManagement();
 		pMemMangement.add(pMemManageContent);
 
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
@@ -176,11 +176,11 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		this.pMemInfoContent = pMemInfo;
 	}
 
-	public MemManagement getpMemInfo2() {
+	public MemContentManagement getpMemInfo2() {
 		return pMemManageContent;
 	}
 
-	public void setpMemInfo2(MemManagement pMemInfo2) {
+	public void setpMemInfo2(MemContentManagement pMemInfo2) {
 		this.pMemManageContent = pMemInfo2;
 	}
 

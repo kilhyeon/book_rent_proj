@@ -11,12 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.MemberContentPanel;
+import book_rent.ui.content.MemberInfo;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.search.BookSearch;
