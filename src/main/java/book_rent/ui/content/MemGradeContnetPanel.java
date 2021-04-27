@@ -10,15 +10,16 @@ import javax.swing.border.TitledBorder;
 import book_rent.dto.MemGrade;
 import book_rent.service.MemGradeService;
 import book_rent.ui.exception.InvalidCheckException;
+import javax.swing.SwingConstants;
 
 public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 	private JTextField tfGradeNo;
 	private JTextField tfGradeName;
-	private MemGradeService service;
+	private MemGradeService memGradeService;
 	private JTextField tfGradeCount;
 
 	public MemGradeContnetPanel() {
-		service = new MemGradeService();
+		memGradeService = new MemGradeService();
 		initialize();
 	}
 
@@ -33,6 +34,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 		pGradeNo.add(lblGradeNo);
 
 		tfGradeNo = new JTextField();
+		tfGradeNo.setHorizontalAlignment(SwingConstants.CENTER);
 		pGradeNo.add(tfGradeNo);
 		tfGradeNo.setColumns(10);
 
@@ -43,6 +45,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 		pGradeName.add(lblGradeName);
 
 		tfGradeName = new JTextField();
+		tfGradeName.setHorizontalAlignment(SwingConstants.CENTER);
 		pGradeName.add(tfGradeName);
 		tfGradeName.setColumns(10);
 
@@ -53,6 +56,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 		pGradeCount.add(lblGradeCount);
 
 		tfGradeCount = new JTextField();
+		tfGradeCount.setHorizontalAlignment(SwingConstants.CENTER);
 		pGradeCount.add(tfGradeCount);
 		tfGradeCount.setColumns(10);
 	}

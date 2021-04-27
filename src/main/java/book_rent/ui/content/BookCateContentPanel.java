@@ -10,14 +10,15 @@ import javax.swing.border.TitledBorder;
 import book_rent.dto.BookCate;
 import book_rent.service.BookCateService;
 import book_rent.ui.exception.InvalidCheckException;
+import javax.swing.SwingConstants;
 
 public class BookCateContentPanel extends AbstractContentPanel<BookCate> {
 	private JTextField tfCateNo;
 	private JTextField tfCateName;
-	private BookCateService service;
+	private BookCateService bookCateService;
 
 	public BookCateContentPanel() {
-		service = new BookCateService();
+		bookCateService = new BookCateService();
 		initialize();
 	}
 
@@ -33,6 +34,7 @@ public class BookCateContentPanel extends AbstractContentPanel<BookCate> {
 		pCateNo.add(lblCateNo);
 
 		tfCateNo = new JTextField();
+		tfCateNo.setHorizontalAlignment(SwingConstants.CENTER);
 		pCateNo.add(tfCateNo);
 		tfCateNo.setColumns(10);
 
@@ -43,6 +45,7 @@ public class BookCateContentPanel extends AbstractContentPanel<BookCate> {
 		pCateName.add(lblCateName);
 
 		tfCateName = new JTextField();
+		tfCateName.setHorizontalAlignment(SwingConstants.CENTER);
 		pCateName.add(tfCateName);
 		tfCateName.setColumns(10);
 

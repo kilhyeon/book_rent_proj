@@ -9,12 +9,12 @@ import book_rent.ui.content.MemGradeContnetPanel;
 import book_rent.ui.exception.NotSelectedException;
 
 public class MemGradeTablePanel extends AbstractCustomTablePanel<MemGrade> {
-	private MemGradeService service;
-	private MemGradeContnetPanel pMemGrade;
+	private MemGradeService memGradeService;
+	private MemGradeContnetPanel pMemGradeContent;
 
 	public MemGradeTablePanel() {
 		initialize();
-		pMemGrade = new MemGradeContnetPanel();
+		pMemGradeContent = new MemGradeContnetPanel();
 	}
 
 	private void initialize() {
@@ -22,11 +22,11 @@ public class MemGradeTablePanel extends AbstractCustomTablePanel<MemGrade> {
 	}
 
 	public MemGradeContnetPanel getpMemGrade() {
-		return pMemGrade;
+		return pMemGradeContent;
 	}
 
 	public void setService(MemGradeService service) {
-		this.service = service;
+		this.memGradeService = service;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class MemGradeTablePanel extends AbstractCustomTablePanel<MemGrade> {
 
 	@Override
 	public void initList() {
-		list = service.showMemGradeByAll();
+		list = memGradeService.showMemGradeByAll();
 
 	}
 

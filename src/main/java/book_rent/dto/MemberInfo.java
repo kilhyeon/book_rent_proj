@@ -117,7 +117,7 @@ public class MemberInfo {
 
 	@Override
 	public String toString() {
-		return String.format("%s(%s)", memName, memNo);
+		return String.format("%s", memNo);
 	}
 
 //	@Override

@@ -21,14 +21,14 @@ import book_rent.ui.list.MemberInfoTablePanel;
 public class MemberSearch extends JPanel implements ActionListener {
 	private JTextField tf;
 	private JButton btn;
-	private MemberInfoService service;
+	private MemberInfoService memService;
 	private JComboBox<String> cmb;
-	private List<MemberInfo> list;
-	private MemberInfoTablePanel pMember;
+	private List<MemberInfo> memList;
+	private MemberInfoTablePanel pMemInfoTableList;
 
 	public MemberSearch() {
-		pMember = new MemberInfoTablePanel();
-		list = new ArrayList<MemberInfo>();
+		pMemInfoTableList = new MemberInfoTablePanel();
+		memList = new ArrayList<MemberInfo>();
 		initialize();
 		cmb.setSelectedIndex(-1);
 	}
@@ -61,13 +61,13 @@ public class MemberSearch extends JPanel implements ActionListener {
 	protected void actionPerformedBtn(ActionEvent e) {
 		try {
 			String selectItem = cmb.getSelectedItem().toString();
-			list = item(selectItem);
-			if (list != null) {
-				pMember.setList(list);
-				pMember.setList();
+			memList = item(selectItem);
+			if (memList != null) {
+				pMemInfoTableList.setList(memList);
+				pMemInfoTableList.setList();
 			} else {
-				pMember.setList(list);
-				pMember.loadData();
+				pMemInfoTableList.setList(memList);
+				pMemInfoTableList.loadData();
 			}
 
 		} catch (Exception e1) {
@@ -79,27 +79,27 @@ public class MemberSearch extends JPanel implements ActionListener {
 		try {
 
 			if (model.equals("회원번호")) {
-				list = service.showMemberListByNo(new MemberInfo(Integer.parseInt(tf.getText())));
+				memList = memService.showMemberListByNo(new MemberInfo(Integer.parseInt(tf.getText())));
 			}
 			if (model.equals("회원명")) {
-				list = service.showMemberListByName(new MemberInfo(tf.getText()));
+				memList = memService.showMemberListByName(new MemberInfo(tf.getText()));
 			}
 			if (model.equals("휴대전화")) {
-				list = service.showMemberListByCp(new MemberInfo(tf.getText()));
+				memList = memService.showMemberListByCp(new MemberInfo(tf.getText()));
 			}
 			if (model.equals("회원등급")) {
-				list = service.showMemberListByGrade(new MemberInfo(Integer.parseInt(tf.getText())));
+				memList = memService.showMemberListByGrade(new MemberInfo(Integer.parseInt(tf.getText())));
 			}
 
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 
-		return list;
+		return memList;
 	}
 
 	public void setService(MemberInfoService service) {
-		this.service = service;
+		this.memService = service;
 	}
 
 //	public List<MemberInfo> getList() {
@@ -107,7 +107,7 @@ public class MemberSearch extends JPanel implements ActionListener {
 //	}
 
 	public MemberInfoTablePanel getMemberInfoList() {
-		return pMember;
+		return pMemInfoTableList;
 	}
 
 	public void clearTf() {

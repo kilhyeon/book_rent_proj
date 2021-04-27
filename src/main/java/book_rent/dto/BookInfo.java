@@ -19,24 +19,9 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
-	public BookInfo(BookCate bookCateNo) {
-		this.bookCateNo = bookCateNo;
-	}
-
 	public BookInfo(int bookNo, String bookName) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
-	}
-
-	public BookInfo(int bookNo, int bookCount) {
-		this.bookNo = bookNo;
-		this.bookCount = bookCount;
-	}
-
-	public BookInfo(int bookNo, String bookName, BookCate bookCateNo) {
-		this.bookNo = bookNo;
-		this.bookName = bookName;
-		this.bookCateNo = bookCateNo;
 	}
 
 	public BookInfo(int bookNo, String bookName, int bookCount, BookCate bookCateNo) {
@@ -127,12 +112,13 @@ public class BookInfo {
 
 	@Override
 	public String toString() {
-		return String.format("%s(%s)", bookName, bookNo);
+		return String.format("%s", bookNo);
 	}
 
 //	@Override
 //	public String toString() {
 //		return String.format("%s", bookNo);
+
 //	}
 
 }

@@ -28,14 +28,14 @@ public class RentPage extends JFrame implements ActionListener {
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
-	private MemberInfoTablePanel pListMem;
-	private BookInfoTablePanel pListBook;
-	private MemberContentPanel pMemInfo;
-	private BookContentPanel pBookInfo;
+	private MemberInfoTablePanel pMemInfoTableList;
+	private BookInfoTablePanel pBookInfoTableList;
+	private MemberContentPanel pMemInfoContent;
+	private BookContentPanel pBookInfoContent;
 	private JPanel pMem;
 	private JPanel pBook;
-	private MemberSearch pSearchMem;
-	private BookSearch pSearchBook;
+	private MemberSearch pMemSearch;
+	private BookSearch pBookSearch;
 	private JPanel pBtn;
 	private JButton btnRent;
 	private JButton btnCancel;
@@ -50,8 +50,8 @@ public class RentPage extends JFrame implements ActionListener {
 	}
 	
 	private void tableLoadData() {
-		pListMem.setService(memService);
-		pListMem.loadData();
+		pMemInfoTableList.setService(memService);
+		pMemInfoTableList.loadData();
 		
 
 	}
@@ -68,33 +68,33 @@ public class RentPage extends JFrame implements ActionListener {
 		contentPane.add(pMem);
 		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
-		pSearchMem = new MemberSearch();
-		pMem.add(pSearchMem);
-		pSearchMem.setService(memService);
+		pMemSearch = new MemberSearch();
+		pMem.add(pMemSearch);
+		pMemSearch.setService(memService);
 
-		pListMem = pSearchMem.getMemberInfoList();
-		pMem.add(pListMem);
-		pListMem.setService(memService);
-		pListMem.loadData();
+		pMemInfoTableList = pMemSearch.getMemberInfoList();
+		pMem.add(pMemInfoTableList);
+		pMemInfoTableList.setService(memService);
+		pMemInfoTableList.loadData();
 
-		pMemInfo = pListMem.getpMemInfo();
-		pMem.add(pMemInfo);
+		pMemInfoContent = pMemInfoTableList.getpMemInfo();
+		pMem.add(pMemInfoContent);
 
 		pBook = new JPanel();
 		contentPane.add(pBook);
 		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
-		pSearchBook = new BookSearch();
-		pBook.add(pSearchBook);
-		pSearchBook.setService(bookService);
+		pBookSearch = new BookSearch();
+		pBook.add(pBookSearch);
+		pBookSearch.setService(bookService);
 
-		pListBook = pSearchBook.getBookInfoList();
-		pBook.add(pListBook);
-		pListBook.setService(bookService);
-		pListBook.loadData();
+		pBookInfoTableList = pBookSearch.getBookInfoList();
+		pBook.add(pBookInfoTableList);
+		pBookInfoTableList.setService(bookService);
+		pBookInfoTableList.loadData();
 
-		pBookInfo = pListBook.getpBookInfo();
-		pBook.add(pBookInfo);
+		pBookInfoContent = pBookInfoTableList.getpBookInfo();
+		pBook.add(pBookInfoContent);
 
 		pBtn = new JPanel();
 		contentPane.add(pBtn);
@@ -111,19 +111,19 @@ public class RentPage extends JFrame implements ActionListener {
 	}
 
 	public MemberInfoTablePanel getpListMem() {
-		return pListMem;
+		return pMemInfoTableList;
 	}
 
 	public void setpListMem(MemberInfoTablePanel pListMem) {
-		this.pListMem = pListMem;
+		this.pMemInfoTableList = pListMem;
 	}
 
 	public BookInfoTablePanel getpListBook() {
-		return pListBook;
+		return pBookInfoTableList;
 	}
 
 	public void setpListBook(BookInfoTablePanel pListBook) {
-		this.pListBook = pListBook;
+		this.pBookInfoTableList = pListBook;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -135,19 +135,20 @@ public class RentPage extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnRent(ActionEvent e) {
-		MemberInfo insertMem = pMemInfo.getItemMemNo();
-		BookInfo insertBook = pBookInfo.getItemBookNo();		
-		rentService.addRent(insertMem, insertBook);
-		JOptionPane.showMessageDialog(null, pMemInfo.getItemMemName() + " 회원의 " + pBookInfo.getItemBookName() + " 도서 대여를 완료하였습니다.");
+		MemberInfo memNo = pMemInfoContent.getItemMemNo();
+//		System.out.println(memNo);
+		BookInfo bookNo = pBookInfoContent.getItemBookNo();		
+		rentService.addRent(memNo, bookNo);
+		JOptionPane.showMessageDialog(null, pMemInfoContent.getItemMemName() + " 회원의 " + pBookInfoContent.getItemBookName() + " 도서 대여를 완료하였습니다.");
 //		System.out.println("대여성공");
-		pListMem.loadData();
-		pListBook.loadData();
-		pMemInfo.clearTf();
-		pBookInfo.clearTf();
+		pMemInfoTableList.loadData();
+		pBookInfoTableList.loadData();
+		pMemInfoContent.clearTf();
+		pBookInfoContent.clearTf();
 
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pMemInfo.clearTf();
-		pBookInfo.clearTf();
+		pMemInfoContent.clearTf();
+		pBookInfoContent.clearTf();
 	}
 }

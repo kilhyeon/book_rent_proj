@@ -14,12 +14,12 @@ import book_rent.ui.exception.NotSelectedException;
 import java.awt.GridLayout;
 
 public class BookCateTablePanel extends AbstractCustomTablePanel<BookCate> {
-	private BookCateService service;
-	private BookCateContentPanel pBookCate;
+	private BookCateService bookCateService;
+	private BookCateContentPanel pBookCateContent;
 
 	public BookCateTablePanel() {
 		initialize();
-		pBookCate = new BookCateContentPanel();
+		pBookCateContent = new BookCateContentPanel();
 
 	}
 
@@ -28,7 +28,7 @@ public class BookCateTablePanel extends AbstractCustomTablePanel<BookCate> {
 	}
 
 	public BookCateContentPanel getpBookCate() {
-		return pBookCate;
+		return pBookCateContent;
 	}
 
 	public void setList(List<BookCate> list) {
@@ -36,7 +36,7 @@ public class BookCateTablePanel extends AbstractCustomTablePanel<BookCate> {
 	}
 
 	public void setService(BookCateService service) {
-		this.service = service;
+		this.bookCateService = service;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class BookCateTablePanel extends AbstractCustomTablePanel<BookCate> {
 
 	@Override
 	public void initList() {
-		list = service.showBookCateByAll();
+		list = bookCateService.showBookCateByAll();
 	}
 
 	@Override

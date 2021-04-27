@@ -22,35 +22,34 @@ import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 
 public class MemGradeManagerUI extends JPanel implements ActionListener {
-	private MemGradeTablePanel pList;
-	private MemGradeContnetPanel pContent;
+	private MemGradeTablePanel pMemGradeTableList;
+	private MemGradeContnetPanel pMemGradeContent;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private MemGradeService service;
+	private MemGradeService memGradeService;
 //	private MemManagement memManagement;
 	private JLabel lblMent;
 
 	public MemGradeManagerUI() {
-		service = new MemGradeService();
-//		memManagement = new MemManagement();
+		memGradeService = new MemGradeService();
 		initialize();
 		tableLoadData();
 	}
 
 	private void tableLoadData() {
-		pList.setService(service);
-		pList.loadData();
+		pMemGradeTableList.setService(memGradeService);
+		pMemGradeTableList.loadData();
 
 	}
 
 	private void initialize() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		pList = new MemGradeTablePanel();
-		add(pList);
+		pMemGradeTableList = new MemGradeTablePanel();
+		add(pMemGradeTableList);
 
-		pContent = new MemGradeContnetPanel();
-		add(pContent);
+		pMemGradeContent = new MemGradeContnetPanel();
+		add(pMemGradeContent);
 
 		JPanel pBtn = new JPanel();
 		add(pBtn);
@@ -64,11 +63,11 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 		pBtn.add(btnCancel);
 
 		JPopupMenu popupMenu = createPopupMenu();
-		pList.setPopupMenu(popupMenu);
+		pMemGradeTableList.setPopupMenu(popupMenu);
 
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
 		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
-		pList.add(lblMent, BorderLayout.NORTH);
+		pMemGradeTableList.add(lblMent, BorderLayout.NORTH);
 
 	}
 
@@ -87,19 +86,19 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 	}
 
 	public MemGradeTablePanel getpList() {
-		return pList;
+		return pMemGradeTableList;
 	}
 
 	public void setpList(MemGradeTablePanel pList) {
-		this.pList = pList;
+		this.pMemGradeTableList = pList;
 	}
 
 	public MemGradeContnetPanel getpContent() {
-		return pContent;
+		return pMemGradeContent;
 	}
 
 	public void setpContent(MemGradeContnetPanel pContent) {
-		this.pContent = pContent;
+		this.pMemGradeContent = pContent;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -134,41 +133,41 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 	}
 
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		MemGrade updateGrade = pContent.getItem();
-		service.modifyGrade(updateGrade);
-		pList.loadData();
-		pContent.clearTf();
+		MemGrade updateGrade = pMemGradeContent.getItem();
+		memGradeService.modifyGrade(updateGrade);
+		pMemGradeTableList.loadData();
+		pMemGradeContent.clearTf();
 		btnAdd.setText("추가");
 		JOptionPane.showMessageDialog(null, updateGrade.getMemGradeName() + "정보가 수정되었습니다.");
 
 	}
 
 	protected void actionPerformedMenuUpdate() {
-		MemGrade updateGrade = pList.getItem();
-		pContent.setItem(updateGrade);
+		MemGrade updateGrade = pMemGradeTableList.getItem();
+		pMemGradeContent.setItem(updateGrade);
 		btnAdd.setText("수정");
 
 	}
 
 	protected void actionPerformedMenuDelete() {
-		MemGrade delGrade = pList.getItem();
-		service.removeGrade(delGrade);
-		pList.loadData();
+		MemGrade delGrade = pMemGradeTableList.getItem();
+		memGradeService.removeGrade(delGrade);
+		pMemGradeTableList.loadData();
 		JOptionPane.showMessageDialog(null, delGrade + "삭제 되었습니다.");
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		MemGrade addGrade = pContent.getItem();
-		service.addGrade(addGrade);
-		pList.loadData();
-		pContent.clearTf();
+		MemGrade addGrade = pMemGradeContent.getItem();
+		memGradeService.addGrade(addGrade);
+		pMemGradeTableList.loadData();
+		pMemGradeContent.clearTf();
 		JOptionPane.showMessageDialog(null, addGrade + " 추가했습니다.");
 
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pContent.clearTf();
+		pMemGradeContent.clearTf();
 		if (btnAdd.getText().contentEquals("수정")) {
 			btnAdd.setText("추가");
 		}

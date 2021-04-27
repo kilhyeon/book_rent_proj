@@ -19,6 +19,7 @@ import book_rent.dto.BookInfo;
 import book_rent.service.BookCateService;
 import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
+import javax.swing.SwingConstants;
 
 public class BookManagement extends AbstractContentPanel<BookInfo> implements ActionListener {
 	private JTextField tfBookNo;
@@ -27,11 +28,11 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 	private JTextField tfRentState;
 	private JComboBox cmbCate;
 	private JComboBox cmbRentState;
-	private BookCateService service;
+	private BookCateService bookCateService;
 	private JTextField tfBookCount;
 
 	public BookManagement() {
-		service = new BookCateService();
+		bookCateService = new BookCateService();
 		initialize();
 		selectCmb();
 		tfBookCate.setEditable(false);
@@ -39,7 +40,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 	}
 
 	public void selectCmb() {
-		List<BookCate> cate = service.showBookCateByAll();
+		List<BookCate> cate = bookCateService.showBookCateByAll();
 		DefaultComboBoxModel<BookCate> dcbm = new DefaultComboBoxModel<BookCate>(new Vector<>(cate));
 		cmbCate.setModel(dcbm);
 		cmbCate.setSelectedIndex(-1);
@@ -58,6 +59,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		pBookNo.add(lblBookNo);
 
 		tfBookNo = new JTextField();
+		tfBookNo.setHorizontalAlignment(SwingConstants.CENTER);
 		pBookNo.add(tfBookNo);
 		tfBookNo.setColumns(15);
 
@@ -69,6 +71,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		pBookName.add(lblBookName);
 
 		tfBookName = new JTextField();
+		tfBookName.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookName.setColumns(25);
 		pBookName.add(tfBookName);
 
@@ -80,6 +83,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		pBookCount.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		tfBookCount = new JTextField();
+		tfBookCount.setHorizontalAlignment(SwingConstants.CENTER);
 		pBookCount.add(tfBookCount);
 		tfBookCount.setColumns(10);
 
@@ -91,6 +95,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		pBookCate.add(lblBookCate);
 
 		tfBookCate = new JTextField();
+		tfBookCate.setHorizontalAlignment(SwingConstants.CENTER);
 		tfBookCate.setColumns(10);
 		pBookCate.add(tfBookCate);
 		tfBookCate.setVisible(false);
@@ -109,6 +114,7 @@ public class BookManagement extends AbstractContentPanel<BookInfo> implements Ac
 		pRentState.add(lblRentState);
 
 		tfRentState = new JTextField();
+		tfRentState.setHorizontalAlignment(SwingConstants.CENTER);
 		tfRentState.setColumns(10);
 		pRentState.add(tfRentState);
 

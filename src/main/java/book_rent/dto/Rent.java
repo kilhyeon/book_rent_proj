@@ -27,46 +27,29 @@ public class Rent {
 		this.rentNo = rentNo;
 	}
 
-	public Rent(MemberInfo memNo) {
-		this.memNo = memNo;
-	}
-
 	public Rent(BookInfo bookNo) {
 		this.bookNo = bookNo;
 	}
 
-	public Rent(int rentNo, MemberInfo memNo, BookInfo bookNo) {
+	public Rent(int rentNo, MemberInfo memNo, BookInfo bookNo, int lateDate) {
 		this.rentNo = rentNo;
 		this.memNo = memNo;
 		this.bookNo = bookNo;
+		this.lateDate = lateDate;
 	}
 
-	public Rent(MemberInfo memNo, BookInfo bookNo) {
+	public Rent(int rentNo, MemberInfo memNo, BookInfo bookNo, Date rentDate, int lateDate) {
+		this.rentNo = rentNo;
 		this.memNo = memNo;
 		this.bookNo = bookNo;
+		this.rentDate = rentDate;
+		this.lateDate = lateDate;
 	}
 
 	public Rent(int rentNo, MemberInfo memNo, BookInfo bookNo, Date rentDate, Date returnDate, int lateDate) {
 		this.rentNo = rentNo;
 		this.memNo = memNo;
 		this.bookNo = bookNo;
-		this.rentDate = rentDate;
-		this.returnDate = returnDate;
-		this.lateDate = lateDate;
-	}
-
-	public Rent(int rentNo, MemberInfo memNo, MemberInfo memName, MemGrade memGradeNo, MemGrade memGradeName,
-			BookInfo bookNo, BookInfo bookName, BookCate bookCateNo, BookCate bookCateName, Date rentDate,
-			Date returnDate, int lateDate) {
-		this.rentNo = rentNo;
-		this.memNo = memNo;
-		this.memName = memName;
-		this.memGradeNo = memGradeNo;
-		this.memGradeName = memGradeName;
-		this.bookNo = bookNo;
-		this.bookName = bookName;
-		this.bookCateNo = bookCateNo;
-		this.bookCateName = bookCateName;
 		this.rentDate = rentDate;
 		this.returnDate = returnDate;
 		this.lateDate = lateDate;

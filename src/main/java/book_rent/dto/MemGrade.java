@@ -6,22 +6,14 @@ public class MemGrade {
 	private int memGradeCount;
 
 	public MemGrade() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public MemGrade(int memGradeNo) {
-		super();
 		this.memGradeNo = memGradeNo;
 	}
 
-	public MemGrade(String memGradeName) {
-		super();
-		this.memGradeName = memGradeName;
-	}
-
 	public MemGrade(int memGradeNo, String memGradeName) {
-		super();
 		this.memGradeNo = memGradeNo;
 		this.memGradeName = memGradeName;
 	}
@@ -80,7 +72,7 @@ public class MemGrade {
 
 	@Override
 	public String toString() {
-		return String.format("%s(%s)", memGradeName, memGradeNo);
+		return String.format("%s", memGradeName);
 	}
 
 }

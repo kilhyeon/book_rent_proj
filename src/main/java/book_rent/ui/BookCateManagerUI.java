@@ -22,34 +22,33 @@ import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.BookCateTablePanel;
 
 public class BookCateManagerUI extends JPanel implements ActionListener {
-	private BookCateTablePanel pList;
-	private BookCateContentPanel pContent;
+	private BookCateTablePanel pBookCateTableList;
+	private BookCateContentPanel pBookCateContent;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private BookCateService service;
+	private BookCateService bookCateService;
 	private JLabel lblMent;
-	private BookManagerUI bmUI;
 
 	public BookCateManagerUI() {
-		service = new BookCateService();
+		bookCateService = new BookCateService();
 		initialize();
 		tableLoadData();
 	}
 
 	private void tableLoadData() {
-		pList.setService(service);
-		pList.loadData();
+		pBookCateTableList.setService(bookCateService);
+		pBookCateTableList.loadData();
 
 	}
 
 	private void initialize() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		pList = new BookCateTablePanel();
-		add(pList);
+		pBookCateTableList = new BookCateTablePanel();
+		add(pBookCateTableList);
 
-		pContent = new BookCateContentPanel();
-		add(pContent);
+		pBookCateContent = new BookCateContentPanel();
+		add(pBookCateContent);
 
 		JPanel pBtn = new JPanel();
 		add(pBtn);
@@ -63,11 +62,11 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 		pBtn.add(btnCancel);
 
 		JPopupMenu popupMenu = createPopupMenu();
-		pList.setPopupMenu(popupMenu);
+		pBookCateTableList.setPopupMenu(popupMenu);
 		
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
 		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
-		pList.add(lblMent, BorderLayout.NORTH);
+		pBookCateTableList.add(lblMent, BorderLayout.NORTH);
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -85,19 +84,19 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 	}
 
 	public BookCateTablePanel getpList() {
-		return pList;
+		return pBookCateTableList;
 	}
 
 	public void setpList(BookCateTablePanel pList) {
-		this.pList = pList;
+		this.pBookCateTableList = pList;
 	}
 
 	public BookCateContentPanel getpContent() {
-		return pContent;
+		return pBookCateContent;
 	}
 
 	public void setpContent(BookCateContentPanel pContent) {
-		this.pContent = pContent;
+		this.pBookCateContent = pContent;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -132,41 +131,41 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 	}
 
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		BookCate updateCate = pContent.getItem();
-		service.modifyCate(updateCate);
-		pList.loadData();
-		pContent.clearTf();
+		BookCate updateCate = pBookCateContent.getItem();
+		bookCateService.modifyCate(updateCate);
+		pBookCateTableList.loadData();
+		pBookCateContent.clearTf();
 		btnAdd.setText("추가");
 		JOptionPane.showMessageDialog(null, updateCate.getBookCateName() + "정보가 수정되었습니다.");
 
 	}
 
 	protected void actionPerformedMenuUpdate() {
-		BookCate updateCate = pList.getItem();
-		pContent.setItem(updateCate);
+		BookCate updateCate = pBookCateTableList.getItem();
+		pBookCateContent.setItem(updateCate);
 		btnAdd.setText("수정");
 
 	}
 
 	protected void actionPerformedMenuDelete() {
-		BookCate delCate = pList.getItem();
-		service.removeCate(delCate);
-		pList.loadData();
+		BookCate delCate = pBookCateTableList.getItem();
+		bookCateService.removeCate(delCate);
+		pBookCateTableList.loadData();
 		JOptionPane.showMessageDialog(null, delCate + "삭제 되었습니다.");
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		BookCate addCate = pContent.getItem();
-		service.addCate(addCate);
-		pList.loadData();
-		pContent.clearTf();
+		BookCate addCate = pBookCateContent.getItem();
+		bookCateService.addCate(addCate);
+		pBookCateTableList.loadData();
+		pBookCateContent.clearTf();
 		JOptionPane.showMessageDialog(null, addCate + " 추가했습니다.");
 
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pContent.clearTf();
+		pBookCateContent.clearTf();
 		if (btnAdd.getText().contentEquals("수정")) {
 			btnAdd.setText("추가");
 		}

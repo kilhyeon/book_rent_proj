@@ -31,17 +31,17 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 
 	private JPanel contentPane;
 	private BookInfoService bookService;
-	private BookInfoTablePanel pListBook;
-	private BookInfoTablePanel pListBook2;
-	private BookContentPanel pBookInfo;
-	private BookManagement pBookMange;
-	private BookSearch pSearchBook;
+	private BookInfoTablePanel pBookInfoTableList;
+	private BookInfoTablePanel pBookInfoTableList2;
+	private BookContentPanel pBookInfoContent;
+	private BookManagement pBookManageContent;
+	private BookSearch pBookSearch;
 
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private JPanel pBtn;
 	private JPanel pCate;
-	private BookCateManagerUI pCateManage;
+	private BookCateManagerUI pBookCateManagerUI;
 	private JTabbedPane tabbedPane;
 	private JLabel lblMent;
 
@@ -53,9 +53,9 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	}
 
 	private void tableLoadData() {
-		pListBook.setService(bookService);
-		pListBook.loadData();
-		pListBook2.loadData();
+		pBookInfoTableList.setService(bookService);
+		pBookInfoTableList.loadData();
+		pBookInfoTableList2.loadData();
 
 	}
 
@@ -75,17 +75,17 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 //		tabbedPane.addTab("도서정보", null, pBook, null);
 		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
-		pSearchBook = new BookSearch();
-		pBook.add(pSearchBook);
-		pSearchBook.setService(bookService);
+		pBookSearch = new BookSearch();
+		pBook.add(pBookSearch);
+		pBookSearch.setService(bookService);
 
-		pListBook = pSearchBook.getBookInfoList();
-		pBook.add(pListBook);
-		pListBook.setService(bookService);
-		pListBook.loadData();
+		pBookInfoTableList = pBookSearch.getBookInfoList();
+		pBook.add(pBookInfoTableList);
+		pBookInfoTableList.setService(bookService);
+		pBookInfoTableList.loadData();
 
-		pBookInfo = pListBook.getpBookInfo();
-		pBook.add(pBookInfo);
+		pBookInfoContent = pBookInfoTableList.getpBookInfo();
+		pBook.add(pBookInfoContent);
 
 		JPanel pRentList = new JPanel();
 		pBook.add(pRentList);
@@ -94,21 +94,21 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		tabbedPane.addTab("도서관리", null, pBookMangement, null);
 		pBookMangement.setLayout(new BoxLayout(pBookMangement, BoxLayout.Y_AXIS));
 
-		pSearchBook = new BookSearch();
-		pBookMangement.add(pSearchBook);
-		pSearchBook.setService(bookService);
+		pBookSearch = new BookSearch();
+		pBookMangement.add(pBookSearch);
+		pBookSearch.setService(bookService);
 
-		pListBook2 = pSearchBook.getBookInfoList();
-		pBookMangement.add(pListBook2);
-		pListBook2.setService(bookService);
-		pListBook2.loadData();
+		pBookInfoTableList2 = pBookSearch.getBookInfoList();
+		pBookMangement.add(pBookInfoTableList2);
+		pBookInfoTableList2.setService(bookService);
+		pBookInfoTableList2.loadData();
 
-		pBookMange = new BookManagement();
-		pBookMangement.add(pBookMange);
+		pBookManageContent = new BookManagement();
+		pBookMangement.add(pBookManageContent);
 
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
 		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
-		pListBook2.add(lblMent, BorderLayout.NORTH);
+		pBookInfoTableList2.add(lblMent, BorderLayout.NORTH);
 		
 		pBtn = new JPanel();
 		pBookMangement.add(pBtn);
@@ -125,39 +125,39 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		tabbedPane.addTab("구분관리", null, pCate, null);
 		pCate.setLayout(new BoxLayout(pCate, BoxLayout.X_AXIS));
 
-		pCateManage = new BookCateManagerUI();
-		pCate.add(pCateManage);
+		pBookCateManagerUI = new BookCateManagerUI();
+		pCate.add(pBookCateManagerUI);
 
 		JPopupMenu popupMenu = createPopupMenu();
-		pListBook2.setPopupMenu(popupMenu);
+		pBookInfoTableList2.setPopupMenu(popupMenu);
 	}
 
 	public BookInfoTablePanel getpListBook() {
-		return pListBook;
+		return pBookInfoTableList;
 	}
 
 	public void setpListBook(BookInfoTablePanel pListBook) {
-		this.pListBook = pListBook;
+		this.pBookInfoTableList = pListBook;
 	}
 
 	public BookInfoTablePanel getpListBook2() {
-		return pListBook2;
+		return pBookInfoTableList2;
 	}
 
 	public void setpListBook2(BookInfoTablePanel pListBook2) {
-		this.pListBook2 = pListBook2;
+		this.pBookInfoTableList2 = pListBook2;
 	}
 
 	public void setpBookInfo(BookContentPanel pBookInfo) {
-		this.pBookInfo = pBookInfo;
+		this.pBookInfoContent = pBookInfo;
 	}
 
 	public BookManagement getpBookInfo() {
-		return pBookMange;
+		return pBookManageContent;
 	}
 
 	public void setpBookInfo(BookManagement pBookInfo) {
-		this.pBookMange = pBookInfo;
+		this.pBookManageContent = pBookInfo;
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -206,44 +206,44 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	}
 
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		BookInfo updateBook = pBookMange.getItem();
+		BookInfo updateBook = pBookManageContent.getItem();
 		bookService.modifyBook(updateBook);
-		pListBook.loadData();
-		pListBook2.loadData();
-		pBookMange.clearTf();
+		pBookInfoTableList.loadData();
+		pBookInfoTableList2.loadData();
+		pBookManageContent.clearTf();
 		btnAdd.setText("추가");
 		JOptionPane.showMessageDialog(null, updateBook.getBookName() + " 도서의 정보를 수정하였습니다.");
 
 	}
 
 	private void actionPerformedMenuUpdate() {
-		BookInfo updateBook = pListBook2.getItem();
-		pBookMange.setItem(updateBook);
+		BookInfo updateBook = pBookInfoTableList2.getItem();
+		pBookManageContent.setItem(updateBook);
 		btnAdd.setText("수정");
 
 	}
 
 	private void actionPerformedMenuDelete() {
-		BookInfo delBook = pListBook2.getItem();
+		BookInfo delBook = pBookInfoTableList2.getItem();
 		bookService.removeBook(delBook);
-		pListBook.loadData();
-		pListBook2.loadData();
+		pBookInfoTableList.loadData();
+		pBookInfoTableList2.loadData();
 		JOptionPane.showMessageDialog(null, delBook + " 도서의 정보를 삭제하였습니다.");
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		BookInfo addBook = pBookMange.getItem();
+		BookInfo addBook = pBookManageContent.getItem();
 //		System.out.println(addBook);
 		bookService.addBook(addBook);
-		pListBook.loadData();
-		pListBook2.loadData();
-		pBookMange.clearTf();
+		pBookInfoTableList.loadData();
+		pBookInfoTableList2.loadData();
+		pBookManageContent.clearTf();
 		JOptionPane.showMessageDialog(null, addBook + " 도서를 추가하였습니다.");
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pBookMange.clearTf();
+		pBookManageContent.clearTf();
 
 		if (btnAdd.getText().contentEquals("수정")) {
 			btnAdd.setText("추가");
@@ -269,7 +269,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	}
 
 	protected void mouseClickedTabbedPane(MouseEvent e) {
-		pBookMange.selectCmb();
+		pBookManageContent.selectCmb();
 		tableLoadData();
 	}
 }

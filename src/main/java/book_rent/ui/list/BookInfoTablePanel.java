@@ -14,13 +14,13 @@ import book_rent.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
 public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> implements MouseListener {
-	private BookInfoService service;
-	private BookContentPanel pBookInfo;
+	private BookInfoService bookService;
+	private BookContentPanel pBookInfoContent;
 
 	public BookInfoTablePanel() {
 		initialize();
 		table.addMouseListener(this);
-		pBookInfo = new BookContentPanel();
+		pBookInfoContent = new BookContentPanel();
 	}
 
 	private void initialize() {
@@ -28,7 +28,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 	}
 
 	public BookContentPanel getpBookInfo() {
-		return pBookInfo;
+		return pBookInfoContent;
 	}
 
 	public void setList(List<BookInfo> list) {
@@ -36,12 +36,12 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 	}
 
 	public void setService(BookInfoService service) {
-		this.service = service;
+		this.bookService = service;
 	}
 
 	@Override
 	public void initList() {
-		list = service.showBookList();
+		list = bookService.showBookList();
 	}
 
 	@Override
@@ -85,13 +85,13 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 			throw new NotSelectedException();
 		}
 		try {
-			BookInfo item = service.showBookByBookNo(bookNo);
-			pBookInfo.setItem(item);
-			pBookInfo.getTfBookNo().setEditable(false);
-			pBookInfo.getTfBookName().setEditable(false);
-			pBookInfo.getTfBookCount().setEditable(false);
-			pBookInfo.getTfBookCate().setEditable(false);
-			pBookInfo.getTfRentState().setEditable(false);
+			BookInfo item = bookService.showBookByBookNo(bookNo);
+			pBookInfoContent.setItem(item);
+			pBookInfoContent.getTfBookNo().setEditable(false);
+			pBookInfoContent.getTfBookName().setEditable(false);
+			pBookInfoContent.getTfBookCount().setEditable(false);
+			pBookInfoContent.getTfBookCate().setEditable(false);
+			pBookInfoContent.getTfRentState().setEditable(false);
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}

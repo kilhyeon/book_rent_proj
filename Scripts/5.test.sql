@@ -71,3 +71,13 @@ insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12009, 
 -- 회원 대여내역 조회
 select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, rentDate, returnDate, lateDate
 from vw_rent_mb where memNo = 12004 order by rentNo;
+
+
+-- 도서 반납 (대여내역삭제)
+select * from vw_rent_mb;
+
+update bookinfo set rentState = 0 where bookNo = 40010;
+
+delete from rent where rentNo = 6;
+
+delete from category where bookCateNo = 5;

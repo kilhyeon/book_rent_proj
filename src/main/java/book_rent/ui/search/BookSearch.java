@@ -21,14 +21,14 @@ import book_rent.ui.list.BookInfoTablePanel;
 public class BookSearch extends JPanel implements ActionListener {
 	private JTextField tf;
 	private JButton btn;
-	private BookInfoService service;
+	private BookInfoService bookService;
 	private JComboBox<String> cmb;
-	private List<BookInfo> list;
-	private BookInfoTablePanel pBook;
+	private List<BookInfo> bookList;
+	private BookInfoTablePanel pBookInfoTableList;
 
 	public BookSearch() {
-		pBook = new BookInfoTablePanel();
-		list = new ArrayList<BookInfo>();
+		pBookInfoTableList = new BookInfoTablePanel();
+		bookList = new ArrayList<BookInfo>();
 		initialize();
 		cmb.setSelectedIndex(-1);
 	}
@@ -39,7 +39,7 @@ public class BookSearch extends JPanel implements ActionListener {
 		add(lbl);
 
 		cmb = new JComboBox<String>();
-		cmb.setModel(new DefaultComboBoxModel(new String[] { "도서번호", "도서제목", "도서구분", "대출상태" }));
+		cmb.setModel(new DefaultComboBoxModel(new String[] { "도서번호", "도서제목", "도서구분", "대여상태" }));
 		add(cmb);
 
 		tf = new JTextField();
@@ -61,13 +61,13 @@ public class BookSearch extends JPanel implements ActionListener {
 	protected void actionPerformedBtn(ActionEvent e) {
 		try {
 			String selectItem = cmb.getSelectedItem().toString();
-			list = item(selectItem);
-			if (list != null) {
-				pBook.setList(list);
-				pBook.setList();
+			bookList = item(selectItem);
+			if (bookList != null) {
+				pBookInfoTableList.setList(bookList);
+				pBookInfoTableList.setList();
 			} else {
-				pBook.setList(list);
-				pBook.loadData();
+				pBookInfoTableList.setList(bookList);
+				pBookInfoTableList.loadData();
 			}
 
 		} catch (Exception e1) {
@@ -79,27 +79,27 @@ public class BookSearch extends JPanel implements ActionListener {
 		try {
 
 			if (model.equals("도서번호")) {
-				list = service.showBookListByNo(new BookInfo(Integer.parseInt(tf.getText())));
+				bookList = bookService.showBookListByNo(new BookInfo(Integer.parseInt(tf.getText())));
 			}
 			if (model.equals("도서제목")) {
-				list = service.showBookListByName(new BookInfo(tf.getText()));
+				bookList = bookService.showBookListByName(new BookInfo(tf.getText()));
 			}
 			if (model.equals("도서구분")) {
-				list = service.showBookListByCate(new BookInfo(Integer.parseInt(tf.getText())));
+				bookList = bookService.showBookListByCate(new BookInfo(Integer.parseInt(tf.getText())));
 			}
 			if (model.equals("대출상태")) {
-				list = service.showBookListByRent(new BookInfo(tf.getText()));
+				bookList = bookService.showBookListByRent(new BookInfo(tf.getText()));
 			}
 
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 
-		return list;
+		return bookList;
 	}
 
 	public void setService(BookInfoService service) {
-		this.service = service;
+		this.bookService = service;
 	}
 
 //	public List<MemberInfo> getList() {
@@ -107,7 +107,7 @@ public class BookSearch extends JPanel implements ActionListener {
 //	}
 
 	public BookInfoTablePanel getBookInfoList() {
-		return pBook;
+		return pBookInfoTableList;
 	}
 
 	public void clearTf() {

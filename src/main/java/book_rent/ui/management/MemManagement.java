@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
@@ -19,8 +20,6 @@ import book_rent.dto.MemberInfo;
 import book_rent.service.MemGradeService;
 import book_rent.ui.content.AbstractContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class MemManagement extends AbstractContentPanel<MemberInfo> implements ActionListener {
@@ -32,16 +31,16 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 	private JTextField tfMemGrade;
 	private JTextField tfMemAddr;
 	private JComboBox cmbGrade;
-	private MemGradeService service;
+	private MemGradeService memGradeService;
 
 	public MemManagement() {
-		service = new MemGradeService();
+		memGradeService = new MemGradeService();
 		initialize();
 		selectCmb();
 	}
 
 	public void selectCmb() {
-		List<MemGrade> grade = service.showMemGradeByAll();
+		List<MemGrade> grade = memGradeService.showMemGradeByAll();
 		DefaultComboBoxModel<MemGrade> dcbm = new DefaultComboBoxModel<MemGrade>(new Vector<>(grade));
 		cmbGrade.setModel(dcbm);
 		cmbGrade.setSelectedIndex(-1);
@@ -62,6 +61,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem1.add(lblMemNo);
 
 		tfMemNo = new JTextField();
+		tfMemNo.setHorizontalAlignment(SwingConstants.CENTER);
 		tfMemNo.setColumns(10);
 		pMem1.add(tfMemNo);
 
@@ -69,6 +69,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem1.add(lblMemName);
 
 		tfMemName = new JTextField();
+		tfMemName.setHorizontalAlignment(SwingConstants.CENTER);
 		tfMemName.setColumns(10);
 		pMem1.add(tfMemName);
 
@@ -81,6 +82,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem2.add(lblMemBirth);
 
 		tfMemBirth = new JTextField();
+		tfMemBirth.setHorizontalAlignment(SwingConstants.CENTER);
 		pMem2.add(tfMemBirth);
 		tfMemBirth.setColumns(10);
 
@@ -88,6 +90,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem2.add(lblMemTel);
 
 		tfMemTel = new JTextField();
+		tfMemTel.setHorizontalAlignment(SwingConstants.CENTER);
 		pMem2.add(tfMemTel);
 		tfMemTel.setColumns(10);
 
@@ -100,6 +103,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem3.add(lblMemCp);
 
 		tfMemCp = new JTextField();
+		tfMemCp.setHorizontalAlignment(SwingConstants.CENTER);
 		pMem3.add(tfMemCp);
 		tfMemCp.setColumns(10);
 
@@ -107,6 +111,7 @@ public class MemManagement extends AbstractContentPanel<MemberInfo> implements A
 		pMem3.add(lblMemAddr);
 
 		tfMemAddr = new JTextField();
+		tfMemAddr.setHorizontalAlignment(SwingConstants.CENTER);
 		pMem3.add(tfMemAddr);
 		tfMemAddr.setColumns(10);
 

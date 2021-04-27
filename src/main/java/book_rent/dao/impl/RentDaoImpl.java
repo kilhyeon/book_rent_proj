@@ -10,9 +10,7 @@ import java.util.List;
 
 import book_rent.dao.RentDao;
 import book_rent.database.JdbcConn;
-import book_rent.dto.BookCate;
 import book_rent.dto.BookInfo;
-import book_rent.dto.MemGrade;
 import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
 
@@ -37,7 +35,7 @@ public class RentDaoImpl implements RentDao {
 			if (rs.next()) {
 				List<Rent> list = new ArrayList<Rent>();
 				do {
-					list.add(GetRent(rs));
+					list.add(getRent(rs));
 				} while (rs.next());
 				return list;
 			}
@@ -51,7 +49,7 @@ public class RentDaoImpl implements RentDao {
 	public List<Rent> selectRentByMemNo(MemberInfo memInfo) {
 		String sql = "select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, "
 				+ "rentDate, returnDate, lateDate from vw_rent_mb where memNo = ? order by rentNo";
-		
+
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, memInfo.getMemNo());
 
@@ -59,7 +57,7 @@ public class RentDaoImpl implements RentDao {
 				if (rs.next()) {
 					List<Rent> list = new ArrayList<Rent>();
 					do {
-						list.add(GetRent(rs));
+						list.add(getRent(rs));
 					} while (rs.next());
 					return list;
 				}
@@ -69,10 +67,8 @@ public class RentDaoImpl implements RentDao {
 		}
 		return null;
 	}
-	
-	
-	
-	private Rent GetRent(ResultSet rs) throws SQLException {
+
+	private Rent getRent(ResultSet rs) throws SQLException {
 		int rentNo = rs.getInt("rentNo");
 		MemberInfo memNo = new MemberInfo(rs.getInt("memNo"), rs.getString("memName"));
 //		MemberInfo memName = new MemberInfo(rs.getString("memName"));
@@ -89,12 +85,12 @@ public class RentDaoImpl implements RentDao {
 		return new Rent(rentNo, memNo, bookNo, rentDate, returnDate, lateDate);
 	}
 
-	private Rent GetRent2(ResultSet rs) throws SQLException {
+	private Rent getRent2(ResultSet rs) throws SQLException {
 		int rentNo = rs.getInt("rentNo");
 		MemberInfo memNo = new MemberInfo(rs.getInt("memNo"));
 		BookInfo bookNo = new BookInfo(rs.getInt("bookNo"));
-		Date rentDate = rs.getTimestamp("rentDate");
-		Date returnDate = rs.getTimestamp("returnDate");
+		Date rentDate = rs.getDate("rentDate");
+		Date returnDate = rs.getDate("returnDate");
 		int lateDate = rs.getInt("lateDate");
 
 		return new Rent(rentNo, memNo, bookNo, rentDate, returnDate, lateDate);
@@ -125,6 +121,46 @@ public class RentDaoImpl implements RentDao {
 		return 0;
 	}
 
-	
+	@Override
+	public int deleteRent(BookInfo bookNo, Rent rentNo) {
+		String bookSql1 = "update bookinfo set bookCount = bookCount+1 where bookNo = ?";
+		String bookSql2 = "update bookinfo set rentState = if (bookCount > 0, 0, 1) where bookNo = ?";
+		String returnSql = "delete from rent where rentNo = ?";
+		Connection con = JdbcConn.getConnection();
+		try (PreparedStatement pstmt1 = con.prepareStatement(bookSql1);
+				PreparedStatement pstmt2 = con.prepareStatement(bookSql2);
+				PreparedStatement pstmt = con.prepareStatement(returnSql);) {
+
+			pstmt1.setInt(1, bookNo.getBookNo());
+			pstmt1.executeUpdate();
+			pstmt2.setInt(1, bookNo.getBookNo());
+			pstmt2.executeUpdate();
+			pstmt.setInt(1, rentNo.getRentNo());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	@Override
+	public Rent selectRentByRentNo(int rentNo) {
+		String sql = "select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, "
+				+ "rentDate, returnDate, lateDate from vw_rent_mb where rentNo = ? order by rentNo";
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, rentNo);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+
+					return getRent2(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

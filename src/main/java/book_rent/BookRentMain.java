@@ -31,17 +31,17 @@ public class BookRentMain extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JTable table;
 
-	private MemberInfoTablePanel pMember;
-	private BookInfoTablePanel pBook;
-	private JPanel pList;
-	private MemRentTablePanel pRent;
+	private MemberInfoTablePanel pMemInfoTableList;
+	private BookInfoTablePanel pBookInfoTableList;
+	private JPanel pTableList;
+	private MemRentTablePanel pRentInfoTableList;
 	private MemberInfoService memService;
 	private BookInfoService bookService;
 	private RentService rentService;
 	private JPanel pBtnRentReturn;
 	private JButton btnRent;
 	private JButton btnReturn;
-	private JPanel pBtnManagement;
+	private JPanel pBtnMemberBook;
 	private JButton btnMember;
 	private JButton btnBook;
 
@@ -68,18 +68,18 @@ public class BookRentMain extends JFrame implements ActionListener {
 	}
 
 	public void mainLoadData() {
-		pMember.setService(memService);
-		pBook.setService(bookService);
-		pRent.setService(rentService);
-		pMember.revalidate();
-		pBook.revalidate();
-		pRent.revalidate();
-		pMember.repaint();
-		pBook.repaint();
-		pRent.repaint();
-		pMember.loadData();
-		pBook.loadData();
-		pRent.loadData();
+		pMemInfoTableList.setService(memService);
+		pBookInfoTableList.setService(bookService);
+		pRentInfoTableList.setService(rentService);
+		pMemInfoTableList.revalidate();
+		pBookInfoTableList.revalidate();
+		pRentInfoTableList.revalidate();
+		pMemInfoTableList.repaint();
+		pBookInfoTableList.repaint();
+		pRentInfoTableList.repaint();
+		pMemInfoTableList.loadData();
+		pBookInfoTableList.loadData();
+		pRentInfoTableList.loadData();
 //		System.out.println("메인로드데이터");
 	}
 
@@ -110,16 +110,16 @@ public class BookRentMain extends JFrame implements ActionListener {
 		btnReturn.addActionListener(this);
 		pBtnRentReturn.add(btnReturn);
 
-		pBtnManagement = new JPanel();
-		pBtn.add(pBtnManagement);
-		pBtnManagement.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		pBtnMemberBook = new JPanel();
+		pBtn.add(pBtnMemberBook);
+		pBtnMemberBook.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		btnMember = new JButton("회원관리");
-		pBtnManagement.add(btnMember);
+		pBtnMemberBook.add(btnMember);
 		btnMember.addActionListener(this);
 
 		btnBook = new JButton("도서관리");
-		pBtnManagement.add(btnBook);
+		pBtnMemberBook.add(btnBook);
 		btnBook.addActionListener(this);
 
 		JPanel pSearch = new JPanel();
@@ -135,29 +135,29 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pSearch.add(pSerachBook);
 		pSerachBook.setService(bookService);
 
-		pList = new JPanel();
-		contentPane.add(pList);
-		pList.setLayout(new GridLayout(1, 0, 5, 0));
+		pTableList = new JPanel();
+		contentPane.add(pTableList);
+		pTableList.setLayout(new GridLayout(1, 0, 5, 0));
 
-		pMember = pSerachMember.getMemberInfoList();
+		pMemInfoTableList = pSerachMember.getMemberInfoList();
 
-		pList.add(pMember);
+		pTableList.add(pMemInfoTableList);
 //		pMember.setBorder(new TitledBorder(null, "회원리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pMember.setService(memService);
-		pMember.loadData();
+		pMemInfoTableList.setService(memService);
+		pMemInfoTableList.loadData();
 
-		pBook = pSerachBook.getBookInfoList();
+		pBookInfoTableList = pSerachBook.getBookInfoList();
 
-		pList.add(pBook);
+		pTableList.add(pBookInfoTableList);
 //		pBook.setBorder(new TitledBorder(null, "도서리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pBook.setService(bookService);
-		pBook.loadData();
+		pBookInfoTableList.setService(bookService);
+		pBookInfoTableList.loadData();
 
-		pRent = pMember.getMemRentList();
-		contentPane.add(pRent);
+		pRentInfoTableList = pMemInfoTableList.getMemRentList();
+		contentPane.add(pRentInfoTableList);
 //		pRent.setBorder(new TitledBorder(null, "현재 대여중인 도서목록", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pRent.setService(rentService);
-		pRent.loadData();
+		pRentInfoTableList.setService(rentService);
+		pRentInfoTableList.loadData();
 	}
 
 	@Override

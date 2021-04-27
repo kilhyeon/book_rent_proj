@@ -15,16 +15,16 @@ import book_rent.ui.exception.NotSelectedException;
 @SuppressWarnings("serial")
 
 public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> implements MouseListener {
-	private MemberInfoService service;
-	private MemberContentPanel pMemInfo;
-	private MemRentTablePanel memRentList;
+	private MemberInfoService memService;
+	private MemberContentPanel pMemInfoContent;
+	private MemRentTablePanel memRentTableList;
 
 	public MemberInfoTablePanel() {
 
 		initialize();
 		table.addMouseListener(this);
-		pMemInfo = new MemberContentPanel();
-		memRentList = new MemRentTablePanel();
+		pMemInfoContent = new MemberContentPanel();
+		memRentTableList = new MemRentTablePanel();
 	}
 
 	private void initialize() {
@@ -32,12 +32,12 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 	}
 
 	public MemberContentPanel getpMemInfo() {
-		return pMemInfo;
+		return pMemInfoContent;
 
 	}
 
 	public void setService(MemberInfoService service) {
-		this.service = service;
+		this.memService = service;
 	}
 
 	public void setList(List<MemberInfo> list) {
@@ -45,16 +45,16 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 	}
 
 	public MemRentTablePanel getMemRentList() {
-		return memRentList;
+		return memRentTableList;
 	}
 
 	public void setMemRentList(MemRentTablePanel memRentList) {
-		this.memRentList = memRentList;
+		this.memRentTableList = memRentList;
 	}
 
 	@Override
 	public void initList() {
-		list = service.showMemberList();
+		list = memService.showMemberList();
 	}
 
 	@Override
@@ -97,22 +97,22 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 			throw new NotSelectedException();
 		}
 		try {			
-			MemberInfo item = service.showMemberByMemNo(memNo);
-			pMemInfo.setItem(item);
-			pMemInfo.getTfMemNo().setEditable(false);
-			pMemInfo.getTfMemName().setEditable(false);
-			pMemInfo.getTfMemGrade().setEditable(false);
-			pMemInfo.getTfMemBirth().setEditable(false);
-			pMemInfo.getTfMemAddr().setEditable(false);
-			pMemInfo.getTfMemCp().setEditable(false);
-			pMemInfo.getTfMemTel().setEditable(false);
+			MemberInfo item = memService.showMemberByMemNo(memNo);
+			pMemInfoContent.setItem(item);
+			pMemInfoContent.getTfMemNo().setEditable(false);
+			pMemInfoContent.getTfMemName().setEditable(false);
+			pMemInfoContent.getTfMemGrade().setEditable(false);
+			pMemInfoContent.getTfMemBirth().setEditable(false);
+			pMemInfoContent.getTfMemAddr().setEditable(false);
+			pMemInfoContent.getTfMemCp().setEditable(false);
+			pMemInfoContent.getTfMemTel().setEditable(false);
 			
 //			System.out.println(memNo);
-			memRentList.showRentListByMemNo(new MemberInfo(memNo));
-			memRentList.setList();
+			memRentTableList.showRentListByMemNo(new MemberInfo(memNo));
+			memRentTableList.setList();
 		} catch (NullPointerException e1) {
 //			e1.printStackTrace();
-			memRentList.loadData();
+			memRentTableList.loadData();
 //			System.out.println("널포인트");
 		}
 

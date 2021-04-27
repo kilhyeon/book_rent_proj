@@ -12,10 +12,6 @@ public class BookCate {
 		this.bookCateNo = bookCateNo;
 	}
 
-	public BookCate(String bookCateName) {
-		this.bookCateName = bookCateName;
-	}
-
 	public BookCate(int bookCateNo, String bookCateName) {
 		this.bookCateNo = bookCateNo;
 		this.bookCateName = bookCateName;

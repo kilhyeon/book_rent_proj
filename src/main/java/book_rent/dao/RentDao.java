@@ -11,5 +11,9 @@ public interface RentDao {
 
 	List<Rent> selectRentByMemNo(MemberInfo memInfo);
 	
+	Rent selectRentByRentNo(int rentNo);
+	
 	int insertRent(MemberInfo memInfo, BookInfo bookInfo);
+
+	int deleteRent(BookInfo bookNo, Rent rentNo);
 }
