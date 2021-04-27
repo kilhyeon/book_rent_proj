@@ -18,11 +18,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
 import book_rent.ui.content.MemContentManagement;
 import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.MemRentTablePanel;
@@ -63,7 +63,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		pMemInfoTableList.loadData();
 		pMemInfoTableList2.setService(memService);
 		pMemInfoTableList2.loadData();
-		pMemRentTableList.setService(rentService);
+		pMemRentTableList.setRentService(rentService);
 		pMemRentTableList.loadData();
 	}
 
@@ -98,7 +98,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 		pMemRentTableList = pMemInfoTableList.getMemRentList();
 
 		pMem.add(pMemRentTableList);
-		pMemRentTableList.setService(rentService);
+		pMemRentTableList.setRentService(rentService);
 		pMemRentTableList.loadData();
 
 		JPanel pMemMangement = new JPanel();

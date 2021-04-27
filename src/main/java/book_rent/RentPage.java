@@ -9,14 +9,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.sql.SQLException;
 
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.MemberInfo;
+import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.search.BookSearch;
@@ -48,11 +50,10 @@ public class RentPage extends JFrame implements ActionListener {
 		initialize();
 		tableLoadData();
 	}
-	
+
 	private void tableLoadData() {
 		pMemInfoTableList.setService(memService);
 		pMemInfoTableList.loadData();
-		
 
 	}
 
@@ -101,7 +102,7 @@ public class RentPage extends JFrame implements ActionListener {
 
 		btnRent = new JButton("대여하기");
 //		btnRent.setEnabled(false);
-		
+
 		btnRent.addActionListener(this);
 		pBtn.add(btnRent);
 
@@ -134,19 +135,32 @@ public class RentPage extends JFrame implements ActionListener {
 			actionPerformedBtnRent(e);
 		}
 	}
+
 	protected void actionPerformedBtnRent(ActionEvent e) {
 		MemberInfo memNo = pMemInfoContent.getItemMemNo();
-//		System.out.println(memNo);
-		BookInfo bookNo = pBookInfoContent.getItemBookNo();		
-		rentService.addRent(memNo, bookNo);
-		JOptionPane.showMessageDialog(null, pMemInfoContent.getItemMemName() + " 회원의 " + pBookInfoContent.getItemBookName() + " 도서 대여를 완료하였습니다.");
-//		System.out.println("대여성공");
-		pMemInfoTableList.loadData();
-		pBookInfoTableList.loadData();
-		pMemInfoContent.clearTf();
-		pBookInfoContent.clearTf();
+		BookInfo bookNo = pBookInfoContent.getItemBookNo();
+		int bookCount = pBookInfoContent.getItemBookCount();
+
+		try {
+			if (bookCount > 0) {
+				rentService.bookRent(memNo, bookNo);
+				pMemInfoTableList.loadData();
+				pBookInfoTableList.loadData();
+				pMemInfoContent.clearTf();
+				pBookInfoContent.clearTf();
+				JOptionPane.showMessageDialog(null, "도서 대여가 완료되었습니다.");
+
+			} else {
+				JOptionPane.showMessageDialog(null, "모두 대여중인 도서입니다.", "메세지", JOptionPane.ERROR_MESSAGE);
+				pMemInfoContent.clearTf();
+				pBookInfoContent.clearTf();
+			}
+		} catch (NumberFormatException | InvalidCheckException e1) {
+			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+		}
 
 	}
+
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pMemInfoContent.clearTf();
 		pBookInfoContent.clearTf();

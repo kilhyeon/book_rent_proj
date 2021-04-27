@@ -12,6 +12,7 @@ import com.mysql.fabric.xmlrpc.base.Data;
 
 import book_rent.dto.BookCate;
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.NotSelectedException;
@@ -49,7 +50,7 @@ public class RentContentPanel extends AbstractContentPanel<Rent> {
 		fl_pRent2.setAlignment(FlowLayout.LEFT);
 		add(pRent2);
 
-		JLabel lblRentMem = new JLabel("회원정보 : ");
+		JLabel lblRentMem = new JLabel("회원번호 : ");
 		pRent2.add(lblRentMem);
 
 		tfRentMem = new JTextField();
@@ -62,7 +63,7 @@ public class RentContentPanel extends AbstractContentPanel<Rent> {
 		fl_pRent3.setAlignment(FlowLayout.LEFT);
 		add(pRent3);
 
-		JLabel lblRentBook = new JLabel("도서정보 : ");
+		JLabel lblRentBook = new JLabel("도서번호 : ");
 		pRent3.add(lblRentBook);
 
 		tfRentBook = new JTextField();
@@ -103,8 +104,8 @@ public class RentContentPanel extends AbstractContentPanel<Rent> {
 			throw new NotSelectedException();
 		}
 		tfRentNo.setText(String.valueOf(item.getRentNo()));
-		tfRentMem.setText(String.valueOf(item.getMemNo()));
-		tfRentBook.setText(String.valueOf(item.getBookNo()));
+		tfRentMem.setText(String.valueOf(item.getMemNo().getMemNo()));
+		tfRentBook.setText(String.valueOf(item.getBookNo().getBookNo()));
 		tflRentDate.setText(String.valueOf(item.getRentDate()));
 		tfLateDate.setText(String.valueOf(item.getLateDate()));
 
@@ -125,9 +126,6 @@ public class RentContentPanel extends AbstractContentPanel<Rent> {
 	public Rent getItemRentNo() {
 		validCheck();
 		int rentNo = Integer.parseInt(tfRentNo.getText().trim());
-//		System.out.println(rentNo);
-//		BookInfo bookNo = new BookInfo(Integer.parseInt(tfRentBook.getText().trim()));
-//		System.out.println(bookNo);
 		return new Rent(rentNo);
 	}
 

@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
+import book_rent.dto.MemberInfo;
 import book_rent.service.MemGradeService;
 import book_rent.ui.exception.InvalidCheckException;
 
@@ -145,7 +146,7 @@ public class MemContentManagement extends AbstractContentPanel<MemberInfo> imple
 		tfMemAddr.setText(item.getMemAddr());
 		tfMemCp.setText(item.getMemCp());
 		tfMemTel.setText(item.getMemTel());
-		
+//		cmbGrade.setText(item.getMemGradeNo());
 		int memGrade = Integer.parseInt((String.valueOf(item.getMemGradeNo())).replaceAll("[^0-9]", ""));
 		cmbGrade.setSelectedIndex(memGrade-1);		
 

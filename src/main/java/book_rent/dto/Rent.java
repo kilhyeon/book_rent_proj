@@ -2,8 +2,6 @@ package book_rent.dto;
 
 import java.util.Date;
 
-import book_rent.ui.content.MemberInfo;
-
 public class Rent {
 //	select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, 
 //	rentDate, returnDate, lateDate from vw_rent_mb
@@ -30,6 +28,11 @@ public class Rent {
 	}
 
 	public Rent(BookInfo bookNo) {
+		this.bookNo = bookNo;
+	}
+
+	public Rent(int rentNo, BookInfo bookNo) {
+		this.rentNo = rentNo;
 		this.bookNo = bookNo;
 	}
 
@@ -77,8 +80,16 @@ public class Rent {
 		return bookNo;
 	}
 
-	public void setBookNo(BookInfo bookNo) {
-		this.bookNo = bookNo;
+//	public void setBookNo(BookInfo bookNo) {
+//		this.bookNo = bookNo;
+//	}
+
+	public String getBookName() {
+		return bookNo.getBookName();
+	}
+
+	public void setBookName(BookInfo bookName) {
+		this.bookName = bookName;
 	}
 
 	public Date getRentDate() {
@@ -127,14 +138,6 @@ public class Rent {
 
 	public void setMemGradeName(MemGrade memGradeName) {
 		this.memGradeName = memGradeName;
-	}
-
-	public BookInfo getBookName() {
-		return bookName;
-	}
-
-	public void setBookName(BookInfo bookName) {
-		this.bookName = bookName;
 	}
 
 	public BookCate getBookCateNo() {

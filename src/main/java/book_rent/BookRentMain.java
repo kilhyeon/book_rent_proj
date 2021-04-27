@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
@@ -70,7 +69,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 	public void mainLoadData() {
 		pMemInfoTableList.setService(memService);
 		pBookInfoTableList.setService(bookService);
-		pRentInfoTableList.setService(rentService);
+		pRentInfoTableList.setRentService(rentService);
 		pMemInfoTableList.revalidate();
 		pBookInfoTableList.revalidate();
 		pRentInfoTableList.revalidate();
@@ -156,7 +155,7 @@ public class BookRentMain extends JFrame implements ActionListener {
 		pRentInfoTableList = pMemInfoTableList.getMemRentList();
 		contentPane.add(pRentInfoTableList);
 //		pRent.setBorder(new TitledBorder(null, "현재 대여중인 도서목록", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pRentInfoTableList.setService(rentService);
+		pRentInfoTableList.setRentService(rentService);
 		pRentInfoTableList.loadData();
 	}
 

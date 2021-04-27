@@ -15,7 +15,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import book_rent.ui.content.MemberInfo;
+import book_rent.dto.MemberInfo;
 
 @SuppressWarnings("serial")
 public abstract class AbstractCustomTablePanel<T> extends JPanel {

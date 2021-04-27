@@ -7,9 +7,9 @@ import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import book_rent.dto.MemberInfo;
 import book_rent.service.MemberInfoService;
 import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.MemberInfo;
 import book_rent.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
@@ -69,7 +69,7 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 	@Override
 	public Object[] toArray(MemberInfo m) {
 		return new Object[] { m.getMemNo(), m.getMemName(), m.getMemBirth(), m.getMemTel(), m.getMemCp(),
-				m.getMemAddr(), m.getMemGradeNo() };
+				m.getMemAddr(), m.getMemGradeNo().getMemGradeName() };
 	}
 
 	@Override

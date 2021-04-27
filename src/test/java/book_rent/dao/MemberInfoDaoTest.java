@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import book_rent.dao.impl.MemberInfoDaoImpl;
-import book_rent.ui.content.MemberInfo;
+import book_rent.dto.MemberInfo;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MemberInfoDaoTest {

@@ -8,39 +8,59 @@ import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
+import book_rent.service.BookInfoService;
 import book_rent.service.RentService;
-import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.MemberInfo;
+import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.RentContentPanel;
 import book_rent.ui.exception.NotSelectedException;
 
 public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements MouseListener {
 	private RentService rentService;
-	private MemberContentPanel pMemInfoContent;
+	private BookInfoService bookService;
 	private RentContentPanel pRentInfoContent;
+	private BookContentPanel pBookInfoContent;
 
 	public MemRentTablePanel() {
 		initialize();
 		table.addMouseListener(this);
-		pMemInfoContent = new MemberContentPanel();
 		pRentInfoContent = new RentContentPanel();
+		rentService = new RentService();
+		bookService = new BookInfoService();
 	}
 
 	private void initialize() {
 		setBorder(new TitledBorder(null, "현재 대여중인 도서목록", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 	}
 
-	public void setService(RentService service) {
-		this.rentService = service;
+	public void setRentService(RentService rentService) {
+		this.rentService = rentService;
+	}
+
+	public void setBookService(BookInfoService bookService) {
+		this.bookService = bookService;
 	}
 
 	public void setList(List<Rent> list) {
 		this.list = list;
 	}
 
-	public RentContentPanel getpRentInfo() {
+	public RentContentPanel getpRentInfoContent() {
 		return pRentInfoContent;
+	}
+
+	public void setpRentInfoContent(RentContentPanel pRentInfoContent) {
+		this.pRentInfoContent = pRentInfoContent;
+	}
+
+	public BookContentPanel getpBookInfoContent() {
+		return pBookInfoContent;
+	}
+
+	public void setpBookInfoContent(BookContentPanel pBookInfoContent) {
+		this.pBookInfoContent = pBookInfoContent;
 	}
 
 	@Override
@@ -69,12 +89,13 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 
 	@Override
 	public Object[] toArray(Rent r) {
-		return new Object[] { r.getRentNo(), r.getMemNo(), r.getBookNo(), r.getRentDate(), r.getLateDate() };
+		return new Object[] { r.getRentNo(), r.getBookNo().getBookNo(), r.getBookName(), r.getRentDate(),
+				r.getLateDate() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "대출번호", "회원정보", "도서정보", "도서대여일", "연체일자" };
+		return new String[] { "대여번호", "도서번호", "도서제목", "도서대여일", "연체일자" };
 	}
 
 	@Override
@@ -88,6 +109,14 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 
 		return list.get(list.indexOf(new Rent(rentNo)));
 
+	}
+
+	public Rent getRentNo() {
+		int row = table.getSelectedRow();
+		int rentNo = (int) table.getValueAt(row, 0);
+		int bookNo = (int) table.getValueAt(row, 1);
+
+		return new Rent(rentNo, new BookInfo(bookNo));
 	}
 
 	@Override
@@ -109,6 +138,7 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}
+
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
+import book_rent.dto.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
 import javax.swing.SwingConstants;
 
@@ -113,7 +114,7 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 //		}
 		tfMemNo.setText(String.valueOf(item.getMemNo()));
 		tfMemName.setText(item.getMemName());
-		tfMemGrade.setText(String.valueOf(item.getMemGradeNo()));
+		tfMemGrade.setText(String.valueOf(item.getMemGradeNo().getMemGradeName()));
 		tfMemBirth.setText(item.getMemBirth());
 		tfMemAddr.setText(item.getMemAddr());
 		tfMemCp.setText(item.getMemCp());
@@ -141,11 +142,11 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		return new MemberInfo(memNo);
 	}
 	
-	public MemberInfo getItemMemName() {
-		int memNo = Integer.parseInt(tfMemNo.getText().trim());
-		String memName = tfMemName.getText().trim();
-		return new MemberInfo(memNo, memName);
-	}
+//	public MemberInfo getItemMemName() {
+//		int memNo = Integer.parseInt(tfMemNo.getText().trim());
+//		String memName = tfMemName.getText().trim();
+//		return new MemberInfo(memNo, memName);
+//	}
 
 	@Override
 	public void validCheck() {

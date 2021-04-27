@@ -24,9 +24,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 	private JTextField tfBookNo;
 	private JTextField tfBookName;
 	private JTextField tfBookCate;
-	private JTextField tfRentState;
 	private JComboBox cmbCate;
-	private JComboBox cmbRentState;
 	private BookCateService bookCateService;
 	private JTextField tfBookCount;
 
@@ -84,7 +82,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		tfBookCount = new JTextField();
 		tfBookCount.setHorizontalAlignment(SwingConstants.CENTER);
 		pBookCount.add(tfBookCount);
-		tfBookCount.setColumns(10);
+		tfBookCount.setColumns(15);
 
 		JPanel pBookCate = new JPanel();
 		add(pBookCate);
@@ -103,22 +101,6 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		cmbCate.addActionListener(this);
 
 		pBookCate.add(cmbCate);
-
-		JPanel pRentState = new JPanel();
-		add(pRentState);
-		pRentState.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		pRentState.setVisible(false);
-
-		JLabel lblRentState = new JLabel("대여상태 : ");
-		pRentState.add(lblRentState);
-
-		tfRentState = new JTextField();
-		tfRentState.setHorizontalAlignment(SwingConstants.CENTER);
-		tfRentState.setColumns(10);
-		pRentState.add(tfRentState);
-
-		cmbRentState = new JComboBox();
-		pRentState.add(cmbRentState);
 	}
 
 	@Override
@@ -128,7 +110,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		tfBookName.setText(item.getBookName());
 		tfBookCount.setText(String.valueOf(item.getBookCount()));
 //		tfBookCate.setText((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
-		tfRentState.setText(String.valueOf(item.getRentState()));
+//		tfRentState.setText(String.valueOf(item.getRentState()));
 
 		int bookCate = Integer.parseInt((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
 		cmbCate.setSelectedIndex(bookCate - 1);
@@ -167,7 +149,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		tfBookName.setText("");
 		tfBookCate.setText("");
 		tfBookCount.setText("");
-		tfRentState.setText("");
+//		tfRentState.setText("");
 		cmbCate.setSelectedIndex(-1);
 
 		if (!tfBookNo.isEditable()) {
@@ -207,14 +189,6 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		this.tfBookCate = tfBookCate;
 	}
 
-	public JTextField getTfRentState() {
-		return tfRentState;
-	}
-
-	public void setTfRentState(JTextField tfRentState) {
-		this.tfRentState = tfRentState;
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbCate) {
 			actionPerformedCmbCate(e);
@@ -227,14 +201,6 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 
 	public void setCmbCate(JComboBox cmbCate) {
 		this.cmbCate = cmbCate;
-	}
-
-	public JComboBox getCmbRentState() {
-		return cmbRentState;
-	}
-
-	public void setCmbRentState(JComboBox cmbRentState) {
-		this.cmbRentState = cmbRentState;
 	}
 
 	public void actionPerformedCmbCate(ActionEvent e) {

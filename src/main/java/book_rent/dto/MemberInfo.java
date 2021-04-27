@@ -1,6 +1,4 @@
-package book_rent.ui.content;
-
-import book_rent.dto.MemGrade;
+package book_rent.dto;
 
 public class MemberInfo {
 	private int memNo;
@@ -119,12 +117,9 @@ public class MemberInfo {
 
 	@Override
 	public String toString() {
-		return String.format("%s", memNo);
+		return String.format(
+				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGradeNo=%s]", memNo,
+				memName, memBirth, memTel, memCp, memAddr, memGradeNo);
 	}
-
-//	@Override
-//	public String toString() {
-//		return String.format("%s", memNo);
-//	}
 
 }

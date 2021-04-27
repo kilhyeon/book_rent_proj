@@ -112,7 +112,8 @@ public class BookInfo {
 
 	@Override
 	public String toString() {
-		return String.format("%s", bookNo);
+		return String.format("BookInfo [bookNo=%s, bookName=%s, bookCount=%s, bookCateNo=%s, rentState=%s]", bookNo,
+				bookName, bookCount, bookCateNo, rentState);
 	}
 
 //	@Override

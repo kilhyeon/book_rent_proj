@@ -12,6 +12,8 @@ select bookNo, bookName, bookCateNo, rentState from bookinfo;
 
 -- 대여목록 조회
 select rentNo, memNo, bookNo, rentDate, returnDate, lateDate from rent;
+update rentinfo set returndate = now() where rentno = ? and returndate is null;
+
 
 select bookCateNo, bookCateName from category where bookCateNo = 1;
 select bookCateNo, bookCateName from category where bookCateName = '수학';
@@ -68,9 +70,21 @@ update bookinfo set rentState = rentState-1 where bookNo = 40008;
 insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12009, 40009, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0);
 
 
--- 회원 대여내역 조회
+-- 대여내역 조회
 select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, rentDate, returnDate, lateDate
-from vw_rent_mb where memNo = 12004 order by rentNo;
+from vw_rent_mb where memNo = 12001 order by rentNo;
+
+select * from rent;
+
+update rent set returnDate = now() where rentNo = 7 and returnDate is null;
+
+select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, 
+rentDate, returnDate, lateDate from vw_rent_mb where memNo = 12001 and returnDate is null order by rentNo;
+
+delete from rent where memNo = 12004;
+
+select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, rentDate, returnDate, lateDate
+from vw_rent_mb where memNo = 12001 and returnDate = null order by rentNo;
 
 
 -- 도서 반납 (대여내역삭제)
@@ -81,3 +95,11 @@ update bookinfo set rentState = 0 where bookNo = 40010;
 delete from rent where rentNo = 6;
 
 delete from category where bookCateNo = 5;
+select * from bookinfo;
+select * from rent;
+
+-- 대여 제약조건
+insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12002, 40002, now(), null, 0)
+from dual where exists(select * from bookinfo where bookCount = 0);
+
+

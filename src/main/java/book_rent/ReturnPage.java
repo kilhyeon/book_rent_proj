@@ -18,6 +18,7 @@ import book_rent.service.RentService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.content.RentContentPanel;
+import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemRentTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
@@ -44,7 +45,7 @@ public class ReturnPage extends JFrame implements ActionListener {
 	private BookSearch pBookSearch;
 
 	private JPanel pBtn;
-	private JButton btnRent;
+	private JButton btnReturn;
 	private JButton btnCancel;
 
 	public ReturnPage() {
@@ -53,7 +54,7 @@ public class ReturnPage extends JFrame implements ActionListener {
 		bookService = new BookInfoService();
 		rentService = new RentService();
 		initialize();
-		tableLoadData();
+//		tableLoadData();
 	}
 
 	private void tableLoadData() {
@@ -98,39 +99,39 @@ public class ReturnPage extends JFrame implements ActionListener {
 
 		pMemRentInfoTableList = pMemInfoTableList.getMemRentList();
 		pRent.add(pMemRentInfoTableList);
-		pMemRentInfoTableList.setService(rentService);
+		pMemRentInfoTableList.setRentService(rentService);
 		pMemRentInfoTableList.loadData();
 
-		pRentInfoContent = pMemRentInfoTableList.getpRentInfo();
+		pRentInfoContent = pMemRentInfoTableList.getpRentInfoContent();
 		pRent.add(pRentInfoContent);
 
 		pBtn = new JPanel();
 		contentPane.add(pBtn);
 
-		btnRent = new JButton("반납하기");
-		btnRent.addActionListener(this);
-		pBtn.add(btnRent);
+		btnReturn = new JButton("반납하기");
+		btnReturn.addActionListener(this);
+		pBtn.add(btnReturn);
 
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 
-		pBook = new JPanel();
-		contentPane.add(pBook);
-		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
-		pBook.setVisible(true);
-
-		pBookSearch = new BookSearch();
-		pBook.add(pBookSearch);
-		pBookSearch.setService(bookService);
-
-		pBookInfoTableList = pBookSearch.getBookInfoList();
-		pBook.add(pBookInfoTableList);
-		pBookInfoTableList.setService(bookService);
-		pBookInfoTableList.loadData();
-
-		pBookInfoContent = pBookInfoTableList.getpBookInfo();
-		pBook.add(pBookInfoContent);
+//		pBook = new JPanel();
+//		contentPane.add(pBook);
+//		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
+//		pBook.setVisible(true);
+//
+//		pBookSearch = new BookSearch();
+//		pBook.add(pBookSearch);
+//		pBookSearch.setService(bookService);
+//
+//		pBookInfoTableList = pBookSearch.getBookInfoList();
+//		pBook.add(pBookInfoTableList);
+//		pBookInfoTableList.setService(bookService);
+//		pBookInfoTableList.loadData();
+//
+//		pBookInfoContent = pBookInfoTableList.getpBookInfo();
+//		pBook.add(pBookInfoContent);
 
 	}
 
@@ -166,32 +167,32 @@ public class ReturnPage extends JFrame implements ActionListener {
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
-		if (e.getSource() == btnRent) {
+		if (e.getSource() == btnReturn) {
 			actionPerformedBtnRent(e);
 		}
 	}
 
 	protected void actionPerformedBtnRent(ActionEvent e) {
-//		Rent bookNo = pRentInfo.getItemBookNo();
-		BookInfo bookNo = pBookInfoContent.getItemBookNo();
-		System.out.println(bookNo);
-		Rent rentNo = pRentInfoContent.getItemRentNo();
-		System.out.println(rentNo);
-		
-		
-		rentService.delRent(bookNo, rentNo);
-		JOptionPane.showMessageDialog(null, pMemInfoContent.getItemMemName() + " 회원의 " + pBookInfoContent.getItemBookName() + " 도서 반납을 완료하였습니다.");
-//		System.out.println("반납성공");
+		System.out.println("대여");
+
+		try {
+			rentService.bookReturn(pMemRentInfoTableList.getRentNo());
+		} catch (NumberFormatException | InvalidCheckException e1) {
+			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+		}
+
+		JOptionPane.showMessageDialog(null, "도서 반납이 완료되었습니다.");
+
 		pMemInfoTableList.loadData();
 		pMemRentInfoTableList.loadData();
 
 		pMemInfoContent.clearTf();
-		pBookInfoContent.clearTf();
+		pRentInfoContent.clearTf();
 
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pMemInfoContent.clearTf();
-		pBookInfoContent.clearTf();
+		pRentInfoContent.clearTf();
 	}
 }

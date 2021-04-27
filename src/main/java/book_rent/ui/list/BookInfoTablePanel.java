@@ -56,7 +56,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 
 	@Override
 	public Object[] toArray(BookInfo b) {
-		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCount(), b.getBookCateNo(), b.getRentState() };
+		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCount(), b.getBookCateNo().getBookCateName(), b.getRentState() };
 	}
 
 	@Override

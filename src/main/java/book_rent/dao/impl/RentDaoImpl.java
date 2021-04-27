@@ -11,8 +11,8 @@ import java.util.List;
 import book_rent.dao.RentDao;
 import book_rent.database.JdbcConn;
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
-import book_rent.ui.content.MemberInfo;
 
 public class RentDaoImpl implements RentDao {
 
@@ -48,7 +48,7 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public List<Rent> selectRentByMemNo(MemberInfo memInfo) {
 		String sql = "select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, "
-				+ "rentDate, returnDate, lateDate from vw_rent_mb where memNo = ? order by rentNo";
+				+ "rentDate, returnDate, lateDate from vw_rent_mb where memNo = ? and returnDate is null order by rentNo";
 
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, memInfo.getMemNo());
@@ -98,7 +98,7 @@ public class RentDaoImpl implements RentDao {
 
 	@Override
 	public int insertRent(MemberInfo memNo, BookInfo bookNo) {
-		String rentSql = "insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (?, ?, now(), DATE_ADD(NOW(), INTERVAL 3 DAY), 0)";
+		String rentSql = "insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (?, ?, now(), null, 0)";
 		String bookSql1 = "update bookinfo set bookCount = bookCount-1 where bookNo = ?";
 		String bookSql2 = "update bookinfo set rentState = if (bookCount > 0, 0, 1) where bookNo = ?";
 		Connection con = JdbcConn.getConnection();
@@ -122,18 +122,18 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public int deleteRent(BookInfo bookNo, Rent rentNo) {
+	public int updateRent(Rent rentNo) {
 		String bookSql1 = "update bookinfo set bookCount = bookCount+1 where bookNo = ?";
 		String bookSql2 = "update bookinfo set rentState = if (bookCount > 0, 0, 1) where bookNo = ?";
-		String returnSql = "delete from rent where rentNo = ?";
+		String returnSql = "update rent set returnDate = now() where rentNo = ? and returnDate is null";
 		Connection con = JdbcConn.getConnection();
 		try (PreparedStatement pstmt1 = con.prepareStatement(bookSql1);
 				PreparedStatement pstmt2 = con.prepareStatement(bookSql2);
 				PreparedStatement pstmt = con.prepareStatement(returnSql);) {
 
-			pstmt1.setInt(1, bookNo.getBookNo());
+			pstmt1.setInt(1, rentNo.getBookNo().getBookNo());
 			pstmt1.executeUpdate();
-			pstmt2.setInt(1, bookNo.getBookNo());
+			pstmt2.setInt(1, rentNo.getBookNo().getBookNo());
 			pstmt2.executeUpdate();
 			pstmt.setInt(1, rentNo.getRentNo());
 			pstmt.executeUpdate();
