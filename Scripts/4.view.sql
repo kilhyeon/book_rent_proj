@@ -15,12 +15,14 @@ r.rentDate, r.returnDate, r.lateDate
 from rent r join vw_bookinfo_cate b on r.bookNo = b.bookNo join vw_meminfo_grade m on r.memNo = m.memNo;
 
 
+/*
 select * from vw_bookinfo_cate;
 select * from vw_meminfo_grade;
 select * from vw_rent_mb;
+*/
 
 
--- 테스트
-update bookinfo set bookName = 40010, bookCount = ?, bookCateNo = ? where bookNo = ? 
+/*-- 테스트
+update bookinfo set bookName = 40010, bookCount = ?, bookCateNo = ? where bookNo = ? */
 
 
