@@ -27,6 +27,7 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 		initialize();
 		table.addMouseListener(this);
 		pRentInfoContent = new RentContentPanel();
+		pBookInfoContent = new BookContentPanel();
 		rentService = new RentService();
 		bookService = new BookInfoService();
 	}
@@ -66,11 +67,6 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 	@Override
 	public void initList() {
 		list = new ArrayList<Rent>();
-	}
-
-	public void blankTable() {
-		Object[][] data = new Object[0][];
-
 	}
 
 	public void showRentListByMemNo(MemberInfo memIfno) {

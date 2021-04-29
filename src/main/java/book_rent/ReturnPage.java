@@ -173,10 +173,10 @@ public class ReturnPage extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnRent(ActionEvent e) {
-		System.out.println("대여");
+		Rent rentNo = pMemRentInfoTableList.getRentNo();
 
 		try {
-			rentService.bookReturn(pMemRentInfoTableList.getRentNo());
+			rentService.bookReturn(rentNo);
 		} catch (NumberFormatException | InvalidCheckException e1) {
 			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
 		}

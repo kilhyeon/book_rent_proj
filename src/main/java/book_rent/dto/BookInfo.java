@@ -72,6 +72,10 @@ public class BookInfo {
 		}
 	}
 
+	public void setRentState(int rentState) {
+		this.rentState = rentState;
+	}
+
 	public int getBookCount() {
 		return bookCount;
 	}
@@ -82,10 +86,6 @@ public class BookInfo {
 
 	public int getRentStateToInt() {
 		return rentState;
-	}
-
-	public void setRentState(int rentState) {
-		this.rentState = rentState;
 	}
 
 	@Override

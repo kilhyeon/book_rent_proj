@@ -54,7 +54,8 @@ public class RentPage extends JFrame implements ActionListener {
 	private void tableLoadData() {
 		pMemInfoTableList.setService(memService);
 		pMemInfoTableList.loadData();
-
+		pBookInfoTableList.setService(bookService);
+		pBookInfoTableList.loadData();
 	}
 
 	private void initialize() {
