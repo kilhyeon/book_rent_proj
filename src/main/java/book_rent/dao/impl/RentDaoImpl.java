@@ -101,11 +101,13 @@ public class RentDaoImpl implements RentDao {
 		String rentSql = "insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (?, ?, now(), null, 0)";
 		String bookSql1 = "update bookinfo set bookCount = bookCount-1 where bookNo = ?";
 		String bookSql2 = "update bookinfo set rentState = if (bookCount > 0, 0, 1) where bookNo = ?";
+		String memSql = "update memberinfo set memRentCount = memRentCount+1 where memNo = ?";
 		Connection con = JdbcConn.getConnection();
 
 		try (PreparedStatement pstmt = con.prepareStatement(rentSql);
 				PreparedStatement pstmt1 = con.prepareStatement(bookSql1);
-				PreparedStatement pstmt2 = con.prepareStatement(bookSql2);) {
+				PreparedStatement pstmt2 = con.prepareStatement(bookSql2);
+				PreparedStatement pstmt3 = con.prepareStatement(memSql);) {
 
 			pstmt.setInt(1, memNo.getMemNo());
 			pstmt.setInt(2, bookNo.getBookNo());
@@ -114,6 +116,8 @@ public class RentDaoImpl implements RentDao {
 			pstmt1.executeUpdate();
 			pstmt2.setInt(1, bookNo.getBookNo());
 			pstmt2.executeUpdate();
+			pstmt3.setInt(1, memNo.getMemNo());
+			pstmt3.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

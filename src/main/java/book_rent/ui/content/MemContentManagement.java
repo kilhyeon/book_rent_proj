@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
+import book_rent.dto.MemGradeRentCount;
 import book_rent.dto.MemberInfo;
 import book_rent.service.MemGradeService;
 import book_rent.ui.exception.InvalidCheckException;
@@ -31,6 +32,8 @@ public class MemContentManagement extends AbstractContentPanel<MemberInfo> imple
 	private JTextField tfMemAddr;
 	private JComboBox cmbGrade;
 	private MemGradeService memGradeService;
+	private JTextField tfMemRentCount;
+	private JTextField tflMemGradeRentCount;
 
 	public MemContentManagement() {
 		memGradeService = new MemGradeService();
@@ -131,6 +134,29 @@ public class MemContentManagement extends AbstractContentPanel<MemberInfo> imple
 		cmbGrade = new JComboBox();
 		cmbGrade.addActionListener(this);
 		pMem4.add(cmbGrade);
+		
+		JPanel pMem5 = new JPanel();
+		pMem5.setVisible(false);
+		add(pMem5);
+		
+		JLabel lblMemRentCount = new JLabel("대여권수 : ");
+		pMem5.add(lblMemRentCount);
+		
+		tfMemRentCount = new JTextField();
+		tfMemRentCount.setHorizontalAlignment(SwingConstants.CENTER);
+		tfMemRentCount.setColumns(10);
+		pMem5.add(tfMemRentCount);
+		
+		JPanel pMem6 = new JPanel();
+		pMem6.setVisible(false);
+		add(pMem6);
+		
+		JLabel lblMemGradeRentCount = new JLabel("회원등급대여가능권수 :");
+		pMem6.add(lblMemGradeRentCount);
+		
+		tflMemGradeRentCount = new JTextField();
+		pMem6.add(tflMemGradeRentCount);
+		tflMemGradeRentCount.setColumns(10);
 	}
 
 	
@@ -148,7 +174,8 @@ public class MemContentManagement extends AbstractContentPanel<MemberInfo> imple
 		tfMemTel.setText(item.getMemTel());
 //		cmbGrade.setText(item.getMemGradeNo());
 		int memGrade = Integer.parseInt((String.valueOf(item.getMemGradeNo())).replaceAll("[^0-9]", ""));
-		cmbGrade.setSelectedIndex(memGrade-1);		
+		cmbGrade.setSelectedIndex(memGrade-1);	
+		tfMemRentCount.setText(String.valueOf(item.getMemRentCount()));
 
 		tfMemNo.setEditable(false);
 
@@ -164,7 +191,9 @@ public class MemContentManagement extends AbstractContentPanel<MemberInfo> imple
 		String memCp = tfMemCp.getText().trim();
 		String memAddr = tfMemAddr.getText().trim();
 		MemGrade memGradeNo = new MemGrade(Integer.parseInt(tfMemGrade.getText().trim()));
-		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo);
+		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(Integer.parseInt(tflMemGradeRentCount.getText().trim()));
+		int memRentCount = Integer.parseInt(tfMemNo.getText().trim());
+		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount, memRentCount);
 	}
 
 	@Override

@@ -65,7 +65,7 @@ public class MemGradeContnetPanel extends AbstractContentPanel<MemGrade> {
 	public void setItem(MemGrade item) {
 		tfGradeNo.setText(String.valueOf(item.getMemGradeNo()));
 		tfGradeName.setText(item.getMemGradeName());
-		tfGradeCount.setText(String.valueOf(item.getMemGradeCount()));
+		tfGradeCount.setText(String.valueOf(item.getMemGradeRentCount()));
 		tfGradeNo.setEditable(false);
 	}
 

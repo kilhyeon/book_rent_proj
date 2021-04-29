@@ -59,7 +59,7 @@ public class MemGradeTablePanel extends AbstractCustomTablePanel<MemGrade> {
 
 	@Override
 	public Object[] toArray(MemGrade g) {
-		return new Object[] { g.getMemGradeNo(), g.getMemGradeName(), g.getMemGradeCount() };
+		return new Object[] { g.getMemGradeNo(), g.getMemGradeName(), g.getMemGradeRentCount() };
 	}
 
 	@Override

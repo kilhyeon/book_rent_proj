@@ -41,20 +41,21 @@ update bookinfo set rentState = 2 where bookNo = 123123;
 
 
 
-insert into memberinfo(memName, memBirth, memTel, memCp, memAddr, memGradeNo) 
-values('홍길동', '20000101', '010-1234-1234', '010-1234-1234', '대구', 2);
+insert into memberinfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo) 
+values(120020, '이순신', '20000101', '010-1234-1234', '010-1234-1234', '대구', 2);
 
 
 insert into bookinfo(bookNo, bookName, bookCateNo) values (555, 555, 1);
 
 -- 회원검색
-select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeName, memGradeCount from vw_meminfo_grade where memNo = 12001 order by memNo;
+select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeName, memGradeRentCount, memRentCount from vw_meminfo_grade where memNo = 12001 order by memNo;
 
 -- 대여정보 뷰 정렬
 select rentNo, memNo, memName, memGradeNo, memGradeName, bookNo, bookName, bookCateNo, bookCateName, 
 rentDate, returnDate, lateDate 
 from vw_rent_mb order by rentNo;
 
+select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeName, memGradeRentCount, memRentCount from vw_meminfo_grade where memNo = 12001;
 
 -- 도서 대여 정보 입력
 select * from memberinfo;
@@ -97,9 +98,15 @@ delete from rent where rentNo = 6;
 delete from category where bookCateNo = 5;
 select * from bookinfo;
 select * from rent;
+select * from memberinfo;
 
 -- 대여 제약조건
 insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12002, 40002, now(), null, 0)
 from dual where exists(select * from bookinfo where bookCount = 0);
+
+
+
+-- 회원 등급별 대여 회수
+update memberinfo set memRentCount = memRentCount+1 where memNo = 12001;
 
 

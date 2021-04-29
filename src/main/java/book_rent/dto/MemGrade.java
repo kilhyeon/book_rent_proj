@@ -3,7 +3,7 @@ package book_rent.dto;
 public class MemGrade {
 	private int memGradeNo;
 	private String memGradeName;
-	private int memGradeCount;
+	private int memGradeRentCount;
 
 	public MemGrade() {
 		// TODO Auto-generated constructor stub
@@ -18,10 +18,10 @@ public class MemGrade {
 		this.memGradeName = memGradeName;
 	}
 
-	public MemGrade(int memGradeNo, String memGradeName, int memGradeCount) {
+	public MemGrade(int memGradeNo, String memGradeName, int memGradeRentCount) {
 		this.memGradeNo = memGradeNo;
 		this.memGradeName = memGradeName;
-		this.memGradeCount = memGradeCount;
+		this.memGradeRentCount = memGradeRentCount;
 	}
 
 	public int getMemGradeNo() {
@@ -40,12 +40,12 @@ public class MemGrade {
 		this.memGradeName = memGradeName;
 	}
 
-	public int getMemGradeCount() {
-		return memGradeCount;
+	public int getMemGradeRentCount() {
+		return memGradeRentCount;
 	}
 
-	public void setMemGradeCount(int memGradeCount) {
-		this.memGradeCount = memGradeCount;
+	public void setMemGradeRentCount(int memGradeRentCount) {
+		this.memGradeRentCount = memGradeRentCount;
 	}
 
 	@Override
@@ -53,6 +53,7 @@ public class MemGrade {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + memGradeNo;
+		result = prime * result + memGradeRentCount;
 		return result;
 	}
 
@@ -66,6 +67,8 @@ public class MemGrade {
 			return false;
 		MemGrade other = (MemGrade) obj;
 		if (memGradeNo != other.memGradeNo)
+			return false;
+		if (memGradeRentCount != other.memGradeRentCount)
 			return false;
 		return true;
 	}

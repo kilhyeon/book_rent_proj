@@ -21,6 +21,12 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 		initialize();
 		table.addMouseListener(this);
 		pBookInfoContent = new BookContentPanel();
+		pBookInfoContent.getTfBookNo().setEditable(false);
+		pBookInfoContent.getTfBookName().setEditable(false);
+		pBookInfoContent.getTfBookCount().setEditable(false);
+		pBookInfoContent.getTfBookCate().setEditable(false);
+		pBookInfoContent.getTfRentState().setEditable(false);
+		
 	}
 
 	private void initialize() {
@@ -87,11 +93,7 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 		try {
 			BookInfo item = bookService.showBookByBookNo(bookNo);
 			pBookInfoContent.setItem(item);
-			pBookInfoContent.getTfBookNo().setEditable(false);
-			pBookInfoContent.getTfBookName().setEditable(false);
-			pBookInfoContent.getTfBookCount().setEditable(false);
-			pBookInfoContent.getTfBookCate().setEditable(false);
-			pBookInfoContent.getTfRentState().setEditable(false);
+		
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}

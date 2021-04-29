@@ -6,12 +6,13 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import book_rent.dto.MemGrade;
+import book_rent.dto.MemGradeRentCount;
 import book_rent.dto.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
-import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
@@ -22,9 +23,12 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 	private JTextField tfMemCp;
 	private JTextField tfMemGrade;
 	private JTextField tfMemAddr;
+	private JTextField tfMemRentCount;
+	private JTextField tflMemGradeRentCount;
 
 	public MemberContentPanel() {
 		initialize();
+		
 	}
 
 	private void initialize() {
@@ -105,6 +109,29 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemGrade.setHorizontalAlignment(SwingConstants.CENTER);
 		pMem4.add(tfMemGrade);
 		tfMemGrade.setColumns(10);
+
+		JPanel pMem5 = new JPanel();
+		pMem5.setVisible(false);
+		add(pMem5);
+
+		JLabel lblMemRentCount = new JLabel("대여권수 : ");
+		pMem5.add(lblMemRentCount);
+
+		tfMemRentCount = new JTextField();
+		tfMemRentCount.setHorizontalAlignment(SwingConstants.CENTER);
+		tfMemRentCount.setColumns(10);
+		pMem5.add(tfMemRentCount);
+
+		JPanel pMem6 = new JPanel();
+		pMem6.setVisible(false);
+		add(pMem6);
+
+		JLabel lblMemGradeRentCount = new JLabel("회원등급대여가능권수 :");
+		pMem6.add(lblMemGradeRentCount);
+
+		tflMemGradeRentCount = new JTextField();
+		pMem6.add(tflMemGradeRentCount);
+		tflMemGradeRentCount.setColumns(10);
 	}
 
 	@Override
@@ -119,7 +146,8 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		tfMemAddr.setText(item.getMemAddr());
 		tfMemCp.setText(item.getMemCp());
 		tfMemTel.setText(item.getMemTel());
-
+		tfMemRentCount.setText(String.valueOf(item.getMemRentCount()));
+		tflMemGradeRentCount.setText(String.valueOf(item.getMemGradeRentCount().getMemGradeRentCount()));
 		tfMemNo.setEditable(false);
 
 	}
@@ -134,14 +162,27 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		String memCp = tfMemCp.getText().trim();
 		String memAddr = tfMemAddr.getText().trim();
 		MemGrade memGradeNo = new MemGrade(Integer.parseInt(tfMemGrade.getText().trim()));
-		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo);
+		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(Integer.parseInt(tflMemGradeRentCount.getText().trim()));
+		int memRentCount = Integer.parseInt(tfMemRentCount.getText().trim());
+		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount,
+				memRentCount);
 	}
 
 	public MemberInfo getItemMemNo() {
 		int memNo = Integer.parseInt(tfMemNo.getText().trim());
 		return new MemberInfo(memNo);
 	}
-	
+
+	public int getItemMemRentCount() {
+		int memRentCount = Integer.parseInt(tfMemRentCount.getText().trim());
+		return memRentCount;
+	}
+
+	public int getItemMemGradeRentCount() {
+		int memGradeRentCount = Integer.parseInt(tflMemGradeRentCount.getText().trim());
+		return memGradeRentCount;
+	}
+
 //	public MemberInfo getItemMemName() {
 //		int memNo = Integer.parseInt(tfMemNo.getText().trim());
 //		String memName = tfMemName.getText().trim();
@@ -227,5 +268,20 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		this.tfMemAddr = tfMemAddr;
 	}
 
-	
+	public JTextField getTfMemRentCount() {
+		return tfMemRentCount;
+	}
+
+	public void setTfMemRentCount(JTextField tfMemRentCount) {
+		this.tfMemRentCount = tfMemRentCount;
+	}
+
+	public JTextField getTflMemGradeRentCount() {
+		return tflMemGradeRentCount;
+	}
+
+	public void setTflMemGradeRentCount(JTextField tflMemGradeRentCount) {
+		this.tflMemGradeRentCount = tflMemGradeRentCount;
+	}
+
 }

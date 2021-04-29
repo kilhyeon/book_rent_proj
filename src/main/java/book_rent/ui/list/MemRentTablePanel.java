@@ -30,6 +30,11 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 		pBookInfoContent = new BookContentPanel();
 		rentService = new RentService();
 		bookService = new BookInfoService();
+		pRentInfoContent.getTfRentNo().setEditable(false);
+		pRentInfoContent.getTfRentMem().setEditable(false);
+		pRentInfoContent.getTfRentBook().setEditable(false);
+		pRentInfoContent.getTflRentDate().setEditable(false);
+		pRentInfoContent.getTfLateDate().setEditable(false);
 	}
 
 	private void initialize() {
@@ -126,11 +131,7 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 		try {
 			Rent item = rentService.showRentByRentNo(rentNo);
 			pRentInfoContent.setItem(item);
-			pRentInfoContent.getTfRentNo().setEditable(false);
-			pRentInfoContent.getTfRentMem().setEditable(false);
-			pRentInfoContent.getTfRentBook().setEditable(false);
-			pRentInfoContent.getTflRentDate().setEditable(false);
-			pRentInfoContent.getTfLateDate().setEditable(false);
+	
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}

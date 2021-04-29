@@ -35,7 +35,7 @@ public class MemberInfoService {
 	}
 
 	public MemberInfo showMemberByMemNo(int memNo) {
-		return memDao.selectMeberInfoBymemNo(memNo);
+		return memDao.selectMeberInfoByMemNo(memNo);
 	}
 
 	public void addMember(MemberInfo memberinfo) {

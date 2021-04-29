@@ -9,9 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.sql.SQLException;
 
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemGradeRentCount;
 import book_rent.dto.MemberInfo;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
@@ -142,17 +142,31 @@ public class RentPage extends JFrame implements ActionListener {
 		BookInfo bookNo = pBookInfoContent.getItemBookNo();
 		int bookCount = pBookInfoContent.getItemBookCount();
 
+		int memRentCount = pMemInfoContent.getItemMemRentCount();
+		int memGradeRentCount = pMemInfoContent.getItemMemGradeRentCount();
+
 		try {
 			if (bookCount > 0) {
-				rentService.bookRent(memNo, bookNo);
-				pMemInfoTableList.loadData();
-				pBookInfoTableList.loadData();
-				pMemInfoContent.clearTf();
-				pBookInfoContent.clearTf();
-				JOptionPane.showMessageDialog(null, "도서 대여가 완료되었습니다.");
+				if (memRentCount < memGradeRentCount) {
+					rentService.bookRent(memNo, bookNo);
+					pMemInfoTableList.loadData();
+					pBookInfoTableList.loadData();
+					pMemInfoContent.clearTf();
+					pBookInfoContent.clearTf();
+					JOptionPane.showMessageDialog(null, "도서 대여가 완료되었습니다.");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "대여가능한 도서권수를 초과하였습니다.", "메세지", JOptionPane.ERROR_MESSAGE);
+					pMemInfoTableList.loadData();
+					pBookInfoTableList.loadData();
+					pMemInfoContent.clearTf();
+					pBookInfoContent.clearTf();
+				}
 
 			} else {
 				JOptionPane.showMessageDialog(null, "모두 대여중인 도서입니다.", "메세지", JOptionPane.ERROR_MESSAGE);
+				pMemInfoTableList.loadData();
+				pBookInfoTableList.loadData();
 				pMemInfoContent.clearTf();
 				pBookInfoContent.clearTf();
 			}

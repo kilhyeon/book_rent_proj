@@ -6,13 +6,14 @@ CREATE SCHEMA book_rent;
 
 -- 회원정보
 CREATE TABLE book_rent.memberInfo (
-	memNo      INT          NOT NULL COMMENT '회원번호', -- 회원번호
-	memName    VARCHAR(10)  NULL     COMMENT '회원이름', -- 회원이름
-	memBirth   VARCHAR(8)   NULL     COMMENT '생년월일', -- 생년월일
-	memTel     VARCHAR(13)  NULL     COMMENT '전화번호', -- 전화번호
-	memCp      VARCHAR(13)  NULL     COMMENT '휴대전화', -- 휴대전화
-	memAddr    VARCHAR(256) NULL     COMMENT '주소', -- 주소
-	memGradeNo INT          NULL     COMMENT '회원등급' -- 회원등급
+	memNo        INT          NOT NULL COMMENT '회원번호', -- 회원번호
+	memName      VARCHAR(10)  NULL     COMMENT '회원이름', -- 회원이름
+	memBirth     VARCHAR(8)   NULL     COMMENT '생년월일', -- 생년월일
+	memTel       VARCHAR(13)  NULL     COMMENT '전화번호', -- 전화번호
+	memCp        VARCHAR(13)  NULL     COMMENT '휴대전화', -- 휴대전화
+	memAddr      VARCHAR(256) NULL     COMMENT '주소', -- 주소
+	memGradeNo   INT          NULL     COMMENT '회원등급', -- 회원등급
+	memRentCount INT          NULL     DEFAULT 0 COMMENT '대여권수' -- 대여권수
 )
 COMMENT '회원정보';
 
@@ -77,9 +78,9 @@ ALTER TABLE book_rent.category
 
 -- 회원등급
 CREATE TABLE book_rent.grade (
-	memGradeNo    INT         NOT NULL COMMENT '회원등급', -- 회원등급
-	memGradeName  VARCHAR(10) NULL     COMMENT '회원등급이름', -- 회원등급이름
-	memGradeCount INT         NULL     COMMENT '등급대여권수' -- 등급대여권수
+	memGradeNo        INT         NOT NULL COMMENT '회원등급', -- 회원등급
+	memGradeName      VARCHAR(10) NULL     COMMENT '회원등급이름', -- 회원등급이름
+	memGradeRentCount INT         NULL     COMMENT '등급대여권수' -- 등급대여권수
 )
 COMMENT '회원등급';
 

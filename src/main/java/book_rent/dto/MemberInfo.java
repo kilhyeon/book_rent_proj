@@ -8,6 +8,8 @@ public class MemberInfo {
 	private String memCp;
 	private String memAddr;
 	private MemGrade memGradeNo;
+	private MemGrade memGradeRentCount;
+	private int memRentCount;
 
 	public MemberInfo() {
 		// TODO Auto-generated constructor stub
@@ -27,7 +29,7 @@ public class MemberInfo {
 	}
 
 	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
-			MemGrade memGradeNo) {
+			MemGrade memGradeNo, MemGrade memGradeRentCount, int memRentCount) {
 		this.memNo = memNo;
 		this.memName = memName;
 		this.memBirth = memBirth;
@@ -35,6 +37,12 @@ public class MemberInfo {
 		this.memCp = memCp;
 		this.memAddr = memAddr;
 		this.memGradeNo = memGradeNo;
+		this.memGradeRentCount = memGradeRentCount;
+		this.memRentCount = memRentCount;
+	}
+
+	public MemberInfo(MemGrade memGradeRentCount) {
+		this.memGradeRentCount = memGradeRentCount;
 	}
 
 	public int getMemNo() {
@@ -93,6 +101,22 @@ public class MemberInfo {
 		this.memGradeNo = memGradeNo;
 	}
 
+	public MemGrade getMemGradeRentCount() {
+		return memGradeRentCount;
+	}
+
+	public void setMemGradeRentCount(MemGrade memGradeRentCount) {
+		this.memGradeRentCount = memGradeRentCount;
+	}
+
+	public int getMemRentCount() {
+		return memRentCount;
+	}
+
+	public void setMemRentCount(int memRentCount) {
+		this.memRentCount = memRentCount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,8 +142,8 @@ public class MemberInfo {
 	@Override
 	public String toString() {
 		return String.format(
-				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGradeNo=%s]", memNo,
-				memName, memBirth, memTel, memCp, memAddr, memGradeNo);
+				"MemberInfo [memNo=%s, memName=%s, memBirth=%s, memTel=%s, memCp=%s, memAddr=%s, memGradeNo=%s, memGradeRentCount=%s, memRentCount=%s]",
+				memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount, memRentCount);
 	}
 
 }
