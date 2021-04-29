@@ -5,7 +5,15 @@ public class MemGradeRentCount extends MemGrade {
 
 	public MemGradeRentCount(int memGradeRentCount) {
 		this.memGradeRentCount = memGradeRentCount;
-		super.setMemGradeRentCount(memGradeRentCount);
+
 	}
-	
+
+	public int getMemGradeRentCount() {
+		return memGradeRentCount;
+	}
+
+	public void setMemGradeRentCount(int memGradeRentCount) {
+		this.memGradeRentCount = memGradeRentCount;
+	}
+
 }

@@ -5,7 +5,15 @@ public class MemRentCount extends MemberInfo {
 
 	public MemRentCount(int memRentCount) {
 		this.memRentCount = memRentCount;
-		super.setMemRentCount(memRentCount);
+
+	}
+
+	public int getMemRentCount() {
+		return memRentCount;
+	}
+
+	public void setMemRentCount(int memRentCount) {
+		this.memRentCount = memRentCount;
 	}
 
 }
