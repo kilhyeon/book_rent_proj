@@ -139,7 +139,7 @@ from vw_meminfo_grade where memCp = '01097415821' order by memNo;
 
 select * from rent;
 
-insert into rent values(8, 12004, 40005, 20210425, null, 0);
+insert into rent values(1, 12001, 40001, 20210425, null, 0);
 
 update rent set lateDate = if(ReturnDate - rentDate > 3, (ReturnDate - rentDate) -3, 0) where rentNo = 5;
 

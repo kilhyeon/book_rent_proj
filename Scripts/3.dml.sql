@@ -33,3 +33,6 @@ insert into bookinfo values
 	(40009, 'Probabilistic robotics', 4, 3, 0, 0, 0),
 	(40010, 'Pattern recognition and machine learning', 2, 3, 0, 0, 0);
 	
+-- insert into rent values(1, 12001, 40001, 20210421, null, 0);
+-- insert into rent values(2, 12002, 40002, 20210422, null, 0);
+-- insert into rent values(3, 12003, 40003, 20210423, null, 0);
