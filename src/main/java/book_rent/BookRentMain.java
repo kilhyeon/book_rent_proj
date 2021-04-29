@@ -167,7 +167,7 @@ public class BookRentMain extends JFrame implements ActionListener, MouseListene
 		tabbedPane.addTab("대여기록", null, RentRecord, null);
 		RentRecord.setLayout(new BoxLayout(RentRecord, BoxLayout.X_AXIS));
 		RentRecord.setService(rentService);
-//		RentRecord.loadData();
+		RentRecord.loadData();
 		
 		
 		
@@ -208,12 +208,12 @@ public class BookRentMain extends JFrame implements ActionListener, MouseListene
 	}
 
 	protected void actionPerformedButton1(ActionEvent e) {
-		RentPage frame = new RentPage();
+		RentPageUI frame = new RentPageUI();
 		frame.setVisible(true);
 	}
 
 	protected void actionPerformedButton2(ActionEvent e) {
-		ReturnPage frame = new ReturnPage();
+		ReturnPageUI frame = new ReturnPageUI();
 		frame.setVisible(true);
 	}
 

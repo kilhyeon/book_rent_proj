@@ -11,22 +11,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemGradeRentCount;
 import book_rent.dto.MemberInfo;
-import book_rent.dto.Rent;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.MemberContentPanel;
-import book_rent.ui.content.RentContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.list.BookInfoTablePanel;
-import book_rent.ui.list.MemRentTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.search.BookSearch;
 import book_rent.ui.search.MemberSearch;
 
-public class ReturnPage extends JFrame implements ActionListener {
+public class RentPageUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private MemberInfoService memService;
@@ -34,28 +32,23 @@ public class ReturnPage extends JFrame implements ActionListener {
 	private RentService rentService;
 	private MemberInfoTablePanel pMemInfoTableList;
 	private BookInfoTablePanel pBookInfoTableList;
-	private MemRentTablePanel pMemRentInfoTableList;
 	private MemberContentPanel pMemInfoContent;
 	private BookContentPanel pBookInfoContent;
-	private RentContentPanel pRentInfoContent;
 	private JPanel pMem;
-	private JPanel pRent;
 	private JPanel pBook;
-
 	private MemberSearch pMemSearch;
 	private BookSearch pBookSearch;
-
 	private JPanel pBtn;
-	private JButton btnReturn;
+	private JButton btnRent;
 	private JButton btnCancel;
 
-	public ReturnPage() {
-		setTitle("도서반납");
+	public RentPageUI() {
+		setTitle("도서대여");
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();
 		rentService = new RentService();
 		initialize();
-//		tableLoadData();
+		tableLoadData();
 	}
 
 	private void tableLoadData() {
@@ -63,7 +56,6 @@ public class ReturnPage extends JFrame implements ActionListener {
 		pMemInfoTableList.loadData();
 		pBookInfoTableList.setService(bookService);
 		pBookInfoTableList.loadData();
-
 	}
 
 	private void initialize() {
@@ -90,112 +82,105 @@ public class ReturnPage extends JFrame implements ActionListener {
 		pMemInfoContent = pMemInfoTableList.getpMemInfo();
 		pMem.add(pMemInfoContent);
 
-		pRent = new JPanel();
-		contentPane.add(pRent);
-		pRent.setLayout(new BoxLayout(pRent, BoxLayout.Y_AXIS));
+		pBook = new JPanel();
+		contentPane.add(pBook);
+		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
-//		pSearchBook = new BookSearch();
-//		pBook.add(pSearchBook);
-//		pSearchBook.setService(bookService);
+		pBookSearch = new BookSearch();
+		pBook.add(pBookSearch);
+		pBookSearch.setService(bookService);
 
-		pMemRentInfoTableList = pMemInfoTableList.getMemRentList();
-		pRent.add(pMemRentInfoTableList);
-		pMemRentInfoTableList.setRentService(rentService);
-		pMemRentInfoTableList.loadData();
+		pBookInfoTableList = pBookSearch.getBookInfoList();
+		pBook.add(pBookInfoTableList);
+		pBookInfoTableList.setService(bookService);
+		pBookInfoTableList.loadData();
 
-		pRentInfoContent = pMemRentInfoTableList.getpRentInfoContent();
-		pRent.add(pRentInfoContent);
+		pBookInfoContent = pBookInfoTableList.getpBookInfo();
+		pBook.add(pBookInfoContent);
 
 		pBtn = new JPanel();
 		contentPane.add(pBtn);
 
-		btnReturn = new JButton("반납하기");
-		btnReturn.addActionListener(this);
-		pBtn.add(btnReturn);
+		btnRent = new JButton("대여하기");
+//		btnRent.setEnabled(false);
+
+		btnRent.addActionListener(this);
+		pBtn.add(btnRent);
 
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
-
-//		pBook = new JPanel();
-//		contentPane.add(pBook);
-//		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
-//		pBook.setVisible(true);
-//
-//		pBookSearch = new BookSearch();
-//		pBook.add(pBookSearch);
-//		pBookSearch.setService(bookService);
-//
-//		pBookInfoTableList = pBookSearch.getBookInfoList();
-//		pBook.add(pBookInfoTableList);
-//		pBookInfoTableList.setService(bookService);
-//		pBookInfoTableList.loadData();
-//
-//		pBookInfoContent = pBookInfoTableList.getpBookInfo();
-//		pBook.add(pBookInfoContent);
-
-	}
-
-	public void setpListMem(MemberInfoTablePanel pListMem) {
-		this.pMemInfoTableList = pListMem;
 	}
 
 	public MemberInfoTablePanel getpListMem() {
 		return pMemInfoTableList;
 	}
 
+	public void setpListMem(MemberInfoTablePanel pListMem) {
+		this.pMemInfoTableList = pListMem;
+	}
+
+	public BookInfoTablePanel getpListBook() {
+		return pBookInfoTableList;
+	}
+
 	public void setpListBook(BookInfoTablePanel pListBook) {
 		this.pBookInfoTableList = pListBook;
-	}
-
-	public MemRentTablePanel getpListBook() {
-		return pMemRentInfoTableList;
-	}
-
-	public void setpListBook(MemRentTablePanel pListBook) {
-		this.pMemRentInfoTableList = pListBook;
-	}
-
-	public RentContentPanel getpRentInfo() {
-		return pRentInfoContent;
-	}
-
-	public void setpRentInfo(RentContentPanel pRentInfo) {
-		this.pRentInfoContent = pRentInfo;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
-		if (e.getSource() == btnReturn) {
+		if (e.getSource() == btnRent) {
 			actionPerformedBtnRent(e);
 		}
 	}
 
 	protected void actionPerformedBtnRent(ActionEvent e) {
-		Rent rentNo = pMemRentInfoTableList.getRentNo();
 		MemberInfo memNo = pMemInfoContent.getItemMemNo();
+		BookInfo bookNo = pBookInfoContent.getItemBookNo();
+		int bookCount = pBookInfoContent.getItemBookCount();
+		int bookCountTotal = pBookInfoContent.getItemBokCountTotal();
 
-		try {
-			rentService.bookReturn(rentNo, memNo);
-		} catch (NumberFormatException | InvalidCheckException e1) {
-			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+		int memRentCount = pMemInfoContent.getItemMemRentCount();
+		int memGradeRentCount = pMemInfoContent.getItemMemGradeRentCount();
+
+//		try {
+		if (memNo != null && bookNo != null) {
+
+			if (bookCount < bookCountTotal) {
+				if (memRentCount < memGradeRentCount) {
+					rentService.bookRent(memNo, bookNo);
+					pMemInfoTableList.loadData();
+					pBookInfoTableList.loadData();
+//					pMemInfoContent.clearTf();
+					pBookInfoContent.clearTf();
+					JOptionPane.showMessageDialog(null, "도서 대여가 완료되었습니다.");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "대여가능한 도서권수를 초과하였습니다.", "메세지", JOptionPane.ERROR_MESSAGE);
+					pMemInfoTableList.loadData();
+					pBookInfoTableList.loadData();
+					pMemInfoContent.clearTf();
+					pBookInfoContent.clearTf();
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(null, "모두 대여중인 도서입니다.", "메세지", JOptionPane.ERROR_MESSAGE);
+				pMemInfoTableList.loadData();
+				pBookInfoTableList.loadData();
+//				pMemInfoContent.clearTf();
+//				pBookInfoContent.clearTf();
+			}
+//		} catch (NumberFormatException | InvalidCheckException e1) {
+//			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+//		}
 		}
-
-		JOptionPane.showMessageDialog(null, "도서 반납이 완료되었습니다.");
-
-		pMemInfoTableList.loadData();
-		pMemRentInfoTableList.loadData();
-//		pBookInfoTableList.loadData();
-
-		pMemInfoContent.clearTf();
-		pRentInfoContent.clearTf();
-
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pMemInfoContent.clearTf();
-		pRentInfoContent.clearTf();
+		pBookInfoContent.clearTf();
 	}
 }
