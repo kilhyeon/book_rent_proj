@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemGrade;
 import book_rent.service.BookInfoService;
 import book_rent.ui.content.BookContentPanel;
 import book_rent.ui.content.BookContentManagement;
@@ -109,7 +110,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
 		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
 		pBookInfoTableList2.add(lblMent, BorderLayout.NORTH);
-		
+
 		pBtn = new JPanel();
 		pBookMangement.add(pBtn);
 
@@ -217,29 +218,48 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	}
 
 	private void actionPerformedMenuUpdate() {
-		BookInfo updateBook = pBookInfoTableList2.getItem();
-		pBookManageContent.setItem(updateBook);
-		btnAdd.setText("수정");
+		try {
+
+			BookInfo updateBook = pBookInfoTableList2.getItem();
+			pBookManageContent.setItem(updateBook);
+			btnAdd.setText("수정");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "도서정보를 선택하세요.");
+		}
 
 	}
 
 	private void actionPerformedMenuDelete() {
-		BookInfo delBook = pBookInfoTableList2.getItem();
-		bookService.removeBook(delBook);
-		pBookInfoTableList.loadData();
-		pBookInfoTableList2.loadData();
-		JOptionPane.showMessageDialog(null, delBook + " 도서의 정보를 삭제하였습니다.");
+		try {
+
+			BookInfo delBook = pBookInfoTableList2.getItem();
+			bookService.removeBook(delBook);
+			pBookInfoTableList.loadData();
+			pBookInfoTableList2.loadData();
+			JOptionPane.showMessageDialog(null, delBook + " 도서의 정보를 삭제하였습니다.");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "도서정보를 선택하세요.");
+		}
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		BookInfo addBook = pBookManageContent.getItem();
+		try {
+			
+			BookInfo addBook = pBookManageContent.getItem();
 //		System.out.println(addBook);
-		bookService.addBook(addBook);
-		pBookInfoTableList.loadData();
-		pBookInfoTableList2.loadData();
-		pBookManageContent.clearTf();
-		JOptionPane.showMessageDialog(null, addBook + " 도서를 추가하였습니다.");
+			bookService.addBook(addBook);
+			pBookInfoTableList.loadData();
+			pBookInfoTableList2.loadData();
+			pBookManageContent.clearTf();
+			JOptionPane.showMessageDialog(null, addBook + " 도서를 추가하였습니다.");
+			
+		}catch(NumberFormatException e1) {
+			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");
+		}
+		
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {

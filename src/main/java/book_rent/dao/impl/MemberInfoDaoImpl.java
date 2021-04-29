@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import book_rent.dao.MemberInfoDao;
-import book_rent.database.JdbcConn;
 import book_rent.dto.MemGrade;
 import book_rent.dto.MemGradeRentCount;
 import book_rent.dto.MemberInfo;
+import book_rent.uitl.JdbcConn;
 
 public class MemberInfoDaoImpl implements MemberInfoDao {
 
@@ -154,8 +154,19 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 		MemGrade memGradeNo = new MemGrade(rs.getInt("memGradeNo"), rs.getString("memGradeName"));
 		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(rs.getInt("memGradeRentCount"));
 		int memRentCount = rs.getInt("memRentCount");
-		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount, memRentCount);
+		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount,
+				memRentCount);
 	}
+	
+	private MemberInfo getMemberRank(ResultSet rs) throws SQLException {
+		int memNo = rs.getInt("memNo");
+		String memName = rs.getString("memName");		
+		MemGrade memGradeNo = new MemGrade(rs.getInt("memGradeNo"), rs.getString("memGradeName"));
+		int memRecord = rs.getInt("memRecord");
+		return new MemberInfo(memNo, memName, memGradeNo, memRecord);
+	}
+	
+	
 
 	@Override
 
@@ -219,6 +230,25 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 
 					return getMemberInfo(rs);
 				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<MemberInfo> selectMemberRank() {
+		String sql = "select memNo, memName, memGradeNo, memGradeName, memRecord from vw_meminfo_grade order by memRecord desc, memNo limit 10";
+		try (Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			if (rs.next()) {
+				List<MemberInfo> list = new ArrayList<MemberInfo>();
+				do {
+					list.add(getMemberRank(rs));
+				} while (rs.next());
+				return list;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

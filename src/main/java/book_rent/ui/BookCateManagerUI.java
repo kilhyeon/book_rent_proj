@@ -1,9 +1,5 @@
 package book_rent.ui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.SwingConstants;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingConstants;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 import book_rent.dto.BookCate;
 import book_rent.service.BookCateService;
@@ -63,7 +64,7 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 
 		JPopupMenu popupMenu = createPopupMenu();
 		pBookCateTableList.setPopupMenu(popupMenu);
-		
+
 		lblMent = new JLabel("마우스 우클릭으로 수정, 삭제 ");
 		lblMent.setHorizontalAlignment(SwingConstants.LEFT);
 		pBookCateTableList.add(lblMent, BorderLayout.NORTH);
@@ -141,26 +142,44 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 	}
 
 	protected void actionPerformedMenuUpdate() {
-		BookCate updateCate = pBookCateTableList.getItem();
-		pBookCateContent.setItem(updateCate);
-		btnAdd.setText("수정");
+		try {
+
+			BookCate updateCate = pBookCateTableList.getItem();
+			pBookCateContent.setItem(updateCate);
+			btnAdd.setText("수정");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "구분정보를 선택하세요.");
+		}
 
 	}
 
 	protected void actionPerformedMenuDelete() {
-		BookCate delCate = pBookCateTableList.getItem();
-		bookCateService.removeCate(delCate);
-		pBookCateTableList.loadData();
-		JOptionPane.showMessageDialog(null, delCate + "삭제 되었습니다.");
+		try {
+
+			BookCate delCate = pBookCateTableList.getItem();
+			bookCateService.removeCate(delCate);
+			pBookCateTableList.loadData();
+			JOptionPane.showMessageDialog(null, delCate + "삭제 되었습니다.");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "구분정보를 선택하세요.");
+		}
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		BookCate addCate = pBookCateContent.getItem();
-		bookCateService.addCate(addCate);
-		pBookCateTableList.loadData();
-		pBookCateContent.clearTf();
-		JOptionPane.showMessageDialog(null, addCate + " 추가했습니다.");
+		try {
+
+			BookCate addCate = pBookCateContent.getItem();
+			bookCateService.addCate(addCate);
+			pBookCateTableList.loadData();
+			pBookCateContent.clearTf();
+			JOptionPane.showMessageDialog(null, addCate + " 추가했습니다.");
+
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");
+		}
 
 	}
 

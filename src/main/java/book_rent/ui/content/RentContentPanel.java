@@ -85,6 +85,7 @@ public class RentContentPanel extends AbstractContentPanel<Rent> {
 		tflRentDate.setColumns(10);
 
 		JPanel panel = new JPanel();
+		panel.setVisible(false);
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(panel);

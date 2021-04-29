@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -28,7 +29,7 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 
 	public MemberContentPanel() {
 		initialize();
-		
+
 	}
 
 	private void initialize() {
@@ -162,25 +163,47 @@ public class MemberContentPanel extends AbstractContentPanel<MemberInfo> {
 		String memCp = tfMemCp.getText().trim();
 		String memAddr = tfMemAddr.getText().trim();
 		MemGrade memGradeNo = new MemGrade(Integer.parseInt(tfMemGrade.getText().trim()));
-		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(Integer.parseInt(tflMemGradeRentCount.getText().trim()));
+		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(
+				Integer.parseInt(tflMemGradeRentCount.getText().trim()));
 		int memRentCount = Integer.parseInt(tfMemRentCount.getText().trim());
 		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount,
 				memRentCount);
 	}
 
 	public MemberInfo getItemMemNo() {
-		int memNo = Integer.parseInt(tfMemNo.getText().trim());
-		return new MemberInfo(memNo);
+		try {
+			int memNo = Integer.parseInt(tfMemNo.getText().trim());
+			return new MemberInfo(memNo);
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			JOptionPane.showMessageDialog(null, "회원정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+			e.getStackTrace();
+			return null;
+		}
 	}
 
 	public int getItemMemRentCount() {
-		int memRentCount = Integer.parseInt(tfMemRentCount.getText().trim());
-		return memRentCount;
+		try {
+			int memRentCount = Integer.parseInt(tfMemRentCount.getText().trim());
+			return memRentCount;
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			e.getStackTrace();
+			return -1;
+		}
+
 	}
 
 	public int getItemMemGradeRentCount() {
-		int memGradeRentCount = Integer.parseInt(tflMemGradeRentCount.getText().trim());
-		return memGradeRentCount;
+		try {
+			int memGradeRentCount = Integer.parseInt(tflMemGradeRentCount.getText().trim());
+			return memGradeRentCount;
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			e.getStackTrace();
+			return -1;
+		}
+
 	}
 
 //	public MemberInfo getItemMemName() {

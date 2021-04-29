@@ -8,6 +8,8 @@ public interface MemberInfoDao {
 
 	List<MemberInfo> selectMemberInfoByAll();
 
+	List<MemberInfo> selectMemberRank();
+
 	List<MemberInfo> selectMemberInfoByNo(MemberInfo memberinfo);
 
 	List<MemberInfo> selectMemberInfoByName(MemberInfo memberinfo);

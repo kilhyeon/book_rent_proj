@@ -13,7 +13,8 @@ CREATE TABLE book_rent.memberInfo (
 	memCp        VARCHAR(13)  NULL     COMMENT '휴대전화', -- 휴대전화
 	memAddr      VARCHAR(256) NULL     COMMENT '주소', -- 주소
 	memGradeNo   INT          NULL     COMMENT '회원등급', -- 회원등급
-	memRentCount INT          NULL     DEFAULT 0 COMMENT '대여권수' -- 대여권수
+	memRentCount INT          NULL     DEFAULT 0 COMMENT '대여권수', -- 대여권수
+	memRecord    INT          NULL     DEFAULT 0 COMMENT '회원대여횟수' -- 회원대여횟수
 )
 COMMENT '회원정보';
 
@@ -26,11 +27,13 @@ ALTER TABLE book_rent.memberInfo
 
 -- 도서정보
 CREATE TABLE book_rent.bookInfo (
-	bookNo     INT         NOT NULL COMMENT '도서번호', -- 도서번호
-	bookName   VARCHAR(40) NULL     COMMENT '도서제목', -- 도서제목
-	bookCateNo INT         NULL     COMMENT '도서구분', -- 도서구분
-	bookCount  INT         NULL     COMMENT '도서보유권수', -- 도서보유권수
-	rentState  INT         NULL     DEFAULT 0 COMMENT '대출여부' -- 대출여부
+	bookNo         INT         NOT NULL COMMENT '도서번호', -- 도서번호
+	bookName       VARCHAR(40) NULL     COMMENT '도서제목', -- 도서제목
+	bookCateNo     INT         NULL     COMMENT '도서구분', -- 도서구분
+	bookCountTotal INT         NULL     COMMENT '도서권수', -- 도서권수
+	bookCount      INT         NULL     DEFAULT 0 COMMENT '대여권수', -- 대여권수
+	rentState      INT         NULL     DEFAULT 0 COMMENT '대여여부', -- 대여여부
+	bookRecord     INT         NULL     DEFAULT 0 COMMENT '도서대여횟수' -- 도서대여횟수
 )
 COMMENT '도서정보';
 

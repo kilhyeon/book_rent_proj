@@ -60,6 +60,20 @@ public class Rent {
 		this.lateDate = lateDate;
 	}
 
+	public Rent(int rentNo, MemberInfo memNo, MemberInfo memName, MemGrade memGradeNo, BookInfo bookNo,
+			BookInfo bookName, BookCate bookCateNo, Date rentDate, Date returnDate, int lateDate) {
+		this.rentNo = rentNo;
+		this.memNo = memNo;
+		this.memName = memName;
+		this.memGradeNo = memGradeNo;
+		this.bookNo = bookNo;
+		this.bookName = bookName;
+		this.bookCateNo = bookCateNo;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.lateDate = lateDate;
+	}
+
 	public int getRentNo() {
 		return rentNo;
 	}
@@ -80,9 +94,9 @@ public class Rent {
 		return bookNo;
 	}
 
-//	public void setBookNo(BookInfo bookNo) {
-//		this.bookNo = bookNo;
-//	}
+	public void setBookNo(BookInfo bookNo) {
+		this.bookNo = bookNo;
+	}
 
 	public String getBookName() {
 		return bookNo.getBookName();

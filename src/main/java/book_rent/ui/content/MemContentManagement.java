@@ -191,9 +191,9 @@ public class MemContentManagement extends AbstractContentPanel<MemberInfo> imple
 		String memCp = tfMemCp.getText().trim();
 		String memAddr = tfMemAddr.getText().trim();
 		MemGrade memGradeNo = new MemGrade(Integer.parseInt(tfMemGrade.getText().trim()));
-		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(Integer.parseInt(tflMemGradeRentCount.getText().trim()));
+//		MemGradeRentCount memGradeRentCount = new MemGradeRentCount(Integer.parseInt(tflMemGradeRentCount.getText().trim()));
 		int memRentCount = Integer.parseInt(tfMemNo.getText().trim());
-		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeRentCount, memRentCount);
+		return new MemberInfo(memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memRentCount);
 	}
 
 	@Override

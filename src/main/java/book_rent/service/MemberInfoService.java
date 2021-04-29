@@ -13,6 +13,10 @@ public class MemberInfoService {
 		return memDao.selectMemberInfoByAll();
 	}
 
+	public List<MemberInfo> showMemberRank() {
+		return memDao.selectMemberRank();
+	}
+
 	public List<MemberInfo> showMemberListByNo(MemberInfo memberinfo) {
 		return memDao.selectMemberInfoByNo(memberinfo);
 	}

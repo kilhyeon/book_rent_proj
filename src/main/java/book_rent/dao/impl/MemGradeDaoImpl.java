@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import book_rent.dao.MemGradeDao;
-import book_rent.database.JdbcConn;
 import book_rent.dto.MemGrade;
+import book_rent.uitl.JdbcConn;
 
 public class MemGradeDaoImpl implements MemGradeDao {
 	private static final MemGradeDaoImpl instance = new MemGradeDaoImpl();

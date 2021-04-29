@@ -23,10 +23,10 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 		pBookInfoContent = new BookContentPanel();
 		pBookInfoContent.getTfBookNo().setEditable(false);
 		pBookInfoContent.getTfBookName().setEditable(false);
-		pBookInfoContent.getTfBookCount().setEditable(false);
+		pBookInfoContent.getTfBookCountTotal().setEditable(false);
 		pBookInfoContent.getTfBookCate().setEditable(false);
 		pBookInfoContent.getTfRentState().setEditable(false);
-		
+
 	}
 
 	private void initialize() {
@@ -53,21 +53,22 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 	@Override
 	protected void setAlignAndWidth() {
 		// 컬럼내용 정렬
-		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4);
+		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(200, 850, 150, 200, 200);
+		setTableCellWidth(200, 850, 150, 150, 200, 200);
 
 	}
 
 	@Override
 	public Object[] toArray(BookInfo b) {
-		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCount(), b.getBookCateNo().getBookCateName(), b.getRentState() };
+		return new Object[] { b.getBookNo(), b.getBookName(), b.getBookCountTotal(), b.getBookCount(), b.getBookCateNo().getBookCateName(),
+				b.getRentState() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "도서번호", "도서제목", "보유권수", "도서구분", "대여상태" };
+		return new String[] { "도서번호", "도서제목", "도서권수", "대여권수", "도서구분", "대여상태" };
 	}
 
 	@Override
@@ -93,10 +94,14 @@ public class BookInfoTablePanel extends AbstractCustomTablePanel<BookInfo> imple
 		try {
 			BookInfo item = bookService.showBookByBookNo(bookNo);
 			pBookInfoContent.setItem(item);
-		
+
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}
+
+//		String bookRentState = (String) table.getValueAt(row, 4);
+//		System.out.println(bookRentState);
+
 	}
 
 	@Override

@@ -10,6 +10,7 @@ public class MemberInfo {
 	private MemGrade memGradeNo;
 	private MemGrade memGradeRentCount;
 	private int memRentCount;
+	private int memRecrod;
 
 	public MemberInfo() {
 		// TODO Auto-generated constructor stub
@@ -26,6 +27,25 @@ public class MemberInfo {
 	public MemberInfo(int memNo, String memName) {
 		this.memNo = memNo;
 		this.memName = memName;
+	}
+
+	public MemberInfo(int memNo, String memName, MemGrade memGradeNo, int memRecrod) {
+		this.memNo = memNo;
+		this.memName = memName;
+		this.memGradeNo = memGradeNo;
+		this.memRecrod = memRecrod;
+	}
+
+	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
+			MemGrade memGradeNo, int memRentCount) {
+		this.memNo = memNo;
+		this.memName = memName;
+		this.memBirth = memBirth;
+		this.memTel = memTel;
+		this.memCp = memCp;
+		this.memAddr = memAddr;
+		this.memGradeNo = memGradeNo;
+		this.memRentCount = memRentCount;
 	}
 
 	public MemberInfo(int memNo, String memName, String memBirth, String memTel, String memCp, String memAddr,
@@ -115,6 +135,14 @@ public class MemberInfo {
 
 	public void setMemRentCount(int memRentCount) {
 		this.memRentCount = memRentCount;
+	}
+
+	public int getMemRecrod() {
+		return memRecrod;
+	}
+
+	public void setMemRecrod(int memRecrod) {
+		this.memRecrod = memRecrod;
 	}
 
 	@Override

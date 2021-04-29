@@ -13,6 +13,10 @@ public class BookInfoService {
 		return bookDao.selectBookInfoByAll();
 	}
 
+	public List<BookInfo> showBookRank() {
+		return bookDao.selectBookRank();
+	}
+
 	public List<BookInfo> showBookListByNo(BookInfo bookinfo) {
 		return bookDao.selectBookInfoByNo(bookinfo);
 	}
@@ -32,8 +36,7 @@ public class BookInfoService {
 	public BookInfo showBookByBookNo(int bookNo) {
 		return bookDao.selectBookInfoBybookNo(bookNo);
 	}
-	
-	
+
 	public void addBook(BookInfo bookinfo) {
 		bookDao.insertBook(bookinfo);
 	}

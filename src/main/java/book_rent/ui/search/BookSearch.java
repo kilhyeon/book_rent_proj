@@ -9,6 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -39,7 +40,7 @@ public class BookSearch extends JPanel implements ActionListener {
 		add(lbl);
 
 		cmb = new JComboBox<String>();
-		cmb.setModel(new DefaultComboBoxModel(new String[] { "도서번호", "도서제목", "도서구분", "대여상태" }));
+		cmb.setModel(new DefaultComboBoxModel(new String[] { "도서번호", "도서제목" }));
 		add(cmb);
 
 		tf = new JTextField();
@@ -66,12 +67,15 @@ public class BookSearch extends JPanel implements ActionListener {
 				pBookInfoTableList.setList(bookList);
 				pBookInfoTableList.setList();
 			} else {
-				pBookInfoTableList.setList(bookList);
+				JOptionPane.showMessageDialog(null, "일치하는 도서 정보가 없습니다.");
 				pBookInfoTableList.loadData();
+				clearTf();
 			}
 
-		} catch (Exception e1) {
-			e1.getStackTrace();
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, "검색 방법을 선택하세요.");
+//			pMemInfoTableList.setList(memSearchList);
+			pBookInfoTableList.loadData();
 		}
 	}
 
@@ -84,12 +88,12 @@ public class BookSearch extends JPanel implements ActionListener {
 			if (model.equals("도서제목")) {
 				bookList = bookService.showBookListByName(new BookInfo(tf.getText()));
 			}
-			if (model.equals("도서구분")) {
-				bookList = bookService.showBookListByCate(new BookInfo(Integer.parseInt(tf.getText())));
-			}
-			if (model.equals("대출상태")) {
-				bookList = bookService.showBookListByRent(new BookInfo(tf.getText()));
-			}
+//			if (model.equals("도서구분")) {
+//				bookList = bookService.showBookListByCate(new BookInfo(Integer.parseInt(tf.getText())));
+//			}
+//			if (model.equals("대출상태")) {
+//				bookList = bookService.showBookListByRent(new BookInfo(tf.getText()));
+//			}
 
 		} catch (Exception e) {
 			e.getStackTrace();

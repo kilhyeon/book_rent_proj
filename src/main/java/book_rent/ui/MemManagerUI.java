@@ -241,29 +241,47 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 	}
 
 	private void actionPerformedMenuUpdate() {
-		MemberInfo updateMember = pMemInfoTableList2.getItem();
-		pMemManageContent.setItem(updateMember);
-		btnAdd.setText("수정");
+		try {
+
+			MemberInfo updateMember = pMemInfoTableList2.getItem();
+			pMemManageContent.setItem(updateMember);
+			btnAdd.setText("수정");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "회원정보를 선택하세요.");
+		}
 
 	}
 
 	private void actionPerformedMenuDelete() {
-		MemberInfo delMember = pMemInfoTableList2.getItem();
-		memService.removeMember(delMember);
-		pMemInfoTableList.loadData();
-		pMemInfoTableList2.loadData();
-		JOptionPane.showMessageDialog(null, delMember + " 회원의 정보를 삭제하였습니다.");
+		try {
+
+			MemberInfo delMember = pMemInfoTableList2.getItem();
+			memService.removeMember(delMember);
+			pMemInfoTableList.loadData();
+			pMemInfoTableList2.loadData();
+			JOptionPane.showMessageDialog(null, delMember + " 회원의 정보를 삭제하였습니다.");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "회원정보를 선택하세요.");
+		}
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		MemberInfo addMember = pMemManageContent.getItem();
-		memService.addMember(addMember);
-		pMemInfoTableList.loadData();
-		pMemInfoTableList2.loadData();
-		pMemManageContent.clearTf();
-		tableLoadData();
-		JOptionPane.showMessageDialog(null, addMember + " 회원을 추가하였습니다.");
+		try {
+
+			MemberInfo addMember = pMemManageContent.getItem();
+			memService.addMember(addMember);
+			pMemInfoTableList.loadData();
+			pMemInfoTableList2.loadData();
+			pMemManageContent.clearTf();
+			tableLoadData();
+			JOptionPane.showMessageDialog(null, addMember + " 회원을 추가하였습니다.");
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");
+		}
+
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {

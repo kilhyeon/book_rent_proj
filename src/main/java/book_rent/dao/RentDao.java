@@ -8,12 +8,14 @@ import book_rent.dto.Rent;
 
 public interface RentDao {
 	List<Rent> selectRentByAll();
+	
+	List<Rent> selectRentByList();
 
 	List<Rent> selectRentByMemNo(MemberInfo memInfo);
-	
+
 	Rent selectRentByRentNo(int rentNo);
-	
+
 	int insertRent(MemberInfo memInfo, BookInfo bookInfo);
 
-	int updateRent(Rent rentInfo);
+	int updateRent(Rent rentInfo, MemberInfo memNo);
 }

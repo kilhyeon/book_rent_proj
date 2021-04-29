@@ -3,9 +3,11 @@ package book_rent.dto;
 public class BookInfo {
 	private int bookNo;
 	private String bookName;
+	private int bookCountTotal;
 	private int bookCount;
 	private BookCate bookCateNo;
 	private int rentState;
+	private int bookRecord;
 
 	public BookInfo() {
 		// TODO Auto-generated constructor stub
@@ -24,16 +26,25 @@ public class BookInfo {
 		this.bookName = bookName;
 	}
 
-	public BookInfo(int bookNo, String bookName, int bookCount, BookCate bookCateNo) {
+	public BookInfo(int bookNo, String bookName, int bookCountTotal, BookCate bookCateNo) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
-		this.bookCount = bookCount;
+		this.bookCountTotal = bookCountTotal;
 		this.bookCateNo = bookCateNo;
 	}
 
-	public BookInfo(int bookNo, String bookName, int bookCount, BookCate bookCateNo, int rentState) {
+	public BookInfo(int bookNo, String bookName, BookCate bookCateNo, int bookRecord) {
 		this.bookNo = bookNo;
 		this.bookName = bookName;
+		this.bookCateNo = bookCateNo;
+		this.bookRecord = bookRecord;
+	}
+
+	public BookInfo(int bookNo, String bookName, int bookCountTotal, int bookCount, BookCate bookCateNo,
+			int rentState) {
+		this.bookNo = bookNo;
+		this.bookName = bookName;
+		this.bookCountTotal = bookCountTotal;
 		this.bookCount = bookCount;
 		this.bookCateNo = bookCateNo;
 		this.rentState = rentState;
@@ -86,6 +97,22 @@ public class BookInfo {
 
 	public int getRentStateToInt() {
 		return rentState;
+	}
+
+	public int getBookCountTotal() {
+		return bookCountTotal;
+	}
+
+	public void setBookCountTotal(int bookCountTotal) {
+		this.bookCountTotal = bookCountTotal;
+	}
+
+	public int getBookRecord() {
+		return bookRecord;
+	}
+
+	public void setBookRecord(int bookRecord) {
+		this.bookRecord = bookRecord;
 	}
 
 	@Override

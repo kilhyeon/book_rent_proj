@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import book_rent.dto.MemGrade;
+import book_rent.dto.MemberInfo;
 import book_rent.service.MemGradeService;
 import book_rent.ui.content.MemGradeContnetPanel;
 import book_rent.ui.content.MemContentManagement;
@@ -144,26 +145,42 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 	}
 
 	protected void actionPerformedMenuUpdate() {
-		MemGrade updateGrade = pMemGradeTableList.getItem();
-		pMemGradeContent.setItem(updateGrade);
-		btnAdd.setText("수정");
+		try {
+			MemGrade updateGrade = pMemGradeTableList.getItem();
+			pMemGradeContent.setItem(updateGrade);
+			btnAdd.setText("수정");
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "등급정보를 선택하세요.");
+		}
 
 	}
 
 	protected void actionPerformedMenuDelete() {
-		MemGrade delGrade = pMemGradeTableList.getItem();
-		memGradeService.removeGrade(delGrade);
-		pMemGradeTableList.loadData();
-		JOptionPane.showMessageDialog(null, delGrade + "삭제 되었습니다.");
+		try {
+
+			MemGrade delGrade = pMemGradeTableList.getItem();
+			memGradeService.removeGrade(delGrade);
+			pMemGradeTableList.loadData();
+			JOptionPane.showMessageDialog(null, delGrade + "삭제 되었습니다.");
+
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "등급정보를 선택하세요.");
+		}
 
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		MemGrade addGrade = pMemGradeContent.getItem();
-		memGradeService.addGrade(addGrade);
-		pMemGradeTableList.loadData();
-		pMemGradeContent.clearTf();
-		JOptionPane.showMessageDialog(null, addGrade + " 추가했습니다.");
+		try {
+
+			MemGrade addGrade = pMemGradeContent.getItem();
+			memGradeService.addGrade(addGrade);
+			pMemGradeTableList.loadData();
+			pMemGradeContent.clearTf();
+			JOptionPane.showMessageDialog(null, addGrade + " 추가했습니다.");
+
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");
+		}
 
 	}
 

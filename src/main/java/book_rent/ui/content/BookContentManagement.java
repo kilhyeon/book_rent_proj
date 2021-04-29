@@ -26,7 +26,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 	private JTextField tfBookCate;
 	private JComboBox cmbCate;
 	private BookCateService bookCateService;
-	private JTextField tfBookCount;
+	private JTextField tfBookCountTotal;
 
 	public BookContentManagement() {
 		bookCateService = new BookCateService();
@@ -75,14 +75,14 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		JPanel pBookCount = new JPanel();
 		add(pBookCount);
 
-		JLabel lblBookCount = new JLabel("보유권수 : ");
-		pBookCount.add(lblBookCount);
+		JLabel lblBookCountTotal = new JLabel("도서권수 : ");
+		pBookCount.add(lblBookCountTotal);
 		pBookCount.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		tfBookCount = new JTextField();
-		tfBookCount.setHorizontalAlignment(SwingConstants.CENTER);
-		pBookCount.add(tfBookCount);
-		tfBookCount.setColumns(15);
+		tfBookCountTotal = new JTextField();
+		tfBookCountTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		pBookCount.add(tfBookCountTotal);
+		tfBookCountTotal.setColumns(15);
 
 		JPanel pBookCate = new JPanel();
 		add(pBookCate);
@@ -108,7 +108,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 
 		tfBookNo.setText(String.valueOf(item.getBookNo()));
 		tfBookName.setText(item.getBookName());
-		tfBookCount.setText(String.valueOf(item.getBookCount()));
+		tfBookCountTotal.setText(String.valueOf(item.getBookCountTotal()));
 //		tfBookCate.setText((String.valueOf(item.getBookCateNo())).replaceAll("[^0-9]", ""));
 //		tfRentState.setText(String.valueOf(item.getRentState()));
 
@@ -123,10 +123,10 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		validCheck();
 		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
 		String bookName = tfBookName.getText().trim();
-		int bookCount = Integer.parseInt(tfBookCount.getText().trim());
+		int bookCountTotal = Integer.parseInt(tfBookCountTotal.getText().trim());
 		BookCate bookCateNo = new BookCate(Integer.parseInt(tfBookCate.getText().trim()));
 //		int rentState = Integer.parseInt(tfRentState.getText().trim());
-		return new BookInfo(bookNo, bookName, bookCount, bookCateNo);
+		return new BookInfo(bookNo, bookName, bookCountTotal, bookCateNo);
 	}
 
 //	public BookInfo getItemBookNo() {
@@ -148,7 +148,7 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		tfBookNo.setText("");
 		tfBookName.setText("");
 		tfBookCate.setText("");
-		tfBookCount.setText("");
+		tfBookCountTotal.setText("");
 //		tfRentState.setText("");
 		cmbCate.setSelectedIndex(-1);
 
@@ -173,12 +173,12 @@ public class BookContentManagement extends AbstractContentPanel<BookInfo> implem
 		this.tfBookName = tfBookName;
 	}
 
-	public JTextField getTfBookCount() {
-		return tfBookCount;
+	public JTextField getTfBookCountTotal() {
+		return tfBookCountTotal;
 	}
 
-	public void setTfBookCount(JTextField tfBookCount) {
-		this.tfBookCount = tfBookCount;
+	public void setTfBookCountTotal(JTextField tfBookCountTotal) {
+		this.tfBookCountTotal = tfBookCountTotal;
 	}
 
 	public JTextField getTfBookCate() {

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.dto.Rent;
 import book_rent.service.BookInfoService;
 import book_rent.service.MemberInfoService;
@@ -174,9 +175,10 @@ public class ReturnPage extends JFrame implements ActionListener {
 
 	protected void actionPerformedBtnRent(ActionEvent e) {
 		Rent rentNo = pMemRentInfoTableList.getRentNo();
+		MemberInfo memNo = pMemInfoContent.getItemMemNo();
 
 		try {
-			rentService.bookReturn(rentNo);
+			rentService.bookReturn(rentNo, memNo);
 		} catch (NumberFormatException | InvalidCheckException e1) {
 			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
 		}
@@ -185,6 +187,7 @@ public class ReturnPage extends JFrame implements ActionListener {
 
 		pMemInfoTableList.loadData();
 		pMemRentInfoTableList.loadData();
+//		pBookInfoTableList.loadData();
 
 		pMemInfoContent.clearTf();
 		pRentInfoContent.clearTf();

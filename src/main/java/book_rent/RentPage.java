@@ -141,12 +141,15 @@ public class RentPage extends JFrame implements ActionListener {
 		MemberInfo memNo = pMemInfoContent.getItemMemNo();
 		BookInfo bookNo = pBookInfoContent.getItemBookNo();
 		int bookCount = pBookInfoContent.getItemBookCount();
+		int bookCountTotal = pBookInfoContent.getItemBokCountTotal();
 
 		int memRentCount = pMemInfoContent.getItemMemRentCount();
 		int memGradeRentCount = pMemInfoContent.getItemMemGradeRentCount();
 
-		try {
-			if (bookCount > 0) {
+//		try {
+		if (memNo != null && bookNo != null) {
+
+			if (bookCount < bookCountTotal) {
 				if (memRentCount < memGradeRentCount) {
 					rentService.bookRent(memNo, bookNo);
 					pMemInfoTableList.loadData();
@@ -167,13 +170,13 @@ public class RentPage extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "모두 대여중인 도서입니다.", "메세지", JOptionPane.ERROR_MESSAGE);
 				pMemInfoTableList.loadData();
 				pBookInfoTableList.loadData();
-				pMemInfoContent.clearTf();
-				pBookInfoContent.clearTf();
+//				pMemInfoContent.clearTf();
+//				pBookInfoContent.clearTf();
 			}
-		} catch (NumberFormatException | InvalidCheckException e1) {
-			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+//		} catch (NumberFormatException | InvalidCheckException e1) {
+//			JOptionPane.showMessageDialog(null, "회원, 도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+//		}
 		}
-
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {

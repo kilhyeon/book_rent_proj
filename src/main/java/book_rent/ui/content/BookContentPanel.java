@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -12,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import book_rent.dto.BookCate;
 import book_rent.dto.BookCount;
 import book_rent.dto.BookInfo;
+import book_rent.dto.MemberInfo;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.NotSelectedException;
 
@@ -21,6 +23,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 	private JTextField tfBookCate;
 	private JTextField tfRentState;
 	private JTextField tfBookCount;
+	private JTextField tfBookCountTotal;
 
 	public BookContentPanel() {
 		initialize();
@@ -52,7 +55,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfBookCate = new JTextField();
 		pBookName.add(tfBookCate);
 		tfBookCate.setHorizontalAlignment(SwingConstants.CENTER);
-		tfBookCate.setColumns(20);
+		tfBookCate.setColumns(10);
 
 		JPanel pBookState = new JPanel();
 		add(pBookState);
@@ -70,8 +73,16 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		add(pRentCate);
 		pRentCate.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		JLabel lblBookCount = new JLabel("보유권수 : ");
+		JLabel lblBookCount = new JLabel("대여권수 : ");
 		lblBookCount.setVisible(false);
+
+		JLabel lblBookCountTotal = new JLabel("도서권수 : ");
+		pRentCate.add(lblBookCountTotal);
+
+		tfBookCountTotal = new JTextField();
+		tfBookCountTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		pRentCate.add(tfBookCountTotal);
+		tfBookCountTotal.setColumns(10);
 		pRentCate.add(lblBookCount);
 
 		tfBookCount = new JTextField();
@@ -99,6 +110,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfBookNo.setText(String.valueOf(item.getBookNo()));
 		tfBookName.setText(item.getBookName());
 		tfBookCate.setText(String.valueOf(item.getBookCateNo().getBookCateName()));
+		tfBookCountTotal.setText(String.valueOf(item.getBookCountTotal()));
 		tfBookCount.setText(String.valueOf(item.getBookCount()));
 		tfRentState.setText(String.valueOf(item.getRentState()));
 		tfBookNo.setEditable(false);
@@ -109,31 +121,67 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		validCheck();
 		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
 		String bookName = tfBookName.getText().trim();
+		int bookCountTotal = Integer.parseInt(tfBookCountTotal.getText().trim());
 		int bookCount = Integer.parseInt(tfBookCount.getText().trim());
 		BookCate bookCateNo = new BookCate(Integer.parseInt(tfBookCate.getText().trim()));
 		int rentState = Integer.parseInt(tfRentState.getText().trim());
-		return new BookInfo(bookNo, bookName, bookCount, bookCateNo, rentState);
+		return new BookInfo(bookNo, bookName, bookCountTotal, bookCount, bookCateNo, rentState);
 	}
 
 	public BookInfo getItemBookNo() {
-		validCheck();
-		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
-		return new BookInfo(bookNo);
+//		validCheck();
+		try {
+			int bookNo = Integer.parseInt(tfBookNo.getText().trim());
+			return new BookInfo(bookNo);
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			JOptionPane.showMessageDialog(null, "도서정보를 선택하세요.", "메세지", JOptionPane.WARNING_MESSAGE);
+			e.getStackTrace();
+			return null;
+		}
+
 	}
 
 	public BookInfo getItemBookName() {
-		validCheck();
-		int bookNo = Integer.parseInt(tfBookNo.getText().trim());
-		String bookName = tfBookName.getText().trim();
-		return new BookInfo(bookNo, bookName);
+//		validCheck();
+		try {
+			int bookNo = Integer.parseInt(tfBookNo.getText().trim());
+			String bookName = tfBookName.getText().trim();
+			return new BookInfo(bookNo, bookName);
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			e.getStackTrace();
+			return null;
+		}
+
 	}
 
 	public int getItemBookCount() {
-		validCheck();
-		int bookCount = Integer.parseInt(tfBookCount.getText().trim());
-		return bookCount;
+//		validCheck();
+		try {
+			int bookCount = Integer.parseInt(tfBookCount.getText().trim());
+			return bookCount;
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			e.getStackTrace();
+			return -1;
+		}
+
 	}
-	
+
+	public int getItemBokCountTotal() {
+//		validCheck();
+		try {
+			int bookCountTotal = Integer.parseInt(tfBookCountTotal.getText().trim());
+			return bookCountTotal;
+
+		} catch (NumberFormatException | InvalidCheckException e) {
+			e.getStackTrace();
+			return -1;
+		}
+
+	}
+
 	@Override
 	public void validCheck() {
 		if (tfBookNo.getText().equals("")) {
@@ -147,7 +195,7 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 		tfBookNo.setText("");
 		tfBookName.setText("");
 		tfBookCate.setText("");
-		tfBookCount.setText("");
+		tfBookCountTotal.setText("");
 		tfRentState.setText("");
 
 //		if (!tfBookNo.isEditable()) {
@@ -193,6 +241,14 @@ public class BookContentPanel extends AbstractContentPanel<BookInfo> {
 
 	public void setTfRentState(JTextField tfRentState) {
 		this.tfRentState = tfRentState;
+	}
+
+	public JTextField getTfBookCountTotal() {
+		return tfBookCountTotal;
+	}
+
+	public void setTfBookCountTotal(JTextField tfBookCountTotal) {
+		this.tfBookCountTotal = tfBookCountTotal;
 	}
 
 }

@@ -100,6 +100,17 @@ select * from bookinfo;
 select * from rent;
 select * from memberinfo;
 
+
+update bookinfo set rentState = if (bookCount >= bookCountTotal, 1, 0) where bookNo = 40001;
+update bookinfo set bookCount = 4 where bookNo = 40001;
+
+
+-- 도서추가
+insert into bookinfo(bookNo, bookName, bookCountTotal, bookCount, bookCateNo) values (40044, 'book', 5, bookCountTotal, 1);
+select bookNo, bookName, bookCountTotal, bookCount, bookCateNo, bookCateName, rentState from vw_bookinfo_cate order by bookNo;
+
+
+
 -- 대여 제약조건
 insert into rent (memNo, bookNo, rentDate, returnDate, lateDate) values (12002, 40002, now(), null, 0)
 from dual where exists(select * from bookinfo where bookCount = 0);
@@ -108,5 +119,40 @@ from dual where exists(select * from bookinfo where bookCount = 0);
 
 -- 회원 등급별 대여 회수
 update memberinfo set memRentCount = memRentCount+1 where memNo = 12001;
+
+
+-- 대여횟수 증가
+select * from memberinfo;
+select * from bookinfo;
+
+update memberinfo set memRecord = memRecord+1 where memNo = 12001;
+update bookinfo set bookRecord = bookRecord+1 where bookNo = 40001;
+
+select memNo, memName, memGradeNo, memRecord from memberinfo order by memRecord desc, memNo limit 10;
+select bookNo, bookName, bookCateNo, bookRecord from bookinfo b2 order by bookRecord desc, bookNo limit 10;
+
+
+
+select memNo, memName, memBirth, memTel, memCp, memAddr, memGradeNo, memGradeName, memGradeRentCount, memRentCount
+from vw_meminfo_grade where memCp = '01097415821' order by memNo;
+
+
+select * from rent;
+
+insert into rent values(8, 12004, 40005, 20210425, null, 0);
+
+update rent set lateDate = if(ReturnDate - rentDate > 3, (ReturnDate - rentDate) -3, 0) where rentNo = 5;
+
+
+
+
+
+
+
+
+
+
+
+
 
 

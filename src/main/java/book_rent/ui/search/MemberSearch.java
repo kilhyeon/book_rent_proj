@@ -40,7 +40,7 @@ public class MemberSearch extends JPanel implements ActionListener {
 		add(lbl);
 
 		cmb = new JComboBox<String>();
-		cmb.setModel(new DefaultComboBoxModel<String>(new String[] { "회원번호", "회원명", "휴대전화", "회원등급" }));
+		cmb.setModel(new DefaultComboBoxModel<String>(new String[] { "회원번호", "회원명" }));
 		add(cmb);
 
 		tf = new JTextField();
@@ -71,6 +71,7 @@ public class MemberSearch extends JPanel implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "일치하는 회원 정보가 없습니다.");
 				pMemInfoTableList.loadData();
+				clearTf();
 			}
 
 		} catch (NullPointerException e1) {
@@ -89,12 +90,12 @@ public class MemberSearch extends JPanel implements ActionListener {
 			if (item.equals("회원명")) {
 				memSearchList = memService.showMemberListByName(new MemberInfo(tf.getText()));
 			}
-			if (item.equals("휴대전화")) {
-				memSearchList = memService.showMemberListByCp(new MemberInfo(tf.getText()));
-			}
-			if (item.equals("회원등급")) {
-				memSearchList = memService.showMemberListByGrade(new MemberInfo(Integer.parseInt(tf.getText())));
-			}
+//			if (item.equals("휴대전화")) {
+//				memSearchList = memService.showMemberListByCp(new MemberInfo(tf.getText()));
+//			}
+//			if (item.equals("회원등급")) {
+//				memSearchList = memService.showMemberListByGrade(new MemberInfo(Integer.parseInt(tf.getText())));
+//			}
 
 		} catch (NumberFormatException e) {
 			e.getStackTrace();

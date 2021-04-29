@@ -1,10 +1,11 @@
 -- 도서정보 구분이름
-create view vw_bookinfo_cate as select b.bookNo, b.bookName, b.bookCount, c.bookCateNo, c.bookCateName, b.rentState 
+create view vw_bookinfo_cate as select b.bookNo, b.bookName, b.bookCountTotal, b.bookCount, c.bookCateNo, c.bookCateName, b.rentState, b.bookRecord
 from bookinfo b join category c on b.bookCateNo = c.bookCateNo;
 
 
+
 -- 회원정보 등급이름
-create view vw_meminfo_grade as select m.memNo, m.memName, m.memBirth, m.memTel, m.memCp, m.memAddr, g.memGradeNo, g.memGradeName, g.memGradeRentCount, m.memRentCount
+create view vw_meminfo_grade as select m.memNo, m.memName, m.memBirth, m.memTel, m.memCp, m.memAddr, g.memGradeNo, g.memGradeName, g.memGradeRentCount, m.memRentCount, m.memRecord
 from memberinfo m join grade g on m.memGradeNo = g.memGradeNo;
 
 

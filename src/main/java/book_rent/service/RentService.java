@@ -15,6 +15,10 @@ public class RentService {
 		return rentDao.selectRentByAll();
 	}
 	
+	public List<Rent> showRentAllList() {
+		return rentDao.selectRentByList();
+	}
+	
 	public List<Rent> showRentListByMemNo(MemberInfo memInfo){
 		return rentDao.selectRentByMemNo(memInfo);
 	}
@@ -28,7 +32,7 @@ public class RentService {
 		return rentDao.insertRent(memInfo, bookInfo);
 	}
 
-	public int bookReturn(Rent rentInfo) {
-		return rentDao.updateRent(rentInfo);
+	public int bookReturn(Rent rentInfo, MemberInfo memInfo) {
+		return rentDao.updateRent(rentInfo, memInfo);
 	}
 }

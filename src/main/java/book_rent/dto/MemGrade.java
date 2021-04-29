@@ -53,7 +53,6 @@ public class MemGrade {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + memGradeNo;
-		result = prime * result + memGradeRentCount;
 		return result;
 	}
 
@@ -67,8 +66,6 @@ public class MemGrade {
 			return false;
 		MemGrade other = (MemGrade) obj;
 		if (memGradeNo != other.memGradeNo)
-			return false;
-		if (memGradeRentCount != other.memGradeRentCount)
 			return false;
 		return true;
 	}

@@ -81,22 +81,21 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 	@Override
 	protected void setAlignAndWidth() {
 		// 컬럼내용 정렬
-		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4);
+		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(100, 200, 500, 200, 100);
+		setTableCellWidth(100, 200, 500, 200);
 
 	}
 
 	@Override
 	public Object[] toArray(Rent r) {
-		return new Object[] { r.getRentNo(), r.getBookNo().getBookNo(), r.getBookName(), r.getRentDate(),
-				r.getLateDate() };
+		return new Object[] { r.getRentNo(), r.getBookNo().getBookNo(), r.getBookName(), r.getRentDate() };
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "대여번호", "도서번호", "도서제목", "도서대여일", "연체일자" };
+		return new String[] { "대여번호", "도서번호", "도서제목", "도서대여일" };
 	}
 
 	@Override
@@ -131,7 +130,7 @@ public class MemRentTablePanel extends AbstractCustomTablePanel<Rent> implements
 		try {
 			Rent item = rentService.showRentByRentNo(rentNo);
 			pRentInfoContent.setItem(item);
-	
+
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}

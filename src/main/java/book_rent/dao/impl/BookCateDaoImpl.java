@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import book_rent.dao.BookCateDao;
-import book_rent.database.JdbcConn;
 import book_rent.dto.BookCate;
+import book_rent.uitl.JdbcConn;
 
 public class BookCateDaoImpl implements BookCateDao {
 	private static final BookCateDaoImpl instance = new BookCateDaoImpl();
@@ -89,7 +89,7 @@ public class BookCateDaoImpl implements BookCateDao {
 
 	@Override
 	public int insertBookCate(BookCate cate) {
-		String sql = "insert into category values(?, ?)";
+		String sql = "insert into(bookCateNo, bookCateName) category values(?, ?)";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, cate.getBookCateNo());
 			pstmt.setString(2, cate.getBookCateName());
