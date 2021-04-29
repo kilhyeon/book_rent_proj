@@ -96,7 +96,7 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 		if (row == -1) {
 			throw new NotSelectedException();
 		}
-		try {			
+		try {
 			MemberInfo item = memService.showMemberByMemNo(memNo);
 			pMemInfoContent.setItem(item);
 			pMemInfoContent.getTfMemNo().setEditable(false);
@@ -106,7 +106,7 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 			pMemInfoContent.getTfMemAddr().setEditable(false);
 			pMemInfoContent.getTfMemCp().setEditable(false);
 			pMemInfoContent.getTfMemTel().setEditable(false);
-			
+
 //			System.out.println(memNo);
 			memRentTableList.showRentListByMemNo(new MemberInfo(memNo));
 			memRentTableList.setList();
@@ -117,16 +117,6 @@ public class MemberInfoTablePanel extends AbstractCustomTablePanel<MemberInfo> i
 		}
 
 	}
-
-//	private void setItem(MemberInfo item) {
-//		pMemInfo.getTfMemNo().setText(String.valueOf(item.getMemNo()));
-//		pMemInfo.getTfMemName().setText(item.getMemName());
-//		pMemInfo.getTfMemGrade().setText(String.valueOf(item.getMemGradeNo()));
-//		pMemInfo.getTfMemBirth().setText(item.getMemBirth());
-//		pMemInfo.getTfMemAddr().setText(item.getMemAddr());
-//		pMemInfo.getTfMemCp().setText(item.getMemCp());
-//		pMemInfo.getTfMemTel().setText(item.getMemTel());
-//	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
