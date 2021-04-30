@@ -21,8 +21,8 @@ import book_rent.ui.content.MemberContentPanel;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.search.BookSearch;
-import book_rent.ui.search.MemberSearch;
+import book_rent.ui.search.BookSearchPanel;
+import book_rent.ui.search.MemberSearchPanel;
 
 public class RentPageUI extends JFrame implements ActionListener {
 
@@ -36,8 +36,8 @@ public class RentPageUI extends JFrame implements ActionListener {
 	private BookContentPanel pBookInfoContent;
 	private JPanel pMem;
 	private JPanel pBook;
-	private MemberSearch pMemSearch;
-	private BookSearch pBookSearch;
+	private MemberSearchPanel pMemSearch;
+	private BookSearchPanel pBookSearch;
 	private JPanel pBtn;
 	private JButton btnRent;
 	private JButton btnCancel;
@@ -71,7 +71,7 @@ public class RentPageUI extends JFrame implements ActionListener {
 		contentPane.add(pMem);
 		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
-		pMemSearch = new MemberSearch();
+		pMemSearch = new MemberSearchPanel();
 		pMem.add(pMemSearch);
 		pMemSearch.setService(memService);
 
@@ -87,7 +87,7 @@ public class RentPageUI extends JFrame implements ActionListener {
 		contentPane.add(pBook);
 		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
-		pBookSearch = new BookSearch();
+		pBookSearch = new BookSearchPanel();
 		pBook.add(pBookSearch);
 		pBookSearch.setService(bookService);
 

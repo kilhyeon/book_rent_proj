@@ -23,8 +23,8 @@ import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemRentTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.search.BookSearch;
-import book_rent.ui.search.MemberSearch;
+import book_rent.ui.search.BookSearchPanel;
+import book_rent.ui.search.MemberSearchPanel;
 
 public class ReturnPageUI extends JFrame implements ActionListener {
 
@@ -42,8 +42,8 @@ public class ReturnPageUI extends JFrame implements ActionListener {
 	private JPanel pRent;
 	private JPanel pBook;
 
-	private MemberSearch pMemSearch;
-	private BookSearch pBookSearch;
+	private MemberSearchPanel pMemSearch;
+	private BookSearchPanel pBookSearch;
 
 	private JPanel pBtn;
 	private JButton btnReturn;
@@ -79,7 +79,7 @@ public class ReturnPageUI extends JFrame implements ActionListener {
 		contentPane.add(pMem);
 		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
-		pMemSearch = new MemberSearch();
+		pMemSearch = new MemberSearchPanel();
 		pMem.add(pMemSearch);
 		pMemSearch.setService(memService);
 

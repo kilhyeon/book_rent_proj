@@ -19,7 +19,7 @@ import book_rent.service.MemberInfoService;
 import book_rent.ui.list.MemberInfoTablePanel;
 
 @SuppressWarnings("serial")
-public class MemberSearch extends JPanel implements ActionListener {
+public class MemberSearchPanel extends JPanel implements ActionListener {
 	private JTextField tf;
 	private JButton btn;
 	private MemberInfoService memService;
@@ -27,7 +27,7 @@ public class MemberSearch extends JPanel implements ActionListener {
 	private List<MemberInfo> memSearchList;
 	private MemberInfoTablePanel pMemInfoTableList;
 
-	public MemberSearch() {
+	public MemberSearchPanel() {
 		pMemInfoTableList = new MemberInfoTablePanel();
 		memSearchList = new ArrayList<MemberInfo>();
 		initialize();

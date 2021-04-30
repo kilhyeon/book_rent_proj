@@ -24,7 +24,7 @@ import book_rent.ui.content.BookContentManagement;
 import book_rent.ui.exception.InvalidCheckException;
 import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.BookInfoTablePanel;
-import book_rent.ui.search.BookSearch;
+import book_rent.ui.search.BookSearchPanel;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
@@ -36,7 +36,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	private BookInfoTablePanel pBookInfoTableList2;
 	private BookContentPanel pBookInfoContent;
 	private BookContentManagement pBookManageContent;
-	private BookSearch pBookSearch;
+	private BookSearchPanel pBookSearch;
 
 	private JButton btnAdd;
 	private JButton btnCancel;
@@ -77,7 +77,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 //		tabbedPane.addTab("도서정보", null, pBook, null);
 		pBook.setLayout(new BoxLayout(pBook, BoxLayout.Y_AXIS));
 
-		pBookSearch = new BookSearch();
+		pBookSearch = new BookSearchPanel();
 		pBook.add(pBookSearch);
 		pBookSearch.setService(bookService);
 
@@ -96,7 +96,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 		tabbedPane.addTab("도서관리", null, pBookMangement, null);
 		pBookMangement.setLayout(new BoxLayout(pBookMangement, BoxLayout.Y_AXIS));
 
-		pBookSearch = new BookSearch();
+		pBookSearch = new BookSearchPanel();
 		pBookMangement.add(pBookSearch);
 		pBookSearch.setService(bookService);
 

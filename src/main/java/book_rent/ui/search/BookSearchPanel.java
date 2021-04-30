@@ -19,7 +19,7 @@ import book_rent.service.BookInfoService;
 import book_rent.ui.list.BookInfoTablePanel;
 
 @SuppressWarnings("serial")
-public class BookSearch extends JPanel implements ActionListener {
+public class BookSearchPanel extends JPanel implements ActionListener {
 	private JTextField tf;
 	private JButton btn;
 	private BookInfoService bookService;
@@ -27,7 +27,7 @@ public class BookSearch extends JPanel implements ActionListener {
 	private List<BookInfo> bookList;
 	private BookInfoTablePanel pBookInfoTableList;
 
-	public BookSearch() {
+	public BookSearchPanel() {
 		pBookInfoTableList = new BookInfoTablePanel();
 		bookList = new ArrayList<BookInfo>();
 		initialize();

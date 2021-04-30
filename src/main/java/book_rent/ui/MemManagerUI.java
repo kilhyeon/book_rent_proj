@@ -28,7 +28,7 @@ import book_rent.ui.exception.SqlConstraintException;
 import book_rent.ui.list.MemRentTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.list.RentTablePanel;
-import book_rent.ui.search.MemberSearch;
+import book_rent.ui.search.MemberSearchPanel;
 
 public class MemManagerUI extends JFrame implements ActionListener, MouseListener {
 
@@ -39,7 +39,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 	private MemberInfoTablePanel pMemInfoTableList2;
 	private MemberContentPanel pMemInfoContent;
 	private MemContentManagement pMemManageContent;
-	private MemberSearch pMemSearch;
+	private MemberSearchPanel pMemSearch;
 
 	private JButton btnAdd;
 	private JButton btnCancel;
@@ -84,7 +84,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 //		tabbedPane.addTab("회원정보", null, pMem, null);
 		pMem.setLayout(new BoxLayout(pMem, BoxLayout.Y_AXIS));
 
-		pMemSearch = new MemberSearch();
+		pMemSearch = new MemberSearchPanel();
 		pMem.add(pMemSearch);
 		pMemSearch.setService(memService);
 
@@ -107,7 +107,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 
 		pMemMangement.setLayout(new BoxLayout(pMemMangement, BoxLayout.Y_AXIS));
 
-		pMemSearch = new MemberSearch();
+		pMemSearch = new MemberSearchPanel();
 		pMemMangement.add(pMemSearch);
 		pMemSearch.setService(memService);
 

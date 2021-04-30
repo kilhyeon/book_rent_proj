@@ -24,8 +24,8 @@ import book_rent.ui.RentPageUI;
 import book_rent.ui.ReturnPageUI;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
-import book_rent.ui.search.BookSearch;
-import book_rent.ui.search.MemberSearch;
+import book_rent.ui.search.BookSearchPanel;
+import book_rent.ui.search.MemberSearchPanel;
 import javax.swing.JTabbedPane;
 import book_rent.ui.list.MemRankTablePanel;
 import book_rent.ui.list.BookRankTablePanel;
@@ -124,12 +124,12 @@ public class BookRentMain extends JFrame implements ActionListener, MouseListene
 		pBtnSearch.add(pSearch);
 		pSearch.setLayout(new GridLayout(0, 2, 0, 0));
 
-		MemberSearch pSerachMember = new MemberSearch();
+		MemberSearchPanel pSerachMember = new MemberSearchPanel();
 		pSearch.add(pSerachMember);
 		pSerachMember.setService(memService);
 		pSerachMember.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		BookSearch pSerachBook = new BookSearch();
+		BookSearchPanel pSerachBook = new BookSearchPanel();
 		pSearch.add(pSerachBook);
 		pSerachBook.setService(bookService);
 
