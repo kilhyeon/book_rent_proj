@@ -20,6 +20,8 @@ import book_rent.service.MemberInfoService;
 import book_rent.service.RentService;
 import book_rent.ui.BookManagerUI;
 import book_rent.ui.MemManagerUI;
+import book_rent.ui.RentPageUI;
+import book_rent.ui.ReturnPageUI;
 import book_rent.ui.list.BookInfoTablePanel;
 import book_rent.ui.list.MemberInfoTablePanel;
 import book_rent.ui.search.BookSearch;

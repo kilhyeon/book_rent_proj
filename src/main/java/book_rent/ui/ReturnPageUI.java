@@ -1,4 +1,4 @@
-package book_rent;
+package book_rent.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +50,7 @@ public class ReturnPageUI extends JFrame implements ActionListener {
 	private JButton btnCancel;
 
 	public ReturnPageUI() {
+		setResizable(false);
 		setTitle("도서반납");
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();

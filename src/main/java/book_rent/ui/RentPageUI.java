@@ -1,4 +1,4 @@
-package book_rent;
+package book_rent.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +43,7 @@ public class RentPageUI extends JFrame implements ActionListener {
 	private JButton btnCancel;
 
 	public RentPageUI() {
+		setResizable(false);
 		setTitle("도서대여");
 		memService = new MemberInfoService();
 		bookService = new BookInfoService();

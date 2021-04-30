@@ -47,6 +47,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 	private JLabel lblMent;
 
 	public BookManagerUI() {
+		setResizable(false);
 		setTitle("도서관리");
 		bookService = new BookInfoService();
 		initialize();
@@ -237,7 +238,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 			bookService.removeBook(delBook);
 			pBookInfoTableList.loadData();
 			pBookInfoTableList2.loadData();
-			JOptionPane.showMessageDialog(null, delBook + " 도서의 정보를 삭제하였습니다.");
+			JOptionPane.showMessageDialog(null, delBook.getBookName() + " 도서의 정보를 삭제하였습니다.");
 
 		} catch (IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "도서정보를 선택하세요.");
@@ -254,7 +255,7 @@ public class BookManagerUI extends JFrame implements ActionListener, MouseListen
 			pBookInfoTableList.loadData();
 			pBookInfoTableList2.loadData();
 			pBookManageContent.clearTf();
-			JOptionPane.showMessageDialog(null, addBook + " 도서를 추가하였습니다.");
+			JOptionPane.showMessageDialog(null, addBook.getBookName() + " 도서를 추가하였습니다.");
 			
 		}catch(NumberFormatException e1) {
 			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");

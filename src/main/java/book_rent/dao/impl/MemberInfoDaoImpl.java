@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import book_rent.dao.MemberInfoDao;
 import book_rent.dto.MemGrade;
 import book_rent.dto.MemGradeRentCount;
@@ -215,6 +217,7 @@ public class MemberInfoDaoImpl implements MemberInfoDao {
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+//			JOptionPane.showMessageDialog(null, "참조하는 레코드가 존재합니다.");
 		}
 		return 0;
 	}

@@ -51,6 +51,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 	private MemRentTablePanel pMemRentTableList;
 
 	public MemManagerUI() {
+		setResizable(false);
 		setTitle("회원관리");
 		memService = new MemberInfoService();
 		rentService = new RentService();
@@ -260,7 +261,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 			memService.removeMember(delMember);
 			pMemInfoTableList.loadData();
 			pMemInfoTableList2.loadData();
-			JOptionPane.showMessageDialog(null, delMember + " 회원의 정보를 삭제하였습니다.");
+			JOptionPane.showMessageDialog(null, delMember.getMemName() + " 회원의 정보를 삭제하였습니다.");
 
 		} catch (IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "회원정보를 선택하세요.");
@@ -277,7 +278,7 @@ public class MemManagerUI extends JFrame implements ActionListener, MouseListene
 			pMemInfoTableList2.loadData();
 			pMemManageContent.clearTf();
 			tableLoadData();
-			JOptionPane.showMessageDialog(null, addMember + " 회원을 추가하였습니다.");
+			JOptionPane.showMessageDialog(null, addMember.getMemName() + " 회원을 추가하였습니다.");
 		} catch (NumberFormatException e1) {
 			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");
 		}

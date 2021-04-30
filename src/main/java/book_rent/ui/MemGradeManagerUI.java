@@ -140,7 +140,7 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 		pMemGradeTableList.loadData();
 		pMemGradeContent.clearTf();
 		btnAdd.setText("추가");
-		JOptionPane.showMessageDialog(null, updateGrade.getMemGradeName() + "정보가 수정되었습니다.");
+		JOptionPane.showMessageDialog(null, updateGrade.getMemGradeName() + " 등급이 수정되었습니다.");
 
 	}
 
@@ -161,7 +161,7 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 			MemGrade delGrade = pMemGradeTableList.getItem();
 			memGradeService.removeGrade(delGrade);
 			pMemGradeTableList.loadData();
-			JOptionPane.showMessageDialog(null, delGrade + "삭제 되었습니다.");
+			JOptionPane.showMessageDialog(null, delGrade.getMemGradeName() + " 등급이 삭제 되었습니다.");
 
 		} catch (IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "등급정보를 선택하세요.");
@@ -176,7 +176,7 @@ public class MemGradeManagerUI extends JPanel implements ActionListener {
 			memGradeService.addGrade(addGrade);
 			pMemGradeTableList.loadData();
 			pMemGradeContent.clearTf();
-			JOptionPane.showMessageDialog(null, addGrade + " 추가했습니다.");
+			JOptionPane.showMessageDialog(null, addGrade.getMemGradeName() + " 등급을 추가했습니다.");
 
 		} catch (NumberFormatException e1) {
 			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");

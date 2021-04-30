@@ -137,7 +137,7 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 		pBookCateTableList.loadData();
 		pBookCateContent.clearTf();
 		btnAdd.setText("추가");
-		JOptionPane.showMessageDialog(null, updateCate.getBookCateName() + "정보가 수정되었습니다.");
+		JOptionPane.showMessageDialog(null, updateCate.getBookCateName() + "구분 정보가 수정되었습니다.");
 
 	}
 
@@ -160,7 +160,7 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 			BookCate delCate = pBookCateTableList.getItem();
 			bookCateService.removeCate(delCate);
 			pBookCateTableList.loadData();
-			JOptionPane.showMessageDialog(null, delCate + "삭제 되었습니다.");
+			JOptionPane.showMessageDialog(null, delCate.getBookCateName() + "구분이 삭제 되었습니다.");
 
 		} catch (IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "구분정보를 선택하세요.");
@@ -175,7 +175,7 @@ public class BookCateManagerUI extends JPanel implements ActionListener {
 			bookCateService.addCate(addCate);
 			pBookCateTableList.loadData();
 			pBookCateContent.clearTf();
-			JOptionPane.showMessageDialog(null, addCate + " 추가했습니다.");
+			JOptionPane.showMessageDialog(null, addCate.getBookCateName() + " 구분을 추가했습니다.");
 
 		} catch (NumberFormatException e1) {
 			JOptionPane.showMessageDialog(null, "공백이 존재합니다.");
